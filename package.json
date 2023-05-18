@@ -4,6 +4,8 @@
   "description": "This is the useful tools for for JavaScript test concerning ESLint configuration.",
   "main": "index.js",
   "scripts": {
+    "l": "npm run lint",
+    "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
