@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/openreachtech/eslint-inspector/issues"
   },
-  "homepage": "https://github.com/openreachtech/eslint-inspector#readme"
+  "homepage": "https://github.com/openreachtech/eslint-inspector#readme",
+  "devDependencies": {
+    "@openreachtech/eslint-config": "^0.3.0",
+    "eslint": "^8.40.0"
+  }
 }
