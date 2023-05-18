@@ -1,0 +1,22 @@
+{
+  "name": "@openreachtech/eslint-inspector",
+  "version": "0.0.0",
+  "description": "This is the useful tools for for JavaScript test concerning ESLint configuration.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openreachtech/eslint-inspector.git"
+  },
+  "keywords": [
+    "ESLint"
+  ],
+  "author": "Open Reach Tech inc.",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/openreachtech/eslint-inspector/issues"
+  },
+  "homepage": "https://github.com/openreachtech/eslint-inspector#readme"
+}
