@@ -1,6 +1,10 @@
 'use strict'
 
 const {
+  ESLint,
+} = require('eslint')
+
+const {
   ConstructorSpyGenerator,
 } = require('@openreachtech/renchan-test-tools')
 
@@ -390,6 +394,17 @@ describe('ESLintInspector', () => {
         DerivedClass.__spy__
           .mockRestore()
       })
+    })
+  })
+})
+
+describe('ESLintInspector', () => {
+  describe('.createESLintClient()', () => {
+    test('to return instance of ESLint', () => {
+      const client = ESLintInspector.createESLintClient()
+
+      expect(client)
+        .toBeInstanceOf(ESLint)
     })
   })
 })
