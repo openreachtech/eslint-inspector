@@ -360,3 +360,134 @@ describe('LintAnalyzer', () => {
     })
   })
 })
+
+describe('LintAnalyzer', () => {
+  describe('#get:hitMessages', () => {
+    describe('from messages', () => {
+      /** @type {Array<Object>} */
+      const cases = [
+        {
+          params: {
+            lint: {
+              filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+              messages: [
+                {
+                  ruleId: 'indent',
+                  severity: 2,
+                  message: 'Expected indentation of 4 spaces but found 6.',
+                  line: 9,
+                  column: 1,
+                  nodeType: 'Keyword',
+                  messageId: 'wrongIndentation',
+                  endLine: 9,
+                  endColumn: 7,
+                  fix: {
+                    range: [141, 147],
+                    text: '    ',
+                  },
+                },
+                {
+                  ruleId: 'indent',
+                  severity: 2,
+                  message: 'Expected indentation of 2 spaces but found 4.',
+                  line: 11,
+                  column: 1,
+                  nodeType: 'Punctuator',
+                  messageId: 'wrongIndentation',
+                  endLine: 11,
+                  endColumn: 5,
+                  fix: {
+                    range: [161, 165],
+                    text: '  ',
+                  },
+                },
+              ],
+            },
+          },
+          expected: [
+            {
+              ruleId: 'indent',
+              severity: 2,
+              message: 'Expected indentation of 4 spaces but found 6.',
+              line: 9,
+              column: 1,
+              nodeType: 'Keyword',
+              messageId: 'wrongIndentation',
+              endLine: 9,
+              endColumn: 7,
+              fix: {
+                range: [141, 147],
+                text: '    ',
+              },
+            },
+            {
+              ruleId: 'indent',
+              severity: 2,
+              message: 'Expected indentation of 2 spaces but found 4.',
+              line: 11,
+              column: 1,
+              nodeType: 'Punctuator',
+              messageId: 'wrongIndentation',
+              endLine: 11,
+              endColumn: 5,
+              fix: {
+                range: [161, 165],
+                text: '  ',
+              },
+            },
+          ],
+        },
+        {
+          params: {
+            lint: {
+              filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+              messages: [
+                {
+                  ruleId: 'semi',
+                  severity: 2,
+                  message: 'Extra semicolon.',
+                  line: 3,
+                  column: 18,
+                  nodeType: 'ExpressionStatement',
+                  messageId: 'extraSemi',
+                  endLine: 3,
+                  endColumn: 19,
+                  fix: {
+                    range: [28, 32],
+                    text: '111',
+                  },
+                },
+              ],
+            },
+          },
+          expected: [
+            {
+              ruleId: 'semi',
+              severity: 2,
+              message: 'Extra semicolon.',
+              line: 3,
+              column: 18,
+              nodeType: 'ExpressionStatement',
+              messageId: 'extraSemi',
+              endLine: 3,
+              endColumn: 19,
+              fix: {
+                range: [28, 32],
+                text: '111',
+              },
+            },
+          ],
+        },
+      ]
+
+      test.each(cases)('file path: $params.lint.filePath', ({ params, expected }) => {
+        const analyzer = LintAnalyzer.create(params)
+
+        const messages = analyzer.hitMessages
+
+        expect(messages)
+          .toEqual(expected)
+      })
+    })
+  })
+})
