@@ -419,3 +419,158 @@ describe('ESLintInspector', () => {
     })
   })
 })
+
+describe('ESLintInspector', () => {
+  describe('.createAsyncWithText()', () => {
+    describe('to return instance of ESLintInspector', () => {
+      const cases = [
+        {
+          params: {
+            ruleId: 'indent',
+            text: '',
+          },
+        },
+        {
+          params: {
+            ruleId: 'semi',
+            text: 'const alpha = 1;',
+          },
+        },
+      ]
+
+      test.each(cases)('text: $params.text', async ({ params }) => {
+        const inspector = await ESLintInspector.createAsyncWithText(params)
+
+        expect(inspector)
+          .toBeInstanceOf(ESLintInspector)
+      })
+    })
+
+    describe('to call ESLint#lintText()', () => {
+      const cases = [
+        {
+          params: {
+            ruleId: 'indent',
+            text: '',
+          },
+          expected: {
+            analyzers: [
+              LintAnalyzer.create({
+                ruleId: 'indent',
+                lint: {
+                  filePath: '<text>',
+                  messages: [],
+                  suppressedMessages: [],
+                  errorCount: 0,
+                  fatalErrorCount: 0,
+                  warningCount: 0,
+                  fixableErrorCount: 0,
+                  fixableWarningCount: 0,
+                  usedDeprecatedRules: [],
+                },
+              }),
+            ],
+          },
+        },
+        {
+          params: {
+            ruleId: 'semi',
+            text: 'const alpha = 1;',
+          },
+          expected: {
+            analyzers: [
+              LintAnalyzer.create({
+                ruleId: 'semi',
+                lint: {
+                  filePath: '<text>',
+                  messages: [
+                    {
+                      ruleId: 'strict',
+                      severity: 2,
+                      message: 'Use the global form of \'use strict\'.',
+                      line: 1,
+                      column: 1,
+                      nodeType: 'Program',
+                      messageId: 'global',
+                      endLine: 1,
+                      endColumn: 17,
+                    },
+                    {
+                      ruleId: 'no-unused-vars',
+                      severity: 2,
+                      message: '\'alpha\' is assigned a value but never used.',
+                      line: 1,
+                      column: 7,
+                      nodeType: 'Identifier',
+                      messageId: 'unusedVar',
+                      endLine: 1,
+                      endColumn: 12,
+                    },
+                    {
+                      ruleId: 'semi',
+                      severity: 2,
+                      message: 'Extra semicolon.',
+                      line: 1,
+                      column: 16,
+                      nodeType: 'VariableDeclaration',
+                      messageId: 'extraSemi',
+                      endLine: 1,
+                      endColumn: 17,
+                      fix: {
+                        range: [14, 16],
+                        text: '1',
+                      },
+                    },
+                    {
+                      ruleId: 'eol-last',
+                      severity: 2,
+                      message: 'Newline required at end of file but not found.',
+                      line: 1,
+                      column: 17,
+                      nodeType: 'Program',
+                      messageId: 'missing',
+                      fix: {
+                        range: [16, 16],
+                        text: '\n',
+                      },
+                    },
+                  ],
+                  suppressedMessages: [],
+                  errorCount: 4,
+                  fatalErrorCount: 0,
+                  warningCount: 0,
+                  fixableErrorCount: 2,
+                  fixableWarningCount: 0,
+                  source: 'const alpha = 1;',
+                  usedDeprecatedRules: [],
+                },
+              }),
+            ],
+          },
+        },
+      ]
+
+      test.each(cases)('text: $params.text', async ({ params, expected }) => {
+        const mockClient = new ESLint()
+
+        const lintTextSpy = jest.spyOn(mockClient, 'lintText')
+        const createESLintClientSpy = jest.spyOn(ESLintInspector, 'createESLintClient')
+          .mockReturnValue(mockClient)
+        const createSpy = jest.spyOn(ESLintInspector, 'create')
+
+        await ESLintInspector.createAsyncWithText(params)
+
+        expect(lintTextSpy)
+          .toHaveBeenCalledWith(params.text)
+        expect(createSpy)
+          .toHaveBeenCalledWith({
+            analyzers: expected.analyzers,
+          })
+
+        lintTextSpy.mockRestore()
+        createESLintClientSpy.mockRestore()
+        createSpy.mockRestore()
+      })
+    })
+  })
+})
