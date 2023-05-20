@@ -9,6 +9,7 @@ const {
 } = require('@openreachtech/renchan-test-tools')
 
 const ESLintInspector = require('../../lib/ESLintInspector')
+const FileLintAnalyzer = require('../../lib/FileLintAnalyzer')
 const LintAnalyzer = require('../../lib/LintAnalyzer')
 
 describe('ESLintInspector', () => {
@@ -26,6 +27,7 @@ describe('ESLintInspector', () => {
             params: {
               analyzers: [
                 LintAnalyzer.create({
+                  ruleId: 'indent',
                   lint: {
                     filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
                     messages: [
@@ -71,6 +73,7 @@ describe('ESLintInspector', () => {
                   },
                 }),
                 LintAnalyzer.create({
+                  ruleId: 'semi',
                   lint: {
                     filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
                     messages: [
@@ -123,186 +126,14 @@ describe('ESLintInspector', () => {
       const cases = [
         {
           params: {
-            lints: [],
-          },
-        },
-        {
-          params: {
-            lints: [
-              {
-                filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
-                messages: [
-                  {
-                    ruleId: 'indent',
-                    severity: 2,
-                    message: 'Expected indentation of 4 spaces but found 6.',
-                    line: 9,
-                    column: 1,
-                    nodeType: 'Keyword',
-                    messageId: 'wrongIndentation',
-                    endLine: 9,
-                    endColumn: 7,
-                    fix: {
-                      range: [141, 147],
-                      text: '    ',
-                    },
-                  },
-                  {
-                    ruleId: 'indent',
-                    severity: 2,
-                    message: 'Expected indentation of 2 spaces but found 4.',
-                    line: 11,
-                    column: 1,
-                    nodeType: 'Punctuator',
-                    messageId: 'wrongIndentation',
-                    endLine: 11,
-                    endColumn: 5,
-                    fix: {
-                      range: [161, 165],
-                      text: '  ',
-                    },
-                  },
-                ],
-                suppressedMessages: [],
-                errorCount: 2,
-                fatalErrorCount: 0,
-                warningCount: 0,
-                fixableErrorCount: 2,
-                fixableWarningCount: 0,
-                source: 'dummy code of indent.js',
-                usedDeprecatedRules: [],
-              },
-              {
-                filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
-                messages: [
-                  {
-                    ruleId: 'semi',
-                    severity: 2,
-                    message: 'Extra semicolon.',
-                    line: 3,
-                    column: 18,
-                    nodeType: 'ExpressionStatement',
-                    messageId: 'extraSemi',
-                    endLine: 3,
-                    endColumn: 19,
-                    fix: {
-                      range: [28, 32],
-                      text: '111',
-                    },
-                  },
-                ],
-                suppressedMessages: [],
-                errorCount: 1,
-                fatalErrorCount: 0,
-                warningCount: 0,
-                fixableErrorCount: 1,
-                fixableWarningCount: 0,
-                source: 'dummy code of semi.js',
-                usedDeprecatedRules: [],
-              },
-            ],
-          },
-        },
-      ]
-
-      test.each(cases)('[0] lints: $params.lints', ({ params }) => {
-        const inspector = ESLintInspector.create(params)
-
-        expect(inspector)
-          .toBeInstanceOf(ESLintInspector)
-      })
-    })
-
-    describe('to call constructor', () => {
-      /** @type {Array<Object>} */
-      const cases = [
-        {
-          params: {
-            lints: [],
-          },
-          expected: {
             analyzers: [],
           },
         },
         {
           params: {
-            lints: [
-              {
-                filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
-                messages: [
-                  {
-                    ruleId: 'indent',
-                    severity: 2,
-                    message: 'Expected indentation of 4 spaces but found 6.',
-                    line: 9,
-                    column: 1,
-                    nodeType: 'Keyword',
-                    messageId: 'wrongIndentation',
-                    endLine: 9,
-                    endColumn: 7,
-                    fix: {
-                      range: [141, 147],
-                      text: '    ',
-                    },
-                  },
-                  {
-                    ruleId: 'indent',
-                    severity: 2,
-                    message: 'Expected indentation of 2 spaces but found 4.',
-                    line: 11,
-                    column: 1,
-                    nodeType: 'Punctuator',
-                    messageId: 'wrongIndentation',
-                    endLine: 11,
-                    endColumn: 5,
-                    fix: {
-                      range: [161, 165],
-                      text: '  ',
-                    },
-                  },
-                ],
-                suppressedMessages: [],
-                errorCount: 2,
-                fatalErrorCount: 0,
-                warningCount: 0,
-                fixableErrorCount: 2,
-                fixableWarningCount: 0,
-                source: 'dummy code of indent.js',
-                usedDeprecatedRules: [],
-              },
-              {
-                filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
-                messages: [
-                  {
-                    ruleId: 'semi',
-                    severity: 2,
-                    message: 'Extra semicolon.',
-                    line: 3,
-                    column: 18,
-                    nodeType: 'ExpressionStatement',
-                    messageId: 'extraSemi',
-                    endLine: 3,
-                    endColumn: 19,
-                    fix: {
-                      range: [28, 32],
-                      text: '111',
-                    },
-                  },
-                ],
-                suppressedMessages: [],
-                errorCount: 1,
-                fatalErrorCount: 0,
-                warningCount: 0,
-                fixableErrorCount: 1,
-                fixableWarningCount: 0,
-                source: 'dummy code of semi.js',
-                usedDeprecatedRules: [],
-              },
-            ],
-          },
-          expected: {
             analyzers: [
               LintAnalyzer.create({
+                ruleId: 'indent',
                 lint: {
                   filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
                   messages: [
@@ -348,6 +179,7 @@ describe('ESLintInspector', () => {
                 },
               }),
               LintAnalyzer.create({
+                ruleId: 'semi',
                 lint: {
                   filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
                   messages: [
@@ -382,14 +214,115 @@ describe('ESLintInspector', () => {
         },
       ]
 
-      test.each(cases)('[0] lints: $params.lints', ({ params, expected }) => {
+      test.each(cases)('[0] analyzers: $params.analyzers.0', ({ params }) => {
+        const inspector = ESLintInspector.create(params)
+
+        expect(inspector)
+          .toBeInstanceOf(ESLintInspector)
+      })
+    })
+
+    describe('to call constructor', () => {
+      /** @type {Array<Object>} */
+      const cases = [
+        {
+          params: {
+            analyzers: [],
+          },
+        },
+        {
+          params: {
+            analyzers: [
+              LintAnalyzer.create({
+                ruleId: 'indent',
+                lint: {
+                  filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                  messages: [
+                    {
+                      ruleId: 'indent',
+                      severity: 2,
+                      message: 'Expected indentation of 4 spaces but found 6.',
+                      line: 9,
+                      column: 1,
+                      nodeType: 'Keyword',
+                      messageId: 'wrongIndentation',
+                      endLine: 9,
+                      endColumn: 7,
+                      fix: {
+                        range: [141, 147],
+                        text: '    ',
+                      },
+                    },
+                    {
+                      ruleId: 'indent',
+                      severity: 2,
+                      message: 'Expected indentation of 2 spaces but found 4.',
+                      line: 11,
+                      column: 1,
+                      nodeType: 'Punctuator',
+                      messageId: 'wrongIndentation',
+                      endLine: 11,
+                      endColumn: 5,
+                      fix: {
+                        range: [161, 165],
+                        text: '  ',
+                      },
+                    },
+                  ],
+                  suppressedMessages: [],
+                  errorCount: 2,
+                  fatalErrorCount: 0,
+                  warningCount: 0,
+                  fixableErrorCount: 2,
+                  fixableWarningCount: 0,
+                  source: 'dummy code of indent.js',
+                  usedDeprecatedRules: [],
+                },
+              }),
+              LintAnalyzer.create({
+                ruleId: 'semi',
+                lint: {
+                  filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                  messages: [
+                    {
+                      ruleId: 'semi',
+                      severity: 2,
+                      message: 'Extra semicolon.',
+                      line: 3,
+                      column: 18,
+                      nodeType: 'ExpressionStatement',
+                      messageId: 'extraSemi',
+                      endLine: 3,
+                      endColumn: 19,
+                      fix: {
+                        range: [28, 32],
+                        text: '111',
+                      },
+                    },
+                  ],
+                  suppressedMessages: [],
+                  errorCount: 1,
+                  fatalErrorCount: 0,
+                  warningCount: 0,
+                  fixableErrorCount: 1,
+                  fixableWarningCount: 0,
+                  source: 'dummy code of semi.js',
+                  usedDeprecatedRules: [],
+                },
+              }),
+            ],
+          },
+        },
+      ]
+
+      test.each(cases)('[0] lints: $params.lints', ({ params }) => {
         const DerivedClass = ConstructorSpyGenerator.create({ jest })
           .generateSpyKitClass(ESLintInspector)
 
         DerivedClass.create(params)
 
         expect(DerivedClass.__spy__)
-          .toHaveBeenCalledWith(expected)
+          .toHaveBeenCalledWith(params)
 
         DerivedClass.__spy__
           .mockRestore()
@@ -443,7 +376,7 @@ describe('ESLintInspector', () => {
             filePaths: [],
           },
           mocks: {
-            lints: [],
+            analyzers: [],
           },
         },
         {
@@ -454,78 +387,9 @@ describe('ESLintInspector', () => {
             ],
           },
           mocks: {
-            lints: [
-              {
-                filePath: expect.stringContaining('tests/samples/standard/indent.js'),
-                messages: [
-                  {
-                    ruleId: 'indent',
-                    severity: 2,
-                    message: 'Expected indentation of 4 spaces but found 6.',
-                    line: 7,
-                    column: 1,
-                    nodeType: 'Keyword',
-                    messageId: 'wrongIndentation',
-                    endLine: 7,
-                    endColumn: 7,
-                    fix: {
-                      range: [139, 145],
-                      text: '    ',
-                    },
-                  },
-                  {
-                    ruleId: 'indent',
-                    severity: 2,
-                    message: 'Expected indentation of 2 spaces but found 4.',
-                    line: 8,
-                    column: 1,
-                    nodeType: 'Punctuator',
-                    messageId: 'wrongIndentation',
-                    endLine: 8,
-                    endColumn: 5,
-                    fix: {
-                      range: [158, 162],
-                      text: '  ',
-                    },
-                  },
-                ],
-                suppressedMessages: [],
-                errorCount: 2,
-                fatalErrorCount: 0,
-                warningCount: 0,
-                fixableErrorCount: 2,
-                fixableWarningCount: 0,
-                source: expect.any(String),
-                usedDeprecatedRules: [],
-              },
-              {
-                filePath: expect.stringContaining('/tests/samples/standard/semi.js'),
-                messages: [
-                  {
-                    ruleId: 'semi',
-                    severity: 2,
-                    message: 'Extra semicolon.',
-                    line: 3,
-                    column: 18,
-                    nodeType: 'ExpressionStatement',
-                    messageId: 'extraSemi',
-                    endLine: 3,
-                    endColumn: 19,
-                    fix: {
-                      range: [28, 32],
-                      text: '111',
-                    },
-                  }
-                ],
-                suppressedMessages: [],
-                errorCount: 1,
-                fatalErrorCount: 0,
-                warningCount: 0,
-                fixableErrorCount: 1,
-                fixableWarningCount: 0,
-                source: expect.any(String),
-                usedDeprecatedRules: [],
-              }
+            analyzers: [
+              expect.any(FileLintAnalyzer),
+              expect.any(FileLintAnalyzer),
             ],
           },
         },
@@ -545,7 +409,7 @@ describe('ESLintInspector', () => {
           .toHaveBeenCalledWith(params.filePaths)
         expect(createSpy)
           .toHaveBeenCalledWith({
-            lints: mocks.lints,
+            analyzers: mocks.analyzers,
           })
 
         lintFilesSpy.mockRestore()
