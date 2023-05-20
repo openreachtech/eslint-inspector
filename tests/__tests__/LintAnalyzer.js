@@ -94,7 +94,7 @@ describe('LintAnalyzer', () => {
       ]
 
       describe('#lint', () => {
-        test.each(cases)('ruleId: $params.ruleId', ({ params }) => {
+        test.each(cases)('rule id: $params.ruleId', ({ params }) => {
           const analyzer = new LintAnalyzer(params)
 
           expect(analyzer)
@@ -105,7 +105,7 @@ describe('LintAnalyzer', () => {
       })
 
       describe('#ruleId', () => {
-        test.each(cases)('ruleId: $params.ruleId', ({ params }) => {
+        test.each(cases)('rule id: $params.ruleId', ({ params }) => {
           const analyzer = new LintAnalyzer(params)
 
           expect(analyzer)
