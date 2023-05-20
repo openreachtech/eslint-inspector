@@ -12,6 +12,7 @@ describe('LintAnalyzer', () => {
       const cases = [
         {
           params: {
+            ruleId: 'indent',
             lint: {
               filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
               messages: [
@@ -59,6 +60,7 @@ describe('LintAnalyzer', () => {
         },
         {
           params: {
+            ruleId: 'semi',
             lint: {
               filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
               messages: [
@@ -91,13 +93,24 @@ describe('LintAnalyzer', () => {
         },
       ]
 
-      test.each(cases)('file path: $params.lint.filePath', ({ params }) => {
-        const analyzer = new LintAnalyzer(params)
+      describe('#lint', () => {
+        test.each(cases)('ruleId: $params.ruleId', ({ params }) => {
+          const analyzer = new LintAnalyzer(params)
 
-        expect(analyzer)
-          .toHaveProperty('lint', params.lint)
-        expect(analyzer.lint)
-          .toBe(params.lint) // same reference
+          expect(analyzer)
+            .toHaveProperty('lint', params.lint)
+          expect(analyzer.lint)
+            .toBe(params.lint) // same reference
+        })
+      })
+
+      describe('#ruleId', () => {
+        test.each(cases)('ruleId: $params.ruleId', ({ params }) => {
+          const analyzer = new LintAnalyzer(params)
+
+          expect(analyzer)
+            .toHaveProperty('ruleId', params.ruleId)
+        })
       })
     })
   })
@@ -110,6 +123,7 @@ describe('LintAnalyzer', () => {
       const cases = [
         {
           params: {
+            ruleId: 'indent',
             lint: {
               filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
               messages: [
@@ -157,6 +171,7 @@ describe('LintAnalyzer', () => {
         },
         {
           params: {
+            ruleId: 'semi',
             lint: {
               filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
               messages: [
@@ -189,7 +204,7 @@ describe('LintAnalyzer', () => {
         },
       ]
 
-      test.each(cases)('file path: $params.lint.filePath', ({ params }) => {
+      test.each(cases)('rule id: $params.ruleId', ({ params }) => {
         const analyzer = LintAnalyzer.create(params)
 
         expect(analyzer)
@@ -202,6 +217,7 @@ describe('LintAnalyzer', () => {
       const cases = [
         {
           params: {
+            ruleId: 'indent',
             lint: {
               filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
               messages: [
@@ -249,6 +265,7 @@ describe('LintAnalyzer', () => {
         },
         {
           params: {
+            ruleId: 'semi',
             lint: {
               filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
               messages: [
@@ -281,7 +298,7 @@ describe('LintAnalyzer', () => {
         },
       ]
 
-      test.each(cases)('file path: $params.lint.filePath', ({ params }) => {
+      test.each(cases)('rule id: $params.ruleId', ({ params }) => {
         const DerivedClass = ConstructorSpyGenerator.create({ jest })
           .generateSpyKitClass(LintAnalyzer)
 
@@ -304,6 +321,7 @@ describe('LintAnalyzer', () => {
       const cases = [
         {
           params: {
+            ruleId: 'indent',
             lint: {
               filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
               messages: [
@@ -375,6 +393,7 @@ describe('LintAnalyzer', () => {
         },
         {
           params: {
+            ruleId: 'semi',
             lint: {
               filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
               messages: [
@@ -416,7 +435,7 @@ describe('LintAnalyzer', () => {
         },
       ]
 
-      test.each(cases)('file path: $params.lint.filePath', ({ params, expected }) => {
+      test.each(cases)('rule id: $params.ruleId', ({ params, expected }) => {
         const analyzer = LintAnalyzer.create(params)
 
         const messages = analyzer.hitMessages
@@ -430,11 +449,12 @@ describe('LintAnalyzer', () => {
 
 describe('LintAnalyzer', () => {
   describe('#get:unexpectedMessages', () => {
-    describe('from messages', () => {
+    describe('with expected message', () => {
       /** @type {Array<Object>} */
       const cases = [
         {
           params: {
+            ruleId: 'indent',
             lint: {
               filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
               messages: [
@@ -506,6 +526,7 @@ describe('LintAnalyzer', () => {
         },
         {
           params: {
+            ruleId: 'semi',
             lint: {
               filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
               messages: [
@@ -561,81 +582,96 @@ describe('LintAnalyzer', () => {
           ],
         },
       ]
-        .concat([
-          {
-            params: {
-              lint: {
-                filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
-                messages: [
-                  {
-                    ruleId: 'indent',
-                    severity: 2,
-                    message: 'Expected indentation of 4 spaces but found 6.',
-                    line: 9,
-                    column: 1,
-                    nodeType: 'Keyword',
-                    messageId: 'wrongIndentation',
-                    endLine: 9,
-                    endColumn: 7,
-                    fix: {
-                      range: [141, 147],
-                      text: '    ',
-                    },
-                  },
-                  {
-                    ruleId: 'indent',
-                    severity: 2,
-                    message: 'Expected indentation of 2 spaces but found 4.',
-                    line: 11,
-                    column: 1,
-                    nodeType: 'Punctuator',
-                    messageId: 'wrongIndentation',
-                    endLine: 11,
-                    endColumn: 5,
-                    fix: {
-                      range: [161, 165],
-                      text: '  ',
-                    },
-                  },
-                ],
-              },
-            },
-            expected: [],
-          },
-          {
-            params: {
-              lint: {
-                filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
-                messages: [
-                  {
-                    ruleId: 'semi',
-                    severity: 2,
-                    message: 'Extra semicolon.',
-                    line: 3,
-                    column: 18,
-                    nodeType: 'ExpressionStatement',
-                    messageId: 'extraSemi',
-                    endLine: 3,
-                    endColumn: 19,
-                    fix: {
-                      range: [28, 32],
-                      text: '111',
-                    },
-                  },
-                ],
-              },
-            },
-            expected: [],
-          },
-        ])
 
-      test.each(cases)('file path: $params.lint.filePath', ({ params, expected }) => {
+      test.each(cases)('rule id: $params.ruleId', ({ params, expected }) => {
         const analyzer = LintAnalyzer.create(params)
 
         const messages = analyzer.unexpectedMessages
 
         expect(messages)
           .toEqual(expected)
+      })
+    })
+
+    describe('without expected message', () => {
+      /** @type {Array<Object>} */
+      const cases = [
+        {
+          params: {
+            ruleId: 'indent',
+            lint: {
+              filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+              messages: [
+                {
+                  ruleId: 'indent',
+                  severity: 2,
+                  message: 'Expected indentation of 4 spaces but found 6.',
+                  line: 9,
+                  column: 1,
+                  nodeType: 'Keyword',
+                  messageId: 'wrongIndentation',
+                  endLine: 9,
+                  endColumn: 7,
+                  fix: {
+                    range: [141, 147],
+                    text: '    ',
+                  },
+                },
+                {
+                  ruleId: 'indent',
+                  severity: 2,
+                  message: 'Expected indentation of 2 spaces but found 4.',
+                  line: 11,
+                  column: 1,
+                  nodeType: 'Punctuator',
+                  messageId: 'wrongIndentation',
+                  endLine: 11,
+                  endColumn: 5,
+                  fix: {
+                    range: [161, 165],
+                    text: '  ',
+                  },
+                },
+              ],
+            },
+          },
+        },
+        {
+          params: {
+            ruleId: 'semi',
+            lint: {
+              filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+              messages: [
+                {
+                  ruleId: 'semi',
+                  severity: 2,
+                  message: 'Extra semicolon.',
+                  line: 3,
+                  column: 18,
+                  nodeType: 'ExpressionStatement',
+                  messageId: 'extraSemi',
+                  endLine: 3,
+                  endColumn: 19,
+                  fix: {
+                    range: [28, 32],
+                    text: '111',
+                  },
+                },
+              ],
+            },
+          },
+        },
+      ]
+
+      test.each(cases)('rule id: $params.ruleId', ({ params }) => {
+        const analyzer = LintAnalyzer.create(params)
+
+        const messages = analyzer.unexpectedMessages
+
+        expect(messages)
+          .toBeInstanceOf(Array)
+        expect(messages)
+          .toHaveLength(0)
       })
     })
   })
