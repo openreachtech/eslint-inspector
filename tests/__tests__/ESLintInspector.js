@@ -12,6 +12,8 @@ const ESLintInspector = require('../../lib/ESLintInspector')
 const FileLintAnalyzer = require('../../lib/FileLintAnalyzer')
 const LintAnalyzer = require('../../lib/LintAnalyzer')
 
+const CONTROL_CHARACTERS = require('../constants/control-characters')
+
 describe('ESLintInspector', () => {
   describe('constructor', () => {
     describe('to keep property', () => {
@@ -1903,6 +1905,175 @@ describe('ESLintInspector', () => {
           expect(result)
             .toBeFalsy()
         })
+      })
+    })
+  })
+})
+
+describe('ESLintInspector', () => {
+  describe('#getFormattedLog()', () => {
+    describe('to be formatted log', () => {
+      const RESET = CONTROL_CHARACTERS.RESET_STYLE
+      const BOLD = CONTROL_CHARACTERS.BOLD_STYLE
+      const COLOR_DEFAULT = CONTROL_CHARACTERS.COLOR_DEFAULT
+      const COLOR_RED = CONTROL_CHARACTERS.COLOR_RED
+      const COLOR_WHITE = CONTROL_CHARACTERS.COLOR_WHITE
+      const COLOR_GRAY = CONTROL_CHARACTERS.COLOR_GRAY
+      const UNDERLINE_OPEN = CONTROL_CHARACTERS.UNDERLINE_OPEN
+      const UNDERLINE_CLOSE = CONTROL_CHARACTERS.UNDERLINE_CLOSE
+
+      const cases = [
+        {
+          params: {
+            analyzers: [
+              LintAnalyzer.create({
+                ruleId: 'indent',
+                lint: {
+                  filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                  messages: [
+                    {
+                      ruleId: 'indent',
+                      severity: 2,
+                      message: 'Expected indentation of 4 spaces but found 6.',
+                      line: 9,
+                      column: 1,
+                      nodeType: 'Keyword',
+                      messageId: 'wrongIndentation',
+                      endLine: 9,
+                      endColumn: 7,
+                      fix: {
+                        range: [141, 147],
+                        text: '    ',
+                      },
+                    },
+                    {
+                      ruleId: 'indent',
+                      severity: 2,
+                      message: 'Expected indentation of 2 spaces but found 4.',
+                      line: 11,
+                      column: 1,
+                      nodeType: 'Punctuator',
+                      messageId: 'wrongIndentation',
+                      endLine: 11,
+                      endColumn: 5,
+                      fix: {
+                        range: [161, 165],
+                        text: '  ',
+                      },
+                    },
+                    {
+                      ruleId: 'semi',
+                      severity: 2,
+                      message: 'Extra semicolon.',
+                      line: 3,
+                      column: 18,
+                      nodeType: 'ExpressionStatement',
+                      messageId: 'extraSemi',
+                      endLine: 3,
+                      endColumn: 19,
+                      fix: {
+                        range: [28, 32],
+                        text: '111',
+                      },
+                    },
+                  ],
+                  suppressedMessages: [],
+                  errorCount: 2,
+                  fatalErrorCount: 0,
+                  warningCount: 0,
+                  fixableErrorCount: 2,
+                  fixableWarningCount: 0,
+                  source: 'dummy code of indent.js',
+                  usedDeprecatedRules: [],
+                },
+              }),
+              LintAnalyzer.create({
+                ruleId: 'semi',
+                lint: {
+                  filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                  messages: [
+                    {
+                      ruleId: 'indent',
+                      severity: 2,
+                      message: 'Expected indentation of 4 spaces but found 6.',
+                      line: 9,
+                      column: 1,
+                      nodeType: 'Keyword',
+                      messageId: 'wrongIndentation',
+                      endLine: 9,
+                      endColumn: 7,
+                      fix: {
+                        range: [141, 147],
+                        text: '    ',
+                      },
+                    },
+                    {
+                      ruleId: 'indent',
+                      severity: 2,
+                      message: 'Expected indentation of 2 spaces but found 4.',
+                      line: 11,
+                      column: 1,
+                      nodeType: 'Punctuator',
+                      messageId: 'wrongIndentation',
+                      endLine: 11,
+                      endColumn: 5,
+                      fix: {
+                        range: [161, 165],
+                        text: '  ',
+                      },
+                    },
+                    {
+                      ruleId: 'semi',
+                      severity: 2,
+                      message: 'Extra semicolon.',
+                      line: 3,
+                      column: 18,
+                      nodeType: 'ExpressionStatement',
+                      messageId: 'extraSemi',
+                      endLine: 3,
+                      endColumn: 19,
+                      fix: {
+                        range: [28, 32],
+                        text: '111',
+                      },
+                    },
+                  ],
+                  suppressedMessages: [],
+                  errorCount: 1,
+                  fatalErrorCount: 0,
+                  warningCount: 0,
+                  fixableErrorCount: 1,
+                  fixableWarningCount: 0,
+                  source: 'dummy code of semi.js',
+                  usedDeprecatedRules: [],
+                },
+              }),
+            ],
+          },
+          expected: `${RESET}${RESET}
+${RESET}${UNDERLINE_OPEN}/Users/username/repository-name/tests/targets/standard/indent.js${UNDERLINE_CLOSE}${RESET}
+${RESET}   ${COLOR_GRAY}9:1${COLOR_WHITE}   ${COLOR_RED}error${COLOR_DEFAULT}  Expected indentation of 4 spaces but found 6  ${COLOR_GRAY}indent${COLOR_WHITE}${RESET}
+${RESET}  ${COLOR_GRAY}11:1${COLOR_WHITE}   ${COLOR_RED}error${COLOR_DEFAULT}  Expected indentation of 2 spaces but found 4  ${COLOR_GRAY}indent${COLOR_WHITE}${RESET}
+${RESET}   ${COLOR_GRAY}3:18${COLOR_WHITE}  ${COLOR_RED}error${COLOR_DEFAULT}  Extra semicolon                               ${COLOR_GRAY}semi${COLOR_WHITE}${RESET}
+${RESET}${RESET}
+${RESET}${UNDERLINE_OPEN}/Users/username/repository-name/tests/targets/standard/semi.js${UNDERLINE_CLOSE}${RESET}
+${RESET}   ${COLOR_GRAY}9:1${COLOR_WHITE}   ${COLOR_RED}error${COLOR_DEFAULT}  Expected indentation of 4 spaces but found 6  ${COLOR_GRAY}indent${COLOR_WHITE}${RESET}
+${RESET}  ${COLOR_GRAY}11:1${COLOR_WHITE}   ${COLOR_RED}error${COLOR_DEFAULT}  Expected indentation of 2 spaces but found 4  ${COLOR_GRAY}indent${COLOR_WHITE}${RESET}
+${RESET}   ${COLOR_GRAY}3:18${COLOR_WHITE}  ${COLOR_RED}error${COLOR_DEFAULT}  Extra semicolon                               ${COLOR_GRAY}semi${COLOR_WHITE}${RESET}
+${RESET}${RESET}
+${RESET}${COLOR_RED}${BOLD}✖ 3 problems (3 errors, 0 warnings)${COLOR_WHITE}${COLOR_DEFAULT}${RESET}
+${RESET}${COLOR_RED}${BOLD}${COLOR_WHITE}${COLOR_DEFAULT}${COLOR_RED}${BOLD}  3 errors and 0 warnings potentially fixable with the \`--fix\` option.${COLOR_WHITE}${COLOR_DEFAULT}${RESET}
+${RESET}${COLOR_RED}${BOLD}${COLOR_WHITE}${COLOR_DEFAULT}${RESET}`
+        },
+      ]
+
+      test.each(cases)('[0] rule id: $params.analyzers.0.ruleId', async ({ params, expected }) => {
+        const inspector = ESLintInspector.create(params)
+
+        const log = await inspector.getFormattedLog()
+
+        expect(log)
+          .toBe(expected)
       })
     })
   })
