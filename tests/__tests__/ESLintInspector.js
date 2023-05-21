@@ -17,7 +17,7 @@ const CONTROL_CHARACTERS = require('../constants/control-characters')
 describe('ESLintInspector', () => {
   describe('constructor', () => {
     describe('to keep property', () => {
-      describe('#lints', () => {
+      describe('#analyzers', () => {
         /** @type {Array<Object>} */
         const cases = [
           {
