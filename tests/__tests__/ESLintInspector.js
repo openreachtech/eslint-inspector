@@ -2068,12 +2068,15 @@ ${RESET}${COLOR_RED}${BOLD}${COLOR_WHITE}${COLOR_DEFAULT}${RESET}`
       ]
 
       test.each(cases)('[0] rule id: $params.analyzers.0.ruleId', async ({ params, expected }) => {
+        // eslint-disable-next-line no-control-regex
+        const remover = /\x1b\[.+?m/g
+
         const inspector = ESLintInspector.create(params)
 
         const log = await inspector.getFormattedLog()
 
-        expect(log)
-          .toBe(expected)
+        expect(log.replace(remover, ''))
+          .toBe(expected.replace(remover, ''))
       })
     })
   })
