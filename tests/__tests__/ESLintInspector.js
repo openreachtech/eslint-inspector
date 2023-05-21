@@ -377,7 +377,7 @@ describe('ESLintInspector', () => {
           params: {
             filePaths: [],
           },
-          mocks: {
+          expected: {
             analyzers: [],
           },
         },
@@ -388,7 +388,7 @@ describe('ESLintInspector', () => {
               'tests/samples/standard/semi.js',
             ],
           },
-          mocks: {
+          expected: {
             analyzers: [
               expect.any(FileLintAnalyzer),
               expect.any(FileLintAnalyzer),
@@ -397,7 +397,7 @@ describe('ESLintInspector', () => {
         },
       ]
 
-      test.each(cases)('[0] filePaths: $params.filePaths.0', async ({ params, mocks }) => {
+      test.each(cases)('[0] filePaths: $params.filePaths.0', async ({ params, expected }) => {
         const mockClient = new ESLint()
 
         const lintFilesSpy = jest.spyOn(mockClient, 'lintFiles')
@@ -411,7 +411,7 @@ describe('ESLintInspector', () => {
           .toHaveBeenCalledWith(params.filePaths)
         expect(createSpy)
           .toHaveBeenCalledWith({
-            analyzers: mocks.analyzers,
+            analyzers: expected.analyzers,
           })
 
         lintFilesSpy.mockRestore()
