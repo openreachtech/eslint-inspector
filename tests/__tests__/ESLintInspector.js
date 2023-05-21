@@ -2068,6 +2068,7 @@ ${RESET}${COLOR_RED}${BOLD}${COLOR_WHITE}${COLOR_DEFAULT}${RESET}`
       ]
 
       test.each(cases)('[0] rule id: $params.analyzers.0.ruleId', async ({ params, expected }) => {
+        // same as /\x1b\[.+?m/g, it is to avoid no-control-regex rule
         const remover = new RegExp(`${'\x1b'}\\[.+?m`, 'g')
 
         const inspector = ESLintInspector.create(params)
