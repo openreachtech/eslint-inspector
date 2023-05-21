@@ -345,7 +345,7 @@ describe('ESLintInspector', () => {
 })
 
 describe('ESLintInspector', () => {
-  describe('.createAsyncWithFiles()', () => {
+  describe('.createAsyncWithFilePaths()', () => {
     describe('to return instance of ESLintInspector', () => {
       const cases = [
         {
@@ -364,7 +364,7 @@ describe('ESLintInspector', () => {
       ]
 
       test.each(cases)('[0] filePaths: $params.filePaths.0', async ({ params }) => {
-        const inspector = await ESLintInspector.createAsyncWithFiles(params.filePaths)
+        const inspector = await ESLintInspector.createAsyncWithFilePaths(params.filePaths)
 
         expect(inspector)
           .toBeInstanceOf(ESLintInspector)
@@ -405,7 +405,7 @@ describe('ESLintInspector', () => {
           .mockReturnValue(mockClient)
         const createSpy = jest.spyOn(ESLintInspector, 'create')
 
-        await ESLintInspector.createAsyncWithFiles(params.filePaths)
+        await ESLintInspector.createAsyncWithFilePaths(params.filePaths)
 
         expect(lintFilesSpy)
           .toHaveBeenCalledWith(params.filePaths)
