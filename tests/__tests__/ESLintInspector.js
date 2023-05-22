@@ -2294,5 +2294,50 @@ describe('ESLintInspector', () => {
           )
       })
     })
+
+    describe('with file paths', () => {
+      describe('to be null', () => {
+        const cases = [
+          {
+            params: {
+              filePaths: [
+                'tests/samples/expected/**',
+              ],
+            },
+          },
+        ]
+
+        test.each(cases)('file paths: $params.filePaths', async ({ params }) => {
+          const inspector = await ESLintInspector.createAsyncWithFilePaths(params.filePaths)
+
+          const log = await inspector.getFormattedLogIfUnexpected()
+
+          expect(log)
+            .toBeNull()
+        })
+      })
+
+      describe('to be log', () => {
+        const cases = [
+          {
+            params: {
+              filePaths: [
+                'tests/samples/unexpected/**',
+              ],
+            },
+          },
+        ]
+
+        test.each(cases)('file paths: $params.filePaths', async ({ params }) => {
+          const inspector = await ESLintInspector.createAsyncWithFilePaths(params.filePaths)
+
+          const log = await inspector.getFormattedLogIfUnexpected()
+
+          expect(log)
+            .not
+            .toBeNull()
+        })
+      })
+    })
   })
 })
