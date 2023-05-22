@@ -356,8 +356,8 @@ describe('ESLintInspector', () => {
         {
           params: {
             filePaths: [
-              'tests/samples/standard/indent.js',
-              'tests/samples/standard/semi.js',
+              'tests/samples/expected/standard/indent.js',
+              'tests/samples/expected/standard/semi.js',
             ],
           },
         },
@@ -384,8 +384,8 @@ describe('ESLintInspector', () => {
         {
           params: {
             filePaths: [
-              'tests/samples/standard/indent.js',
-              'tests/samples/standard/semi.js',
+              'tests/samples/expected/standard/indent.js',
+              'tests/samples/expected/standard/semi.js',
             ],
           },
           expected: {
