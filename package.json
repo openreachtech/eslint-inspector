@@ -1,11 +1,17 @@
 {
   "name": "@openreachtech/eslint-inspector",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "This is the useful tools for for JavaScript test concerning ESLint configuration.",
+  "files": [
+    "lib/",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
   "main": "index.js",
   "scripts": {
     "l": "npm run lint",
-    "lint": "eslint .",
+    "lint": "eslint --ignore-pattern /tests/samples/* .",
     "test": "export NODE_ENV=development; jest --forceExit --detectOpenHandles"
   },
   "repository": {
@@ -16,7 +22,7 @@
     "ESLint"
   ],
   "author": "Open Reach Tech inc.",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/openreachtech/eslint-inspector/issues"
   },
