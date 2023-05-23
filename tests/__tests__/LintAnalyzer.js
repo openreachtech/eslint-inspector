@@ -327,7 +327,7 @@ describe('LintAnalyzer', () => {
 
 describe('LintAnalyzer', () => {
   describe('#get:hitMessages', () => {
-    describe('from messages', () => {
+    describe('with ruleId only', () => {
       /** @type {Array<Object>} */
       const cases = [
         {
@@ -441,6 +441,66 @@ describe('LintAnalyzer', () => {
                 range: [28, 32],
                 text: '111',
               },
+            },
+          ],
+        },
+      ]
+
+      test.each(cases)('rule id: $params.ruleId', ({ params, expected }) => {
+        const analyzer = LintAnalyzer.create(params)
+
+        const messages = analyzer.hitMessages
+
+        expect(messages)
+          .toEqual(expected)
+      })
+    })
+
+    describe('with ruleId and message', () => {
+      /** @type {Array<Object>} */
+      const cases = [
+        {
+          params: {
+            ruleId: 'no-restricted-syntax',
+            message: 'Never use `let` variable declaration.',
+            lint: {
+              messages: [
+                {
+                  ruleId: 'no-restricted-syntax',
+                  severity: 2,
+                  message: 'Never use `let` variable declaration.', // ✅
+                  line: 5,
+                  column: 1,
+                  nodeType: 'VariableDeclaration',
+                  messageId: 'restrictedSyntax',
+                  endLine: 5,
+                  endColumn: 12
+                },
+                {
+                  ruleId: 'no-restricted-syntax',
+                  severity: 2,
+                  message: 'Never use `Array#forEach()`.', // ❌
+                  line: 6,
+                  column: 1,
+                  nodeType: 'CallExpression',
+                  messageId: 'restrictedSyntax',
+                  endLine: 8,
+                  endColumn: 3
+                },
+              ],
+            },
+          },
+          expected: [
+            {
+              ruleId: 'no-restricted-syntax',
+              severity: 2,
+              message: 'Never use `let` variable declaration.',
+              line: 5,
+              column: 1,
+              nodeType: 'VariableDeclaration',
+              messageId: 'restrictedSyntax',
+              endLine: 5,
+              endColumn: 12
             },
           ],
         },
