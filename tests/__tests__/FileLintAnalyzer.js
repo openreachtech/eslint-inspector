@@ -161,6 +161,7 @@ describe('FileLintAnalyzer', () => {
           },
           expected: {
             ruleId: 'indent',
+            message: null,
             lint: {
               filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
               messages: [
@@ -239,6 +240,7 @@ describe('FileLintAnalyzer', () => {
           },
           expected: {
             ruleId: 'semi',
+            message: null,
             lint: {
               filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
               messages: [
