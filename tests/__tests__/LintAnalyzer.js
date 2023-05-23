@@ -13,6 +13,7 @@ describe('LintAnalyzer', () => {
         {
           params: {
             ruleId: 'indent',
+            message: /Expected indentation of \d+ spaces but found \d+./,
             lint: {
               filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
               messages: [
@@ -61,6 +62,7 @@ describe('LintAnalyzer', () => {
         {
           params: {
             ruleId: 'semi',
+            message: 'Extra semicolon.',
             lint: {
               filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
               messages: [
@@ -110,6 +112,15 @@ describe('LintAnalyzer', () => {
 
           expect(analyzer)
             .toHaveProperty('ruleId', params.ruleId)
+        })
+      })
+
+      describe('#message', () => {
+        test.each(cases)('rule id: $params.ruleId', ({ params }) => {
+          const analyzer = new LintAnalyzer(params)
+
+          expect(analyzer)
+            .toHaveProperty('message', params.message)
         })
       })
     })
