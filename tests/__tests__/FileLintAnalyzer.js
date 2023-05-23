@@ -331,3 +331,81 @@ describe('FileLintAnalyzer', () => {
     })
   })
 })
+
+describe('FileLintAnalyzer', () => {
+  describe('.extractLintKeys()', () => {
+    /** @type {Array<Object>} */
+    const cases = [
+      {
+        params: {
+          filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+        },
+        expected: {
+          ruleId: 'indent',
+          messageId: null,
+        },
+      },
+      {
+        params: {
+          filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+        },
+        expected: {
+          ruleId: 'semi',
+          messageId: null,
+        },
+      },
+      {
+        params: {
+          filePath: '/Users/username/repository-name/tests/targets/standard/quotes.js',
+        },
+        expected: {
+          ruleId: 'quotes',
+          messageId: null,
+        },
+      },
+      {
+        params: {
+          filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax.js',
+        },
+        expected: {
+          ruleId: 'no-restricted-syntax',
+          messageId: null,
+        },
+      },
+      {
+        params: {
+          filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noLet.js',
+        },
+        expected: {
+          ruleId: 'no-restricted-syntax',
+          messageId: 'noLet',
+        },
+      },
+      {
+        params: {
+          filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/category/noArrayForEach.js',
+        },
+        expected: {
+          ruleId: 'no-restricted-syntax',
+          messageId: 'noArrayForEach',
+        },
+      },
+      {
+        params: {
+          filePath: '',
+        },
+        expected: {
+          ruleId: null,
+          messageId: null,
+        },
+      },
+    ]
+
+    test.each(cases)('file path: $params.filePath', ({ params, expected }) => {
+      const result = FileLintAnalyzer.extractLintKeys(params.filePath)
+
+      expect(result)
+        .toStrictEqual(expected)
+    })
+  })
+})
