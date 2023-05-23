@@ -152,3 +152,80 @@ describe('LintKeyExtractor', () => {
     })
   })
 })
+
+describe('LintKeyExtractor', () => {
+  describe('#get:messageId', () => {
+    describe('with ruleId only', () => {
+      const cases = [
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/indent.js',
+          },
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/semi.js',
+          },
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/no-restricted-syntax.js',
+          },
+        },
+      ]
+
+      test.each(cases)('filePath: $params.filePath', ({ params }) => {
+        const extractor = LintKeyExtractor.create(params)
+
+        expect(extractor.messageId)
+          .toBeNull()
+      })
+    })
+
+    describe('with ruleId "no-restricted-syntax"', () => {
+      const cases = [
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js',
+          },
+          expected: 'noLet',
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/no-restricted-syntax/noArrayForEach.js',
+          },
+          expected: 'noArrayForEach',
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/no-restricted-syntax/loop-controls/noArrayForEach.js',
+          },
+          expected: 'noArrayForEach',
+        },
+      ]
+
+      test.each(cases)('filePath: $params.filePath', ({ params, expected }) => {
+        const extractor = LintKeyExtractor.create(params)
+
+        expect(extractor.messageId)
+          .toBe(expected)
+      })
+    })
+
+    describe('invalid file path', () => {
+      const cases = [
+        { params: { filePath: '<text>' } },
+        { params: { filePath: '' } },
+        { params: { filePath: null } },
+        { params: { filePath: undefined } },
+      ]
+
+      test.each(cases)('filePath: $params.filePath', ({ params }) => {
+        const extractor = LintKeyExtractor.create(params)
+
+        expect(extractor.messageId)
+          .toBeNull()
+      })
+    })
+  })
+})
