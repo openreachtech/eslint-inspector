@@ -2303,12 +2303,28 @@ describe('ESLintInspector', () => {
               filePaths: [
                 'tests/samples/expected/**',
               ],
+              messageHash: {
+                noLet: 'Object-Oriented Programming does not require `let` variable declaration.',
+              },
+            },
+          },
+          {
+            params: {
+              filePaths: [
+                'tests/samples/expected/standard/no-restricted-syntax/**',
+              ],
+              messageHash: {
+                noLet: 'Object-Oriented Programming does not require `let` variable declaration.',
+              },
             },
           },
         ]
 
         test.each(cases)('file paths: $params.filePaths', async ({ params }) => {
-          const inspector = await ESLintInspector.createAsyncWithFilePaths(params.filePaths)
+          const inspector = await ESLintInspector.createAsyncWithFilePaths(
+            params.filePaths,
+            params.messageHash
+          )
 
           const log = await inspector.getFormattedLogIfUnexpected()
 
@@ -2324,12 +2340,28 @@ describe('ESLintInspector', () => {
               filePaths: [
                 'tests/samples/unexpected/**',
               ],
+              messageHash: {
+                noLet: 'Object-Oriented Programming does not require `let` variable declaration.',
+              },
+            },
+          },
+          {
+            params: {
+              filePaths: [
+                'tests/samples/unexpected/standard/no-restricted-syntax/**',
+              ],
+              messageHash: {
+                noLet: 'Object-Oriented Programming does not require `let` variable declaration.',
+              },
             },
           },
         ]
 
         test.each(cases)('file paths: $params.filePaths', async ({ params }) => {
-          const inspector = await ESLintInspector.createAsyncWithFilePaths(params.filePaths)
+          const inspector = await ESLintInspector.createAsyncWithFilePaths(
+            params.filePaths,
+            params.messageHash
+          )
 
           const log = await inspector.getFormattedLogIfUnexpected()
 
