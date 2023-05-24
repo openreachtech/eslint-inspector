@@ -811,3 +811,79 @@ describe('LintAnalyzer', () => {
     })
   })
 })
+
+describe('LintAnalyzer', () => {
+  describe('#generateNoLint()', () => {
+    describe('with ruleId only', () => {
+      /** @type {Array<Object>} */
+      const cases = [
+        {
+          params: {
+            ruleId: 'indent',
+          },
+          expected: {
+            ruleId: 'indent',
+            severity: 2,
+            message: 'No lints that should be there',
+          },
+        },
+        {
+          params: {
+            ruleId: 'semi',
+          },
+          expected: {
+            ruleId: 'semi',
+            severity: 2,
+            message: 'No lints that should be there',
+          },
+        },
+      ]
+
+      test.each(cases)('rule id: $params.ruleId', ({ params, expected }) => {
+        const analyzer = LintAnalyzer.create(params)
+
+        const message = analyzer.generateNoLint()
+
+        expect(message)
+          .toEqual(expected)
+      })
+    })
+
+    describe('with ruleId and message', () => {
+      /** @type {Array<Object>} */
+      const cases = [
+        {
+          params: {
+            ruleId: 'no-restricted-syntax',
+            message: 'used `let` variable declaration',
+          },
+          expected: {
+            ruleId: 'no-restricted-syntax "used `let` variable declaration"',
+            severity: 2,
+            message: 'No lints that should be there',
+          },
+        },
+        {
+          params: {
+            ruleId: 'no-restricted-syntax',
+            message: 'used `Array#forEach()`',
+          },
+          expected: {
+            ruleId: 'no-restricted-syntax "used `Array#forEach()`"',
+            severity: 2,
+            message: 'No lints that should be there',
+          },
+        },
+      ]
+
+      test.each(cases)('rule id: $params.ruleId', ({ params, expected }) => {
+        const analyzer = LintAnalyzer.create(params)
+
+        const message = analyzer.generateNoLint()
+
+        expect(message)
+          .toEqual(expected)
+      })
+    })
+  })
+})
