@@ -223,7 +223,7 @@ describe('LintAnalyzer', () => {
       })
     })
 
-    describe('to be instance of LintAnalyzer', () => {
+    describe('to call constructor', () => {
       /** @type {Array<Object>} */
       const cases = [
         {
