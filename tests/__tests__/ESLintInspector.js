@@ -1,5 +1,7 @@
 'use strict'
 
+const path = require('path')
+
 const {
   ESLint,
 } = require('eslint')
@@ -12,7 +14,14 @@ const ESLintInspector = require('../../lib/ESLintInspector')
 const FileLintAnalyzer = require('../../lib/FileLintAnalyzer')
 const LintAnalyzer = require('../../lib/LintAnalyzer')
 
+// same as /\x1b\[.+?m/g, it is to avoid no-control-regex rule
+const controlCharactersRemover = new RegExp(`${'\x1b'}\\[.+?m`, 'g')
+
 const CONTROL_CHARACTERS = require('../constants/control-characters')
+
+const messageHash = {
+  noLet: 'Object-Oriented Programming does not require `let` variable declaration.',
+}
 
 describe('ESLintInspector', () => {
   describe('constructor', () => {
@@ -2068,15 +2077,12 @@ ${RESET}${COLOR_RED}${BOLD}${COLOR_WHITE}${COLOR_DEFAULT}${RESET}`
       ]
 
       test.each(cases)('[0] rule id: $params.analyzers.0.ruleId', async ({ params, expected }) => {
-        // same as /\x1b\[.+?m/g, it is to avoid no-control-regex rule
-        const remover = new RegExp(`${'\x1b'}\\[.+?m`, 'g')
-
         const inspector = ESLintInspector.create(params)
 
         const log = await inspector.getUnexpectedLintLog()
 
-        expect(log.replace(remover, ''))
-          .toBe(expected.replace(remover, ''))
+        expect(log.replace(controlCharactersRemover, ''))
+          .toBe(expected.replace(controlCharactersRemover, ''))
       })
     })
   })
@@ -2294,8 +2300,14 @@ describe('ESLintInspector', () => {
           )
       })
     })
+  })
+})
 
+describe('ESLintInspector', () => {
+  describe('#getFormattedLogIfUnexpected()', () => {
     describe('with file paths', () => {
+      const basePath = __dirname.replace(/__tests__$/, '')
+
       describe('to be null', () => {
         const cases = [
           {
@@ -2344,6 +2356,26 @@ describe('ESLintInspector', () => {
                 noLet: 'Object-Oriented Programming does not require `let` variable declaration.',
               },
             },
+            expected: [
+              '\x1B[0m\x1B[0m',
+              `\x1B[0m\x1B[4m${path.join(basePath, 'samples/unexpected/standard/indent.js')}\x1B[24m\x1B[0m`,
+              '\x1B[0m   \x1B[2m7:1\x1B[22m   \x1B[31merror\x1B[39m  Expected indentation of 4 spaces but found 6  \x1B[2mindent\x1B[22m\x1B[0m',
+              '\x1B[0m   \x1B[2m8:1\x1B[22m   \x1B[31merror\x1B[39m  Expected indentation of 2 spaces but found 4  \x1B[2mindent\x1B[22m\x1B[0m',
+              '\x1B[0m  \x1B[2m10:23\x1B[22m  \x1B[31merror\x1B[39m  Extra semicolon                               \x1B[2msemi\x1B[22m\x1B[0m',
+              '\x1B[0m\x1B[0m',
+              `\x1B[0m\x1B[4m${path.join(basePath, 'samples/unexpected/standard/no-restricted-syntax/noLet.js')}\x1B[24m\x1B[0m`,
+              '\x1B[0m  \x1B[2m0:0\x1B[22m  \x1B[31merror\x1B[39m  🔎 No lints that should be here\x1B[0m',
+              '\x1B[0m              Object-Oriented Programming does not require `let` variable declaration  \x1B[2mno-restricted-syntax\x1B[22m\x1B[0m',
+              '\x1B[0m\x1B[0m',
+              `\x1B[0m\x1B[4m${path.join(basePath, 'samples/unexpected/standard/semi.js')}\x1B[24m\x1B[0m`,
+              '\x1B[0m  \x1B[2m3:1\x1B[22m   \x1B[31merror\x1B[39m  Unexpected console statement  \x1B[2mno-console\x1B[22m\x1B[0m',
+              '\x1B[0m  \x1B[2m5:18\x1B[22m  \x1B[31merror\x1B[39m  Extra semicolon               \x1B[2msemi\x1B[22m\x1B[0m',
+              '\x1B[0m\x1B[0m',
+              '\x1B[0m\x1B[31m\x1B[1m✖ 6 problems (6 errors, 0 warnings)\x1B[22m\x1B[39m\x1B[0m',
+              '\x1B[0m\x1B[31m\x1B[1m\x1B[22m\x1B[39m\x1B[31m\x1B[1m  4 errors and 0 warnings potentially fixable with the `--fix` option.\x1B[22m\x1B[39m\x1B[0m',
+              '\x1B[0m\x1B[31m\x1B[1m\x1B[22m\x1B[39m\x1B[0m'
+            ]
+              .join('\n'),
           },
           {
             params: {
@@ -2354,10 +2386,20 @@ describe('ESLintInspector', () => {
                 noLet: 'Object-Oriented Programming does not require `let` variable declaration.',
               },
             },
+            expected: [
+              '\x1B[0m\x1B[0m',
+              `\x1B[0m\x1B[4m${path.join(basePath, 'samples/unexpected/standard/no-restricted-syntax/noLet.js')}\x1B[24m\x1B[0m`,
+              '\x1B[0m  \x1B[2m0:0\x1B[22m  \x1B[31merror\x1B[39m  🔎 No lints that should be here\x1B[0m',
+              '\x1B[0m              Object-Oriented Programming does not require `let` variable declaration  \x1B[2mno-restricted-syntax\x1B[22m\x1B[0m',
+              '\x1B[0m\x1B[0m',
+              '\x1B[0m\x1B[31m\x1B[1m✖ 1 problem (1 error, 0 warnings)\x1B[22m\x1B[39m\x1B[0m',
+              '\x1B[0m\x1B[31m\x1B[1m\x1B[22m\x1B[39m\x1B[0m'
+            ]
+              .join('\n'),
           },
         ]
 
-        test.each(cases)('file paths: $params.filePaths', async ({ params }) => {
+        test.each(cases)('file paths: $params.filePaths', async ({ params, expected }) => {
           const inspector = await ESLintInspector.createAsyncWithFilePaths(
             params.filePaths,
             params.messageHash
@@ -2365,9 +2407,77 @@ describe('ESLintInspector', () => {
 
           const log = await inspector.getFormattedLogIfUnexpected()
 
-          expect(log)
-            .not
-            .toBeNull()
+          expect(log.replace(controlCharactersRemover, ''))
+            .toBe(expected.replace(controlCharactersRemover, ''))
+        })
+      })
+
+      describe('no lints', () => {
+        const cases = [
+          {
+            params: {
+              filePaths: [
+                'tests/samples/no-lints/all/**',
+              ],
+              messageHash,
+            },
+            expected: [
+              '\x1B[0m\x1B[0m',
+              `\x1B[0m\x1B[4m${path.join(basePath, 'samples/no-lints/all/indent.js')}\x1B[24m\x1B[0m`,
+              '\x1B[0m  \x1B[2m0:0\x1B[22m  \x1B[31merror\x1B[39m  🔎 No lints that should be here  \x1B[2mindent\x1B[22m\x1B[0m',
+              '\x1B[0m\x1B[0m',
+              `\x1B[0m\x1B[4m${path.join(basePath, 'samples/no-lints/all/no-restricted-syntax/noLet.js')}\x1B[24m\x1B[0m`,
+              '\x1B[0m  \x1B[2m0:0\x1B[22m  \x1B[31merror\x1B[39m  🔎 No lints that should be here\x1B[0m',
+              '\x1B[0m              Object-Oriented Programming does not require `let` variable declaration  \x1B[2mno-restricted-syntax\x1B[22m\x1B[0m',
+              '\x1B[0m\x1B[0m',
+              `\x1B[0m\x1B[4m${path.join(basePath, 'samples/no-lints/all/semi.js')}\x1B[24m\x1B[0m`,
+              '\x1B[0m  \x1B[2m0:0\x1B[22m  \x1B[31merror\x1B[39m  🔎 No lints that should be here  \x1B[2msemi\x1B[22m\x1B[0m',
+              '\x1B[0m\x1B[0m',
+              '\x1B[0m\x1B[31m\x1B[1m✖ 3 problems (3 errors, 0 warnings)\x1B[22m\x1B[39m\x1B[0m',
+              '\x1B[0m\x1B[31m\x1B[1m\x1B[22m\x1B[39m\x1B[0m',
+            ]
+              .join('\n'),
+          },
+          {
+            params: {
+              filePaths: [
+                'tests/samples/no-lints/with-unexpected/**',
+              ],
+              messageHash,
+            },
+            expected: [
+              '\x1B[0m\x1B[0m',
+              `\x1B[0m\x1B[4m${path.join(basePath, 'samples/no-lints/with-unexpected/indent.js')}\x1B[24m\x1B[0m`,
+              '\x1B[0m   \x1B[2m7:1\x1B[22m   \x1B[31merror\x1B[39m  Expected indentation of 4 spaces but found 6  \x1B[2mindent\x1B[22m\x1B[0m',
+              '\x1B[0m   \x1B[2m8:1\x1B[22m   \x1B[31merror\x1B[39m  Expected indentation of 2 spaces but found 4  \x1B[2mindent\x1B[22m\x1B[0m',
+              '\x1B[0m  \x1B[2m10:23\x1B[22m  \x1B[31merror\x1B[39m  Extra semicolon                               \x1B[2msemi\x1B[22m\x1B[0m',
+              '\x1B[0m\x1B[0m',
+              `\x1B[0m\x1B[4m${path.join(basePath, 'samples/no-lints/with-unexpected/no-restricted-syntax/noLet.js')}\x1B[24m\x1B[0m`,
+              '\x1B[0m  \x1B[2m0:0\x1B[22m  \x1B[31merror\x1B[39m  🔎 No lints that should be here\x1B[0m',
+              '\x1B[0m              Object-Oriented Programming does not require `let` variable declaration  \x1B[2mno-restricted-syntax\x1B[22m\x1B[0m',
+              '\x1B[0m\x1B[0m',
+              `\x1B[0m\x1B[4m${path.join(basePath, 'samples/no-lints/with-unexpected/semi.js')}\x1B[24m\x1B[0m`,
+              '\x1B[0m  \x1B[2m3:1\x1B[22m   \x1B[31merror\x1B[39m  Unexpected console statement  \x1B[2mno-console\x1B[22m\x1B[0m',
+              '\x1B[0m  \x1B[2m5:18\x1B[22m  \x1B[31merror\x1B[39m  Extra semicolon               \x1B[2msemi\x1B[22m\x1B[0m',
+              '\x1B[0m\x1B[0m',
+              '\x1B[0m\x1B[31m\x1B[1m✖ 6 problems (6 errors, 0 warnings)\x1B[22m\x1B[39m\x1B[0m',
+              '\x1B[0m\x1B[31m\x1B[1m\x1B[22m\x1B[39m\x1B[31m\x1B[1m  4 errors and 0 warnings potentially fixable with the `--fix` option.\x1B[22m\x1B[39m\x1B[0m',
+              '\x1B[0m\x1B[31m\x1B[1m\x1B[22m\x1B[39m\x1B[0m'
+            ]
+              .join('\n'),
+          },
+        ]
+
+        test.each(cases)('file paths: $params.filePaths', async ({ params, expected }) => {
+          const inspector = await ESLintInspector.createAsyncWithFilePaths(
+            params.filePaths,
+            params.messageHash
+          )
+
+          const log = await inspector.getFormattedLogIfUnexpected()
+
+          expect(log.replace(controlCharactersRemover, ''))
+            .toBe(expected.replace(controlCharactersRemover, ''))
         })
       })
     })
