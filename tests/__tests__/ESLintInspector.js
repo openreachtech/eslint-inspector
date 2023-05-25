@@ -14,6 +14,9 @@ const ESLintInspector = require('../../lib/ESLintInspector')
 const FileLintAnalyzer = require('../../lib/FileLintAnalyzer')
 const LintAnalyzer = require('../../lib/LintAnalyzer')
 
+// same as /\x1b\[.+?m/g, it is to avoid no-control-regex rule
+const controlCharactersRemover = new RegExp(`${'\x1b'}\\[.+?m`, 'g')
+
 const CONTROL_CHARACTERS = require('../constants/control-characters')
 
 const messageHash = {
@@ -2074,15 +2077,12 @@ ${RESET}${COLOR_RED}${BOLD}${COLOR_WHITE}${COLOR_DEFAULT}${RESET}`
       ]
 
       test.each(cases)('[0] rule id: $params.analyzers.0.ruleId', async ({ params, expected }) => {
-        // same as /\x1b\[.+?m/g, it is to avoid no-control-regex rule
-        const remover = new RegExp(`${'\x1b'}\\[.+?m`, 'g')
-
         const inspector = ESLintInspector.create(params)
 
         const log = await inspector.getUnexpectedLintLog()
 
-        expect(log.replace(remover, ''))
-          .toBe(expected.replace(remover, ''))
+        expect(log.replace(controlCharactersRemover, ''))
+          .toBe(expected.replace(controlCharactersRemover, ''))
       })
     })
   })
