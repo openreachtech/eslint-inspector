@@ -1075,3 +1075,49 @@ describe('LintAnalyzer', () => {
     })
   })
 })
+
+describe('LintAnalyzer', () => {
+  describe('#generateNoLintMessage()', () => {
+    /** @type {Object} */
+    const lintAnalyzerParams = {
+      ruleId: 'sample-rule-id',
+      message: 'sample-message',
+      lint: {}
+    }
+    const analyzer = LintAnalyzer.create(lintAnalyzerParams)
+
+    const cases = [
+      {
+        params: {
+          message: 'Never use let',
+        },
+        expected: '🔎 No lints that should be here\n              Never use let',
+      },
+      {
+        params: {
+          message: 'Never use var',
+        },
+        expected: '🔎 No lints that should be here\n              Never use var',
+      },
+      {
+        params: {
+          message: /Expected indentation of \d+ spaces but found \d+./,
+        },
+        expected: '🔎 No lints that should be here\n              /Expected indentation of \\d+ spaces but found \\d+./',
+      },
+      {
+        params: {
+          message: null,
+        },
+        expected: '🔎 No lints that should be here',
+      },
+    ]
+
+    test.each(cases)('message: $params.message', ({ params, expected }) => {
+      const actual = analyzer.generateNoLintMessage(params.message)
+
+      expect(actual)
+        .toEqual(expected)
+    })
+  })
+})
