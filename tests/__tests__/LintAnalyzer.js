@@ -1121,3 +1121,317 @@ describe('LintAnalyzer', () => {
     })
   })
 })
+
+describe('LintAnalyzer', () => {
+  describe('#getUnexpectedLint()', () => {
+    describe('with ruleId only', () => {
+      describe('has hit messages', () => {
+        /** @type {Array<Object>} */
+        const cases = [
+          {
+            params: {
+              ruleId: 'indent',
+              message: null,
+              lint: {
+                filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                messages: [
+                  {
+                    ruleId: 'indent',
+                    severity: 2,
+                    message: 'Expected indentation of 4 spaces but found 6.',
+                    line: 9,
+                    column: 1,
+                    nodeType: 'Keyword',
+                    messageId: 'wrongIndentation',
+                    endLine: 9,
+                    endColumn: 7,
+                    fix: {
+                      range: [141, 147],
+                      text: '    ',
+                    },
+                  },
+                  {
+                    ruleId: 'indent',
+                    severity: 2,
+                    message: 'Expected indentation of 2 spaces but found 4.',
+                    line: 11,
+                    column: 1,
+                    nodeType: 'Punctuator',
+                    messageId: 'wrongIndentation',
+                    endLine: 11,
+                    endColumn: 5,
+                    fix: {
+                      range: [161, 165],
+                      text: '  ',
+                    },
+                  },
+                  {
+                    ruleId: 'semi',
+                    severity: 2,
+                    message: 'Extra semicolon.',
+                    line: 3,
+                    column: 18,
+                    nodeType: 'ExpressionStatement',
+                    messageId: 'extraSemi',
+                    endLine: 3,
+                    endColumn: 19,
+                    fix: {
+                      range: [28, 32],
+                      text: '111',
+                    },
+                  },
+                ],
+              },
+            },
+          },
+          {
+            params: {
+              ruleId: 'semi',
+              message: null,
+              lint: {
+                filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                messages: [
+                  {
+                    ruleId: 'indent',
+                    severity: 2,
+                    message: 'Expected indentation of 4 spaces but found 6.',
+                    line: 9,
+                    column: 1,
+                    nodeType: 'Keyword',
+                    messageId: 'wrongIndentation',
+                    endLine: 9,
+                    endColumn: 7,
+                    fix: {
+                      range: [141, 147],
+                      text: '    ',
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        ]
+
+        test.each(cases)('rule id: $params.ruleId', ({ params }) => {
+          const analyzer = LintAnalyzer.create(params)
+
+          const actual = analyzer.getUnexpectedLint()
+
+          expect(actual)
+            .toEqual(params.lint)
+        })
+      })
+
+      describe('has no hit messages', () => {
+        /** @type {Array<Object>} */
+        const cases = [
+          {
+            params: {
+              ruleId: 'indent',
+              message: null,
+              lint: {
+                filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                messages: [],
+              },
+            },
+            expected: {
+              filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+              fatalErrorCount: 1,
+              errorCount: 1,
+              messages: [
+                {
+                  ruleId: 'indent',
+                  severity: 2,
+                  message: '🔎 No lints that should be here',
+                  line: 0,
+                  column: 0,
+                },
+              ],
+            },
+          },
+          {
+            params: {
+              ruleId: 'semi',
+              message: null,
+              lint: {
+                filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                messages: [],
+              },
+            },
+            expected: {
+              filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+              fatalErrorCount: 1,
+              errorCount: 1,
+              messages: [
+                {
+                  ruleId: 'semi',
+                  severity: 2,
+                  message: '🔎 No lints that should be here',
+                  line: 0,
+                  column: 0,
+                },
+              ],
+            },
+          },
+          {
+            params: {
+              ruleId: 'quotes',
+              message: null,
+              lint: {
+                filePath: '/Users/username/repository-name/tests/targets/standard/quotes.js',
+                messages: [],
+              },
+            },
+            expected: {
+              filePath: '/Users/username/repository-name/tests/targets/standard/quotes.js',
+              fatalErrorCount: 1,
+              errorCount: 1,
+              messages: [
+                {
+                  ruleId: 'quotes',
+                  severity: 2,
+                  message: '🔎 No lints that should be here',
+                  line: 0,
+                  column: 0,
+                },
+              ],
+            },
+          },
+        ]
+
+        test.each(cases)('rule id: $params.ruleId', ({ params, expected }) => {
+          const analyzer = LintAnalyzer.create(params)
+
+          const actual = analyzer.getUnexpectedLint()
+
+          expect(actual)
+            .toEqual(expected)
+        })
+      })
+    })
+
+    describe('with ruleId and message', () => {
+      describe('has hit messages', () => {
+        /** @type {Array<Object>} */
+        const cases = [
+          {
+            params: {
+              ruleId: 'no-restricted-syntax',
+              message: 'Never use `let`',
+              lint: {
+                filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noLet.js',
+                messages: [
+                  {
+                    ruleId: 'no-restricted-syntax',
+                    severity: 2,
+                    message: 'Never user `let`.',
+                    line: 10,
+                    column: 1,
+                    nodeType: 'VariableDeclaration',
+                    messageId: 'restrictedSyntax',
+                    endLine: 10,
+                    endColumn: 12,
+                  },
+                ],
+              },
+            },
+          },
+          {
+            params: {
+              ruleId: 'no-restricted-syntax',
+              message: 'Never use `Array#forEach()`',
+              lint: {
+                filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noArrayForEach.js',
+                messages: [
+                  {
+                    ruleId: 'no-restricted-syntax',
+                    severity: 2,
+                    message: 'Never user `Array#forEach()`.',
+                    line: 6,
+                    column: 1,
+                    nodeType: 'CallExpression',
+                    messageId: 'restrictedSyntax',
+                    endLine: 8,
+                    endColumn: 3
+                  },
+                ],
+              },
+            },
+          },
+        ]
+
+        test.each(cases)('rule id: $params.ruleId', ({ params }) => {
+          const analyzer = LintAnalyzer.create(params)
+
+          const actual = analyzer.getUnexpectedLint()
+
+          expect(actual)
+            .toEqual(params.lint)
+        })
+      })
+
+      describe('has no hit messages', () => {
+        /** @type {Array<Object>} */
+        const cases = [
+          {
+            params: {
+              ruleId: 'no-restricted-syntax',
+              message: 'Never use `let`',
+              lint: {
+                filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noLet.js',
+                messages: [],
+              },
+            },
+            expected: {
+              filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noLet.js',
+              messages: [
+                {
+                  ruleId: 'no-restricted-syntax',
+                  severity: 2, // error
+                  message: '🔎 No lints that should be here\n              Never use `let`',
+                  line: 0,
+                  column: 0,
+                }
+              ],
+              fatalErrorCount: 1,
+              errorCount: 1,
+            },
+          },
+          {
+            params: {
+              ruleId: 'no-restricted-syntax',
+              message: 'Never use `Array#forEach()`',
+              lint: {
+                filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noArrayForEach.js',
+                messages: [],
+              },
+            },
+            expected: {
+              filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noArrayForEach.js',
+              messages: [
+                {
+                  ruleId: 'no-restricted-syntax',
+                  severity: 2, // error
+                  message: '🔎 No lints that should be here\n              Never use `Array#forEach()`',
+                  line: 0,
+                  column: 0,
+                }
+              ],
+              fatalErrorCount: 1,
+              errorCount: 1,
+            },
+          },
+        ]
+
+        test.each(cases)('rule id: $params.ruleId', ({ params, expected }) => {
+          const analyzer = LintAnalyzer.create(params)
+
+          const actual = analyzer.getUnexpectedLint()
+
+          expect(actual)
+            .toEqual(expected)
+        })
+      })
+    })
+  })
+})
