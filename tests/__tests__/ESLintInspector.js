@@ -1911,7 +1911,7 @@ describe('ESLintInspector', () => {
 })
 
 describe('ESLintInspector', () => {
-  describe('#getFormattedLog()', () => {
+  describe('#getUnexpectedLintLog()', () => {
     describe('to be formatted log', () => {
       const RESET = CONTROL_CHARACTERS.RESET_STYLE
       const BOLD = CONTROL_CHARACTERS.BOLD_STYLE
@@ -2073,7 +2073,7 @@ ${RESET}${COLOR_RED}${BOLD}${COLOR_WHITE}${COLOR_DEFAULT}${RESET}`
 
         const inspector = ESLintInspector.create(params)
 
-        const log = await inspector.getFormattedLog()
+        const log = await inspector.getUnexpectedLintLog()
 
         expect(log.replace(remover, ''))
           .toBe(expected.replace(remover, ''))
