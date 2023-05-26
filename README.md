@@ -105,7 +105,7 @@
 * `ESLintInspector` decide that the specified rule is working correctly for each sample file of each rule id, when the following conditions are met.
 
 1. The lint result includes one or more lint error of the specified rule id.
-2. Any lint errors other than the specified rule id are not included in the lint result
+2. Any lint errors other than the specified rule id are not included in the lint result.
 
 ## Note
 
