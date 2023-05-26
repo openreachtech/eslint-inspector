@@ -100,6 +100,68 @@
   })
   ```
 
+## Strict Check with Lint Error Message
+
+* There are some cases where we would like to have separate files for checking the behavior of some rules for each message. Currently, for the `no-restricted-syntax` rule, we can create a sample file for each selector.
+
+* For strict inspections, create a sample file with the folder name as the rule name and the message ID as the file name inside it.
+
+* `.eslintrc.yml`
+
+  ```yml
+  ...
+
+  rules:
+    ...
+
+    no-restricted-syntax:
+      - error
+      - selector: 'VariableDeclaration[kind="let"]'
+        message: 'Never use `let`.'
+      - selector: 'SwitchStatement'
+        message: 'Never use `switch` statement.'
+
+    ...
+  ```
+
+* Structure of directories for Jest.
+
+  ```
+  /your-eslint-config-repository
+  |
+  └── tests/
+      └── samples/
+          └── no-restricted-syntax/ # Confirm to work rule id: `no-restricted-syntax`
+              ├── noLet.js          # message id: noLet "Never use `let`."
+              └── noSwitch.js       # message id: noSwitch "Never use `switch` statement."
+  ```
+
+* Define message id and lint error message as an object hash and pass it as the second argument to `ESLintInspector.createAsyncWithFilePaths()`.
+
+  ```javascript
+  // Define object hash by message ID and lint error message.
+  const messageHash = {
+    noLet: 'Never use `let`.',
+    noSwitch: 'Never use `switch` statement.',
+  }
+
+  const {
+    ESLintInspector,
+  } = require('@openreachtech/eslint-inspector')
+
+  test('should work as expected', async () => {
+    const inspector = await ESLintInspector.createAsyncWithFilePaths([
+      'tests/samples/*.js',
+      messageHash // <----------------- ✅
+    ])
+
+    const unexpectedLog = await inspector.getFormattedLogIfUnexpected()
+
+    expect(unexpectedLog)
+      .toBeNull()
+  })
+  ```
+
 ## Spec
 
 * `ESLintInspector` decide that the specified rule is working correctly for each sample file of each rule id, when the following conditions are met.
