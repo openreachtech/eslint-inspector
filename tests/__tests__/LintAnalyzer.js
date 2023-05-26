@@ -979,9 +979,9 @@ describe('LintAnalyzer', () => {
         },
         {
           params: {
-            ruleId: 'quote',
+            ruleId: 'quotes',
             lint: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/quote.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard/quotes.js',
               messages: [],
             },
           },
