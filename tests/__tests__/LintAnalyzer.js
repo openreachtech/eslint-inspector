@@ -13,6 +13,7 @@ describe('LintAnalyzer', () => {
         {
           params: {
             ruleId: 'indent',
+            message: /Expected indentation of \d+ spaces but found \d+./,
             lint: {
               filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
               messages: [
@@ -61,6 +62,7 @@ describe('LintAnalyzer', () => {
         {
           params: {
             ruleId: 'semi',
+            message: 'Extra semicolon.',
             lint: {
               filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
               messages: [
@@ -110,6 +112,15 @@ describe('LintAnalyzer', () => {
 
           expect(analyzer)
             .toHaveProperty('ruleId', params.ruleId)
+        })
+      })
+
+      describe('#message', () => {
+        test.each(cases)('rule id: $params.ruleId', ({ params }) => {
+          const analyzer = new LintAnalyzer(params)
+
+          expect(analyzer)
+            .toHaveProperty('message', params.message)
         })
       })
     })
@@ -212,7 +223,7 @@ describe('LintAnalyzer', () => {
       })
     })
 
-    describe('to be instance of LintAnalyzer', () => {
+    describe('to call constructor', () => {
       /** @type {Array<Object>} */
       const cases = [
         {
@@ -316,7 +327,7 @@ describe('LintAnalyzer', () => {
 
 describe('LintAnalyzer', () => {
   describe('#get:hitMessages', () => {
-    describe('from messages', () => {
+    describe('with ruleId only', () => {
       /** @type {Array<Object>} */
       const cases = [
         {
@@ -444,140 +455,52 @@ describe('LintAnalyzer', () => {
           .toEqual(expected)
       })
     })
-  })
-})
 
-describe('LintAnalyzer', () => {
-  describe('#get:unexpectedMessages', () => {
-    describe('with expected message', () => {
+    describe('with ruleId and message', () => {
       /** @type {Array<Object>} */
       const cases = [
         {
           params: {
-            ruleId: 'indent',
+            ruleId: 'no-restricted-syntax',
+            message: 'Never use `let` variable declaration.',
             lint: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
               messages: [
                 {
-                  ruleId: 'indent',
+                  ruleId: 'no-restricted-syntax',
                   severity: 2,
-                  message: 'Expected indentation of 4 spaces but found 6.',
-                  line: 9,
+                  message: 'Never use `let` variable declaration.', // ✅
+                  line: 5,
                   column: 1,
-                  nodeType: 'Keyword',
-                  messageId: 'wrongIndentation',
-                  endLine: 9,
-                  endColumn: 7,
-                  fix: {
-                    range: [141, 147],
-                    text: '    ',
-                  },
+                  nodeType: 'VariableDeclaration',
+                  messageId: 'restrictedSyntax',
+                  endLine: 5,
+                  endColumn: 12
                 },
                 {
-                  ruleId: 'indent',
+                  ruleId: 'no-restricted-syntax',
                   severity: 2,
-                  message: 'Expected indentation of 2 spaces but found 4.',
-                  line: 11,
+                  message: 'Never use `Array#forEach()`.', // ❌
+                  line: 6,
                   column: 1,
-                  nodeType: 'Punctuator',
-                  messageId: 'wrongIndentation',
-                  endLine: 11,
-                  endColumn: 5,
-                  fix: {
-                    range: [161, 165],
-                    text: '  ',
-                  },
-                },
-                {
-                  ruleId: 'semi',
-                  severity: 2,
-                  message: 'Extra semicolon.',
-                  line: 3,
-                  column: 18,
-                  nodeType: 'ExpressionStatement',
-                  messageId: 'extraSemi',
-                  endLine: 3,
-                  endColumn: 19,
-                  fix: {
-                    range: [28, 32],
-                    text: '111',
-                  },
+                  nodeType: 'CallExpression',
+                  messageId: 'restrictedSyntax',
+                  endLine: 8,
+                  endColumn: 3
                 },
               ],
             },
           },
           expected: [
             {
-              ruleId: 'semi',
+              ruleId: 'no-restricted-syntax',
               severity: 2,
-              message: 'Extra semicolon.',
-              line: 3,
-              column: 18,
-              nodeType: 'ExpressionStatement',
-              messageId: 'extraSemi',
-              endLine: 3,
-              endColumn: 19,
-              fix: {
-                range: [28, 32],
-                text: '111',
-              },
-            },
-          ],
-        },
-        {
-          params: {
-            ruleId: 'semi',
-            lint: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
-              messages: [
-                {
-                  ruleId: 'indent',
-                  severity: 2,
-                  message: 'Expected indentation of 2 spaces but found 4.',
-                  line: 11,
-                  column: 1,
-                  nodeType: 'Punctuator',
-                  messageId: 'wrongIndentation',
-                  endLine: 11,
-                  endColumn: 5,
-                  fix: {
-                    range: [161, 165],
-                    text: '  ',
-                  },
-                },
-                {
-                  ruleId: 'semi',
-                  severity: 2,
-                  message: 'Extra semicolon.',
-                  line: 3,
-                  column: 18,
-                  nodeType: 'ExpressionStatement',
-                  messageId: 'extraSemi',
-                  endLine: 3,
-                  endColumn: 19,
-                  fix: {
-                    range: [28, 32],
-                    text: '111',
-                  },
-                },
-              ],
-            },
-          },
-          expected: [
-            {
-              ruleId: 'indent',
-              severity: 2,
-              message: 'Expected indentation of 2 spaces but found 4.',
-              line: 11,
+              message: 'Never use `let` variable declaration.',
+              line: 5,
               column: 1,
-              nodeType: 'Punctuator',
-              messageId: 'wrongIndentation',
-              endLine: 11,
-              endColumn: 5,
-              fix: {
-                range: [161, 165],
-                text: '  ',
-              },
+              nodeType: 'VariableDeclaration',
+              messageId: 'restrictedSyntax',
+              endLine: 5,
+              endColumn: 12
             },
           ],
         },
@@ -586,14 +509,312 @@ describe('LintAnalyzer', () => {
       test.each(cases)('rule id: $params.ruleId', ({ params, expected }) => {
         const analyzer = LintAnalyzer.create(params)
 
-        const messages = analyzer.unexpectedMessages
+        const messages = analyzer.hitMessages
 
         expect(messages)
           .toEqual(expected)
       })
     })
+  })
+})
 
-    describe('without expected message', () => {
+describe('LintAnalyzer', () => {
+  describe('#get:unexpectedMessages', () => {
+    describe('with ruleId only', () => {
+      describe('with expected message', () => {
+        /** @type {Array<Object>} */
+        const cases = [
+          {
+            params: {
+              ruleId: 'indent',
+              lint: {
+                filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                messages: [
+                  {
+                    ruleId: 'indent',
+                    severity: 2,
+                    message: 'Expected indentation of 4 spaces but found 6.',
+                    line: 9,
+                    column: 1,
+                    nodeType: 'Keyword',
+                    messageId: 'wrongIndentation',
+                    endLine: 9,
+                    endColumn: 7,
+                    fix: {
+                      range: [141, 147],
+                      text: '    ',
+                    },
+                  },
+                  {
+                    ruleId: 'indent',
+                    severity: 2,
+                    message: 'Expected indentation of 2 spaces but found 4.',
+                    line: 11,
+                    column: 1,
+                    nodeType: 'Punctuator',
+                    messageId: 'wrongIndentation',
+                    endLine: 11,
+                    endColumn: 5,
+                    fix: {
+                      range: [161, 165],
+                      text: '  ',
+                    },
+                  },
+                  {
+                    ruleId: 'semi',
+                    severity: 2,
+                    message: 'Extra semicolon.',
+                    line: 3,
+                    column: 18,
+                    nodeType: 'ExpressionStatement',
+                    messageId: 'extraSemi',
+                    endLine: 3,
+                    endColumn: 19,
+                    fix: {
+                      range: [28, 32],
+                      text: '111',
+                    },
+                  },
+                ],
+              },
+            },
+            expected: [
+              {
+                ruleId: 'semi',
+                severity: 2,
+                message: 'Extra semicolon.',
+                line: 3,
+                column: 18,
+                nodeType: 'ExpressionStatement',
+                messageId: 'extraSemi',
+                endLine: 3,
+                endColumn: 19,
+                fix: {
+                  range: [28, 32],
+                  text: '111',
+                },
+              },
+            ],
+          },
+          {
+            params: {
+              ruleId: 'semi',
+              lint: {
+                filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                messages: [
+                  {
+                    ruleId: 'indent',
+                    severity: 2,
+                    message: 'Expected indentation of 2 spaces but found 4.',
+                    line: 11,
+                    column: 1,
+                    nodeType: 'Punctuator',
+                    messageId: 'wrongIndentation',
+                    endLine: 11,
+                    endColumn: 5,
+                    fix: {
+                      range: [161, 165],
+                      text: '  ',
+                    },
+                  },
+                  {
+                    ruleId: 'semi',
+                    severity: 2,
+                    message: 'Extra semicolon.',
+                    line: 3,
+                    column: 18,
+                    nodeType: 'ExpressionStatement',
+                    messageId: 'extraSemi',
+                    endLine: 3,
+                    endColumn: 19,
+                    fix: {
+                      range: [28, 32],
+                      text: '111',
+                    },
+                  },
+                ],
+              },
+            },
+            expected: [
+              {
+                ruleId: 'indent',
+                severity: 2,
+                message: 'Expected indentation of 2 spaces but found 4.',
+                line: 11,
+                column: 1,
+                nodeType: 'Punctuator',
+                messageId: 'wrongIndentation',
+                endLine: 11,
+                endColumn: 5,
+                fix: {
+                  range: [161, 165],
+                  text: '  ',
+                },
+              },
+            ],
+          },
+        ]
+
+        test.each(cases)('rule id: $params.ruleId', ({ params, expected }) => {
+          const analyzer = LintAnalyzer.create(params)
+
+          const messages = analyzer.unexpectedMessages
+
+          expect(messages)
+            .toEqual(expected)
+        })
+      })
+
+      describe('without expected message', () => {
+        /** @type {Array<Object>} */
+        const cases = [
+          {
+            params: {
+              ruleId: 'indent',
+              lint: {
+                filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                messages: [
+                  {
+                    ruleId: 'indent',
+                    severity: 2,
+                    message: 'Expected indentation of 4 spaces but found 6.',
+                    line: 9,
+                    column: 1,
+                    nodeType: 'Keyword',
+                    messageId: 'wrongIndentation',
+                    endLine: 9,
+                    endColumn: 7,
+                    fix: {
+                      range: [141, 147],
+                      text: '    ',
+                    },
+                  },
+                  {
+                    ruleId: 'indent',
+                    severity: 2,
+                    message: 'Expected indentation of 2 spaces but found 4.',
+                    line: 11,
+                    column: 1,
+                    nodeType: 'Punctuator',
+                    messageId: 'wrongIndentation',
+                    endLine: 11,
+                    endColumn: 5,
+                    fix: {
+                      range: [161, 165],
+                      text: '  ',
+                    },
+                  },
+                ],
+              },
+            },
+          },
+          {
+            params: {
+              ruleId: 'semi',
+              lint: {
+                filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                messages: [
+                  {
+                    ruleId: 'semi',
+                    severity: 2,
+                    message: 'Extra semicolon.',
+                    line: 3,
+                    column: 18,
+                    nodeType: 'ExpressionStatement',
+                    messageId: 'extraSemi',
+                    endLine: 3,
+                    endColumn: 19,
+                    fix: {
+                      range: [28, 32],
+                      text: '111',
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        ]
+
+        test.each(cases)('rule id: $params.ruleId', ({ params }) => {
+          const analyzer = LintAnalyzer.create(params)
+
+          const messages = analyzer.unexpectedMessages
+
+          expect(messages)
+            .toBeInstanceOf(Array)
+          expect(messages)
+            .toHaveLength(0)
+        })
+      })
+    })
+
+    describe('with ruleId and message', () => {
+      describe('with expected message', () => {
+        /** @type {Array<Object>} */
+        const cases = [
+          {
+            params: {
+              ruleId: 'no-restricted-syntax',
+              message: 'Never use `let` variable declaration.',
+              lint: {
+                messages: [
+                  {
+                    ruleId: 'no-restricted-syntax',
+                    severity: 2,
+                    message: 'Never use `let` variable declaration.',
+                    line: 5,
+                    column: 1,
+                    nodeType: 'VariableDeclaration',
+                    messageId: 'restrictedSyntax',
+                    endLine: 5,
+                    endColumn: 12
+                  },
+                  {
+                    ruleId: 'no-restricted-syntax',
+                    severity: 2,
+                    message: 'Never use `Array#forEach()`.',
+                    line: 6,
+                    column: 1,
+                    nodeType: 'CallExpression',
+                    messageId: 'restrictedSyntax',
+                    endLine: 8,
+                    endColumn: 3
+                  },
+                ],
+              },
+            },
+            expected: [
+              {
+                ruleId: 'no-restricted-syntax',
+                severity: 2,
+                message: 'Never use `Array#forEach()`.',
+                line: 6,
+                column: 1,
+                nodeType: 'CallExpression',
+                messageId: 'restrictedSyntax',
+                endLine: 8,
+                endColumn: 3
+              },
+            ],
+          },
+        ]
+
+        test.each(cases)('rule id: $params.ruleId', ({ params, expected }) => {
+          const analyzer = LintAnalyzer.create(params)
+
+          const messages = analyzer.unexpectedMessages
+
+          expect(messages)
+            .toEqual(expected)
+        })
+      })
+    })
+  })
+})
+
+describe('LintAnalyzer', () => {
+  describe('#worksAsExpected()', () => {
+    describe('to be truthy', () => {
       /** @type {Array<Object>} */
       const cases = [
         {
@@ -666,12 +887,474 @@ describe('LintAnalyzer', () => {
       test.each(cases)('rule id: $params.ruleId', ({ params }) => {
         const analyzer = LintAnalyzer.create(params)
 
-        const messages = analyzer.unexpectedMessages
+        const actual = analyzer.worksAsExpected()
 
-        expect(messages)
-          .toBeInstanceOf(Array)
-        expect(messages)
-          .toHaveLength(0)
+        expect(actual)
+          .toBeTruthy()
+      })
+    })
+
+    describe('to be falsy', () => {
+      /** @type {Array<Object>} */
+      const cases = [
+        {
+          params: {
+            ruleId: 'indent',
+            lint: {
+              filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+              messages: [
+                {
+                  ruleId: 'indent',
+                  severity: 2,
+                  message: 'Expected indentation of 4 spaces but found 6.',
+                  line: 9,
+                  column: 1,
+                  nodeType: 'Keyword',
+                  messageId: 'wrongIndentation',
+                  endLine: 9,
+                  endColumn: 7,
+                  fix: {
+                    range: [141, 147],
+                    text: '    ',
+                  },
+                },
+                {
+                  ruleId: 'indent',
+                  severity: 2,
+                  message: 'Expected indentation of 2 spaces but found 4.',
+                  line: 11,
+                  column: 1,
+                  nodeType: 'Punctuator',
+                  messageId: 'wrongIndentation',
+                  endLine: 11,
+                  endColumn: 5,
+                  fix: {
+                    range: [161, 165],
+                    text: '  ',
+                  },
+                },
+                {
+                  ruleId: 'semi',
+                  severity: 2,
+                  message: 'Extra semicolon.',
+                  line: 3,
+                  column: 18,
+                  nodeType: 'ExpressionStatement',
+                  messageId: 'extraSemi',
+                  endLine: 3,
+                  endColumn: 19,
+                  fix: {
+                    range: [28, 32],
+                    text: '111',
+                  },
+                },
+              ],
+            },
+          },
+        },
+        {
+          params: {
+            ruleId: 'semi',
+            lint: {
+              filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+              messages: [
+                {
+                  ruleId: 'indent',
+                  severity: 2,
+                  message: 'Expected indentation of 4 spaces but found 6.',
+                  line: 9,
+                  column: 1,
+                  nodeType: 'Keyword',
+                  messageId: 'wrongIndentation',
+                  endLine: 9,
+                  endColumn: 7,
+                  fix: {
+                    range: [141, 147],
+                    text: '    ',
+                  },
+                },
+              ],
+            },
+          },
+        },
+        {
+          params: {
+            ruleId: 'quotes',
+            lint: {
+              filePath: '/Users/username/repository-name/tests/targets/standard/quotes.js',
+              messages: [],
+            },
+          },
+        },
+      ]
+
+      test.each(cases)('rule id: $params.ruleId', ({ params }) => {
+        const analyzer = LintAnalyzer.create(params)
+
+        const actual = analyzer.worksAsExpected()
+
+        expect(actual)
+          .toBeFalsy()
+      })
+    })
+  })
+})
+
+describe('LintAnalyzer', () => {
+  describe('#generateNoLintMessage()', () => {
+    /** @type {Object} */
+    const lintAnalyzerParams = {
+      ruleId: 'sample-rule-id',
+      message: 'sample-message',
+      lint: {}
+    }
+    const analyzer = LintAnalyzer.create(lintAnalyzerParams)
+
+    const cases = [
+      {
+        params: {
+          message: 'Never use let',
+        },
+        expected: '🔎 No lints that should be here\n              Never use let',
+      },
+      {
+        params: {
+          message: 'Never use var',
+        },
+        expected: '🔎 No lints that should be here\n              Never use var',
+      },
+      {
+        params: {
+          message: /Expected indentation of \d+ spaces but found \d+./,
+        },
+        expected: '🔎 No lints that should be here\n              /Expected indentation of \\d+ spaces but found \\d+./',
+      },
+      {
+        params: {
+          message: null,
+        },
+        expected: '🔎 No lints that should be here',
+      },
+    ]
+
+    test.each(cases)('message: $params.message', ({ params, expected }) => {
+      const actual = analyzer.generateNoLintMessage(params.message)
+
+      expect(actual)
+        .toEqual(expected)
+    })
+  })
+})
+
+describe('LintAnalyzer', () => {
+  describe('#getUnexpectedLint()', () => {
+    describe('with ruleId only', () => {
+      describe('has hit messages', () => {
+        /** @type {Array<Object>} */
+        const cases = [
+          {
+            params: {
+              ruleId: 'indent',
+              message: null,
+              lint: {
+                filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                messages: [
+                  {
+                    ruleId: 'indent',
+                    severity: 2,
+                    message: 'Expected indentation of 4 spaces but found 6.',
+                    line: 9,
+                    column: 1,
+                    nodeType: 'Keyword',
+                    messageId: 'wrongIndentation',
+                    endLine: 9,
+                    endColumn: 7,
+                    fix: {
+                      range: [141, 147],
+                      text: '    ',
+                    },
+                  },
+                  {
+                    ruleId: 'indent',
+                    severity: 2,
+                    message: 'Expected indentation of 2 spaces but found 4.',
+                    line: 11,
+                    column: 1,
+                    nodeType: 'Punctuator',
+                    messageId: 'wrongIndentation',
+                    endLine: 11,
+                    endColumn: 5,
+                    fix: {
+                      range: [161, 165],
+                      text: '  ',
+                    },
+                  },
+                  {
+                    ruleId: 'semi',
+                    severity: 2,
+                    message: 'Extra semicolon.',
+                    line: 3,
+                    column: 18,
+                    nodeType: 'ExpressionStatement',
+                    messageId: 'extraSemi',
+                    endLine: 3,
+                    endColumn: 19,
+                    fix: {
+                      range: [28, 32],
+                      text: '111',
+                    },
+                  },
+                ],
+              },
+            },
+          },
+          {
+            params: {
+              ruleId: 'semi',
+              message: null,
+              lint: {
+                filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                messages: [
+                  {
+                    ruleId: 'indent',
+                    severity: 2,
+                    message: 'Expected indentation of 4 spaces but found 6.',
+                    line: 9,
+                    column: 1,
+                    nodeType: 'Keyword',
+                    messageId: 'wrongIndentation',
+                    endLine: 9,
+                    endColumn: 7,
+                    fix: {
+                      range: [141, 147],
+                      text: '    ',
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        ]
+
+        test.each(cases)('rule id: $params.ruleId', ({ params }) => {
+          const analyzer = LintAnalyzer.create(params)
+
+          const actual = analyzer.getUnexpectedLint()
+
+          expect(actual)
+            .toEqual(params.lint)
+        })
+      })
+
+      describe('has no hit messages', () => {
+        /** @type {Array<Object>} */
+        const cases = [
+          {
+            params: {
+              ruleId: 'indent',
+              message: null,
+              lint: {
+                filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                messages: [],
+              },
+            },
+            expected: {
+              filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+              fatalErrorCount: 1,
+              errorCount: 1,
+              messages: [
+                {
+                  ruleId: 'indent',
+                  severity: 2,
+                  message: '🔎 No lints that should be here',
+                  line: 0,
+                  column: 0,
+                },
+              ],
+            },
+          },
+          {
+            params: {
+              ruleId: 'semi',
+              message: null,
+              lint: {
+                filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                messages: [],
+              },
+            },
+            expected: {
+              filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+              fatalErrorCount: 1,
+              errorCount: 1,
+              messages: [
+                {
+                  ruleId: 'semi',
+                  severity: 2,
+                  message: '🔎 No lints that should be here',
+                  line: 0,
+                  column: 0,
+                },
+              ],
+            },
+          },
+          {
+            params: {
+              ruleId: 'quotes',
+              message: null,
+              lint: {
+                filePath: '/Users/username/repository-name/tests/targets/standard/quotes.js',
+                messages: [],
+              },
+            },
+            expected: {
+              filePath: '/Users/username/repository-name/tests/targets/standard/quotes.js',
+              fatalErrorCount: 1,
+              errorCount: 1,
+              messages: [
+                {
+                  ruleId: 'quotes',
+                  severity: 2,
+                  message: '🔎 No lints that should be here',
+                  line: 0,
+                  column: 0,
+                },
+              ],
+            },
+          },
+        ]
+
+        test.each(cases)('rule id: $params.ruleId', ({ params, expected }) => {
+          const analyzer = LintAnalyzer.create(params)
+
+          const actual = analyzer.getUnexpectedLint()
+
+          expect(actual)
+            .toEqual(expected)
+        })
+      })
+    })
+
+    describe('with ruleId and message', () => {
+      describe('has hit messages', () => {
+        /** @type {Array<Object>} */
+        const cases = [
+          {
+            params: {
+              ruleId: 'no-restricted-syntax',
+              message: 'Never use `let`',
+              lint: {
+                filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noLet.js',
+                messages: [
+                  {
+                    ruleId: 'no-restricted-syntax',
+                    severity: 2,
+                    message: 'Never user `let`.',
+                    line: 10,
+                    column: 1,
+                    nodeType: 'VariableDeclaration',
+                    messageId: 'restrictedSyntax',
+                    endLine: 10,
+                    endColumn: 12,
+                  },
+                ],
+              },
+            },
+          },
+          {
+            params: {
+              ruleId: 'no-restricted-syntax',
+              message: 'Never use `Array#forEach()`',
+              lint: {
+                filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noArrayForEach.js',
+                messages: [
+                  {
+                    ruleId: 'no-restricted-syntax',
+                    severity: 2,
+                    message: 'Never user `Array#forEach()`.',
+                    line: 6,
+                    column: 1,
+                    nodeType: 'CallExpression',
+                    messageId: 'restrictedSyntax',
+                    endLine: 8,
+                    endColumn: 3
+                  },
+                ],
+              },
+            },
+          },
+        ]
+
+        test.each(cases)('rule id: $params.ruleId', ({ params }) => {
+          const analyzer = LintAnalyzer.create(params)
+
+          const actual = analyzer.getUnexpectedLint()
+
+          expect(actual)
+            .toEqual(params.lint)
+        })
+      })
+
+      describe('has no hit messages', () => {
+        /** @type {Array<Object>} */
+        const cases = [
+          {
+            params: {
+              ruleId: 'no-restricted-syntax',
+              message: 'Never use `let`',
+              lint: {
+                filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noLet.js',
+                messages: [],
+              },
+            },
+            expected: {
+              filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noLet.js',
+              messages: [
+                {
+                  ruleId: 'no-restricted-syntax',
+                  severity: 2, // error
+                  message: '🔎 No lints that should be here\n              Never use `let`',
+                  line: 0,
+                  column: 0,
+                }
+              ],
+              fatalErrorCount: 1,
+              errorCount: 1,
+            },
+          },
+          {
+            params: {
+              ruleId: 'no-restricted-syntax',
+              message: 'Never use `Array#forEach()`',
+              lint: {
+                filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noArrayForEach.js',
+                messages: [],
+              },
+            },
+            expected: {
+              filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noArrayForEach.js',
+              messages: [
+                {
+                  ruleId: 'no-restricted-syntax',
+                  severity: 2, // error
+                  message: '🔎 No lints that should be here\n              Never use `Array#forEach()`',
+                  line: 0,
+                  column: 0,
+                }
+              ],
+              fatalErrorCount: 1,
+              errorCount: 1,
+            },
+          },
+        ]
+
+        test.each(cases)('rule id: $params.ruleId', ({ params, expected }) => {
+          const analyzer = LintAnalyzer.create(params)
+
+          const actual = analyzer.getUnexpectedLint()
+
+          expect(actual)
+            .toEqual(expected)
+        })
       })
     })
   })
