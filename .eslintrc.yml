@@ -1,2 +1,4 @@
 extends:
   - '@openreachtech'
+plugins:
+  - jest
