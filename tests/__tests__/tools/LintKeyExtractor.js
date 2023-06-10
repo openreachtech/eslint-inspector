@@ -295,6 +295,55 @@ describe('LintKeyExtractor', () => {
       })
     })
 
+    describe('with plugins', () => {
+      const cases = [
+        {
+          params: {
+            filePath: '/root/tests/targets/jest/consistent-test-it.js',
+            plugins: [
+              'jest',
+            ],
+          },
+          expected: 'jest/consistent-test-it',
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/jest/no-alias-methods.js',
+            plugins: [
+              'jest',
+            ],
+          },
+          expected: 'jest/no-alias-methods',
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/jest/prefer-equality-matcher.js',
+            plugins: [
+              'jest',
+            ],
+          },
+          expected: 'jest/prefer-equality-matcher',
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/jsdoc/newline-after-description.js',
+            plugins: [
+              'jest',
+              'jsdoc',
+            ],
+          },
+          expected: 'jsdoc/newline-after-description',
+        },
+      ]
+
+      test.each(cases)('filePath: $params.filePath', ({ params, expected }) => {
+        const extractor = LintKeyExtractor.create(params)
+
+        expect(extractor.ruleId)
+          .toBe(expected)
+      })
+    })
+
     describe('invalid file path', () => {
       const cases = [
         { params: { filePath: '<text>' } },
