@@ -15,8 +15,8 @@
 ## Usage
 
 1. First, place your ESLint configuration file (such as `.eslintrc.json`, `.eslintrc.js`, etc.) in the root directory of your project.
-2. Create directory of lint sample codes, and put sample files.
-3. Use `ESLintInspector` created with file path to the directory of sample codes.
+2. Create directory of intent error codes, and put intent error files.
+3. Use `ESLintInspector` created with file path to the directory of intent error codes.
 
 ## Structure of directories
 
@@ -29,7 +29,7 @@
   |   ├── __tests__/    # Test files
   |   |   └── eslint.js # Entry point to confirm ESLint config
   |   |
-  |   └── samples/      # Jest snapshots if necessary
+  |   └── intents/      # Jest snapshots if necessary
   |       ├── nested/   # May use nested directory to categorize
   |       |   └ semi.js # Confirm to work rule id: `semi`
   |       |
@@ -40,11 +40,11 @@
   └── package.json      # Package information and dependencies
   ```
 
-## Sample Code Files
+## Intent Error Code Files
 
 * Create a code that contains lint to verify ESLint rules working. `ESLintInspector` uses the file name as the target rule ID to confirm.
 
-* The rule id `indent` will be confirmed  by `tests/samples/indent.js`
+* The rule id `indent` will be confirmed  by `tests/intents/indent.js`
 
   ```javascript
   module.exports = function doubleValue (value, ignore) {
@@ -56,7 +56,7 @@
   }
   ```
 
-* The rule id `quotes` will be confirmed  by `tests/samples/quotes.js`
+* The rule id `quotes` will be confirmed  by `tests/intents/quotes.js`
 
   ```javascript
   const BUTTON_LABEL = {
@@ -67,7 +67,7 @@
   module.exports = BUTTON_LABEL
   ```
 
-* The rule id `semi` will be confirmed  by `tests/samples/nested/semi.js`
+* The rule id `semi` will be confirmed  by `tests/intents/nested/semi.js`
 
   ```javascript
   const MILLISECONDS_PER_ONE_DAY = 60 * 60 * 24 * 1000
@@ -81,7 +81,7 @@
 
 ## Test Case
 
-* A sample test case for Jest as follows:
+* A test case for Jest as follows:
 
   ```javascript
   const {
@@ -91,8 +91,9 @@
   test('should work as expected', async () => {
     const inspector = await ESLintInspector.createAsyncWithFilePaths({
       filePaths: [
-        'tests/samples/',
+        'tests/intents/',
       ],
+      configPath: '.eslintrc.yml',
     })
 
     const unexpectedLog = await inspector.getFormattedLogIfUnexpected()
@@ -104,9 +105,9 @@
 
 ## Strict Check with Lint Error Message
 
-* There are some cases where we would like to have separate files for checking the behavior of some rules for each message. Currently, for the `no-restricted-syntax` rule, we can create a sample file for each selector.
+* There are some cases where we would like to have separate files for checking the behavior of some rules for each message. Currently, for the `no-restricted-syntax` rule, we can create a intent error file for each selector.
 
-* For strict inspections, create a sample file with the folder name as the rule name and the message ID as the file name inside it.
+* For strict inspections, create a intent error file with the folder name as the rule name and the message ID as the file name inside it.
 
 * `.eslintrc.yml`
 
@@ -132,7 +133,7 @@
   /your-eslint-config-repository
   |
   └── tests/
-      └── samples/
+      └── intents/
           └── no-restricted-syntax/ # Confirm to work rule id: `no-restricted-syntax`
               ├── noLet.js          # message id: noLet "Never use `let`."
               └── noSwitch.js       # message id: noSwitch "Never use `switch` statement."
@@ -154,8 +155,9 @@
   test('should work as expected', async () => {
     const inspector = await ESLintInspector.createAsyncWithFilePaths({
       filePaths: [
-        'tests/samples/',
+        'tests/intents/',
       ],
+      configPath: '.eslintrc.yml',
       messageHash, // <----------------- ✅
     })
 
@@ -168,17 +170,17 @@
 
 ## Spec
 
-* `ESLintInspector` decide that the specified rule is working correctly for each sample file of each rule id, when the following conditions are met.
+* `ESLintInspector` decide that the specified rule is working correctly for each intent error file of each rule id, when the following conditions are met.
 
 1. The lint result includes one or more lint error of the specified rule id.
 2. Any lint errors other than the specified rule id are not included in the lint result.
 
 ## Note
 
-* When ESLint is applied to the ESLlint config repository, the files contained in the tests/sample directory make fail. To avoid it, specify the following options.
+* When ESLint is applied to the ESLlint config repository, the files contained in the tests/intents directory make fail. To avoid it, specify the following options.
 
   ```
-  npx eslint --ignore-pattern /tests/samples/* .
+  npx eslint --ignore-pattern /tests/intents/* .
   ```
 
 ## License
