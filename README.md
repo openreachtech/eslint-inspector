@@ -4,7 +4,7 @@
 
 ## Installation
 
-* Node.js is required. If it is not installed yet, please do so before proceeding.
+1. Node.js is required. If it is not already installed, please do so before proceeding.
 
 2. Jest or other testing tools are also required. You can install Jest or any other testing tool of your choice. The following is an example of installing Jest. For other testing tools, please refer to their specific installation guides.
 
@@ -21,12 +21,12 @@
 ## Usage
 
 1. First, place your ESLint configuration file (such as `.eslintrc.json`, `.eslintrc.js`, etc.) in the root directory of your project.
-2. Create directory of intent error codes, and put intent error files.
-3. Use `ESLintInspector` created with file path to the directory of intent error codes.
+2. Create a directory of intent error codes, and put intent error files in it.
+3. Use `ESLintInspector`, created with the file path to the directory of intent error codes.
 
 ## Structure of directories
 
-* Structure of directories for Jest.
+* Here is the structure of directories for Jest.
 
   ```
   /your-eslint-config-repository
@@ -48,7 +48,7 @@
 
 ## Intent Error Code Files
 
-* Create a code that contains lint to verify ESLint rules working. `ESLintInspector` uses the file name as the target rule ID to confirm.
+* Create a code that contains lint to verify that the ESLint rules are working. `ESLintInspector` uses the file name as the target rule ID to confirm.
 
 * The rule id `indent` will be confirmed  by `tests/intents/indent.js`
 
@@ -87,7 +87,7 @@
 
 ## Test Case
 
-* A test case for Jest as follows:
+* A test case for Jest is as follows:
 
   ```javascript
   const {
@@ -183,7 +183,7 @@
 
 ## Note
 
-* When ESLint is applied to the ESLlint config repository, the files contained in the tests/intents directory make fail. To avoid it, specify the following options.
+* When ESLint is applied to the ESLlint config repository, the files contained in the tests/intents directory may fail. To avoid it, specify the following options.
 
   ```
   npx eslint --ignore-pattern /tests/intents/* .
