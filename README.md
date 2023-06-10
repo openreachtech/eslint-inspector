@@ -89,9 +89,11 @@
   } = require('@openreachtech/eslint-inspector')
 
   test('should work as expected', async () => {
-    const inspector = await ESLintInspector.createAsyncWithFilePaths([
-      'tests/samples/*.js',
-    ])
+    const inspector = await ESLintInspector.createAsyncWithFilePaths({
+      filePaths: [
+        'tests/samples/',
+      ],
+    })
 
     const unexpectedLog = await inspector.getFormattedLogIfUnexpected()
 
@@ -136,7 +138,7 @@
               └── noSwitch.js       # message id: noSwitch "Never use `switch` statement."
   ```
 
-* Define message id and lint error message as an object hash and pass it as the second argument to `ESLintInspector.createAsyncWithFilePaths()`.
+* Define message id and lint error message as an object hash and pass it as the argument to `ESLintInspector.createAsyncWithFilePaths()`.
 
   ```javascript
   // Define object hash by message ID and lint error message.
@@ -150,10 +152,12 @@
   } = require('@openreachtech/eslint-inspector')
 
   test('should work as expected', async () => {
-    const inspector = await ESLintInspector.createAsyncWithFilePaths([
-      'tests/samples/*.js',
-      messageHash // <----------------- ✅
-    ])
+    const inspector = await ESLintInspector.createAsyncWithFilePaths({
+      filePaths: [
+        'tests/samples/',
+      ],
+      messageHash, // <----------------- ✅
+    })
 
     const unexpectedLog = await inspector.getFormattedLogIfUnexpected()
 
