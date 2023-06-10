@@ -1,5 +1,7 @@
 'use strict'
 
+const path = require('path')
+
 const {
   ConstructorSpyGenerator,
 } = require('@openreachtech/renchan-test-tools')
@@ -33,11 +35,36 @@ describe('LintKeyExtractor', () => {
   describe('.create()', () => {
     describe('to be instance of LintKeyExtractor', () => {
       const cases = [
-        { params: { filePath: '/root/tests/targets/standard/indent.js' } },
-        { params: { filePath: '/root/tests/targets/standard/semi.js' } },
-        { params: { filePath: '/root/tests/targets/standard/no-restricted-syntax.js' } },
-        { params: { filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js' } },
-        { params: { filePath: '/root/tests/targets/standard/no-restricted-syntax/ArrayForEach.js' } },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/indent.js',
+            plugins: [],
+          },
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/semi.js',
+            plugins: [],
+          },
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/no-restricted-syntax.js',
+            plugins: [],
+          },
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js',
+            plugins: [],
+          },
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/no-restricted-syntax/ArrayForEach.js',
+            plugins: [],
+          },
+        },
       ]
 
       test.each(cases)('filePath: $params.filePath', ({ params }) => {
@@ -50,11 +77,36 @@ describe('LintKeyExtractor', () => {
 
     describe('to call constructor', () => {
       const cases = [
-        { params: { filePath: '/root/tests/targets/standard/indent.js' } },
-        { params: { filePath: '/root/tests/targets/standard/semi.js' } },
-        { params: { filePath: '/root/tests/targets/standard/no-restricted-syntax.js' } },
-        { params: { filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js' } },
-        { params: { filePath: '/root/tests/targets/standard/no-restricted-syntax/ArrayForEach.js' } },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/indent.js',
+            plugins: [],
+          },
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/semi.js',
+            plugins: [],
+          },
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/no-restricted-syntax.js',
+            plugins: [],
+          },
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js',
+            plugins: [],
+          },
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/no-restricted-syntax/ArrayForEach.js',
+            plugins: []
+          },
+        },
       ]
 
       test.each(cases)('filePath: $params.filePath', ({ params }) => {
@@ -68,6 +120,114 @@ describe('LintKeyExtractor', () => {
 
         DerivedClass.__spy__
           .mockClear()
+      })
+    })
+  })
+})
+
+describe('LintKeyExtractor', () => {
+  describe('#getPluginName()', () => {
+    describe('without plugins', () => {
+      const cases = [
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/indent.js',
+            plugins: [],
+          },
+          pathHash: path.parse('/root/tests/targets/standard/indent.js'),
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/semi.js',
+            plugins: [],
+          },
+          pathHash: path.parse('/root/tests/targets/standard/semi.js'),
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/no-restricted-syntax.js',
+            plugins: [],
+          },
+          pathHash: path.parse('/root/tests/targets/standard/no-restricted-syntax.js'),
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js',
+            plugins: [],
+          },
+          pathHash: path.parse('/root/tests/targets/standard/no-restricted-syntax/noLet.js'),
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/no-restricted-syntax/ArrayForEach.js',
+            plugins: [],
+          },
+          pathHash: path.parse('/root/tests/targets/standard/no-restricted-syntax/ArrayForEach.js'),
+        },
+      ]
+
+      test.each(cases)('filePath: $params.filePath', ({ params, pathHash }) => {
+        const extractor = LintKeyExtractor.create(params)
+
+        const actual = extractor.getPluginName(pathHash)
+
+        expect(actual)
+          .toBeNull()
+      })
+    })
+
+    describe('with plugins', () => {
+      const cases = [
+        {
+          params: {
+            filePath: '/Users/username/repository-name/tests/targets/jest/consistent-test-it.js',
+            plugins: [
+              'jest',
+            ],
+          },
+          pathHash: path.parse('/Users/username/repository-name/tests/targets/jest/consistent-test-it.js'),
+          expected: 'jest',
+        },
+        {
+          params: {
+            filePath: '/Users/username/repository-name/tests/targets/jest/no-alias-method.js',
+            plugins: [
+              'jest',
+            ],
+          },
+          pathHash: path.parse('/Users/username/repository-name/tests/targets/jest/no-alias-method.js'),
+          expected: 'jest',
+        },
+        {
+          params: {
+            filePath: '/Users/username/repository-name/tests/targets/jest/prefer-equality-matcher.js',
+            plugins: [
+              'jest',
+            ],
+          },
+          pathHash: path.parse('/Users/username/repository-name/tests/targets/jest/prefer-equality-matcher.js'),
+          expected: 'jest',
+        },
+        {
+          params: {
+            filePath: '/Users/username/repository-name/tests/targets/jsdoc/newline-after-description.js',
+            plugins: [
+              'jest',
+              'jsdoc',
+            ],
+          },
+          pathHash: path.parse('/Users/username/repository-name/tests/targets/jsdoc/newline-after-description.js'),
+          expected: 'jsdoc',
+        },
+      ]
+
+      test.each(cases)('filePath: $params.filePath', ({ params, pathHash, expected }) => {
+        const extractor = LintKeyExtractor.create(params)
+
+        const actual = extractor.getPluginName(pathHash)
+
+        expect(actual)
+          .toBe(expected)
       })
     })
   })
@@ -124,6 +284,55 @@ describe('LintKeyExtractor', () => {
             filePath: '/root/tests/targets/standard/no-restricted-syntax/loop-controls/noArrayForEach.js',
           },
           expected: 'no-restricted-syntax',
+        },
+      ]
+
+      test.each(cases)('filePath: $params.filePath', ({ params, expected }) => {
+        const extractor = LintKeyExtractor.create(params)
+
+        expect(extractor.ruleId)
+          .toBe(expected)
+      })
+    })
+
+    describe('with plugins', () => {
+      const cases = [
+        {
+          params: {
+            filePath: '/root/tests/targets/jest/consistent-test-it.js',
+            plugins: [
+              'jest',
+            ],
+          },
+          expected: 'jest/consistent-test-it',
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/jest/no-alias-methods.js',
+            plugins: [
+              'jest',
+            ],
+          },
+          expected: 'jest/no-alias-methods',
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/jest/prefer-equality-matcher.js',
+            plugins: [
+              'jest',
+            ],
+          },
+          expected: 'jest/prefer-equality-matcher',
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/jsdoc/newline-after-description.js',
+            plugins: [
+              'jest',
+              'jsdoc',
+            ],
+          },
+          expected: 'jsdoc/newline-after-description',
         },
       ]
 
