@@ -373,7 +373,7 @@ describe('ESLintInspector', () => {
       ]
 
       test.each(cases)('[0] filePaths: $params.filePaths.0', async ({ params }) => {
-        const inspector = await ESLintInspector.createAsyncWithFilePaths(params.filePaths)
+        const inspector = await ESLintInspector.createAsyncWithFilePaths(params)
 
         expect(inspector)
           .toBeInstanceOf(ESLintInspector)
@@ -414,7 +414,7 @@ describe('ESLintInspector', () => {
           .mockReturnValue(mockClient)
         const createSpy = jest.spyOn(ESLintInspector, 'create')
 
-        await ESLintInspector.createAsyncWithFilePaths(params.filePaths)
+        await ESLintInspector.createAsyncWithFilePaths(params)
 
         expect(lintFilesSpy)
           .toHaveBeenCalledWith(params.filePaths)
@@ -2333,10 +2333,7 @@ describe('ESLintInspector', () => {
         ]
 
         test.each(cases)('file paths: $params.filePaths', async ({ params }) => {
-          const inspector = await ESLintInspector.createAsyncWithFilePaths(
-            params.filePaths,
-            params.messageHash
-          )
+          const inspector = await ESLintInspector.createAsyncWithFilePaths(params)
 
           const log = await inspector.getFormattedLogIfUnexpected()
 
@@ -2400,10 +2397,7 @@ describe('ESLintInspector', () => {
         ]
 
         test.each(cases)('file paths: $params.filePaths', async ({ params, expected }) => {
-          const inspector = await ESLintInspector.createAsyncWithFilePaths(
-            params.filePaths,
-            params.messageHash
-          )
+          const inspector = await ESLintInspector.createAsyncWithFilePaths(params)
 
           const log = await inspector.getFormattedLogIfUnexpected()
 
@@ -2469,10 +2463,7 @@ describe('ESLintInspector', () => {
         ]
 
         test.each(cases)('file paths: $params.filePaths', async ({ params, expected }) => {
-          const inspector = await ESLintInspector.createAsyncWithFilePaths(
-            params.filePaths,
-            params.messageHash
-          )
+          const inspector = await ESLintInspector.createAsyncWithFilePaths(params)
 
           const log = await inspector.getFormattedLogIfUnexpected()
 
