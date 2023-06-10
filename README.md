@@ -6,11 +6,17 @@
 
 * Node.js is required. If it is not installed yet, please do so before proceeding.
 
-* You can install `ESLintInspector` with the following command:
+2. Jest or other testing tools are also required. You can install Jest or any other testing tool of your choice. The following is an example of installing Jest. For other testing tools, please refer to their specific installation guides.
 
-  ```
-  npm install --save-dev @openreachtech/eslint-inspector
-  ```
+    ```
+    npm install --save-dev jest
+    ```
+
+3. You can install `ESLintInspector` with the following command:
+
+    ```
+    npm install --save-dev @openreachtech/eslint-inspector
+    ```
 
 ## Usage
 
