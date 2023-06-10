@@ -411,5 +411,54 @@ describe('FileLintAnalyzer', () => {
           .toStrictEqual(expected)
       })
     })
+
+    describe('as plugin rule', () => {
+      /** @type {Array<Object>} */
+      const cases = [
+        {
+          params: {
+            filePath: '/Users/username/repository-name/tests/targets/jest/consistent-test-it.js',
+            plugins: [
+              'jest',
+            ],
+          },
+          expected: {
+            ruleId: 'jest/consistent-test-it',
+            messageId: null,
+          },
+        },
+        {
+          params: {
+            filePath: '/Users/username/repository-name/tests/targets/jest/no-alias-method.js',
+            plugins: [
+              'jest',
+            ],
+          },
+          expected: {
+            ruleId: 'jest/no-alias-method',
+            messageId: null,
+          },
+        },
+        {
+          params: {
+            filePath: '/Users/username/repository-name/tests/targets/jest/prefer-equality-matcher.js',
+            plugins: [
+              'jest',
+            ],
+          },
+          expected: {
+            ruleId: 'jest/prefer-equality-matcher',
+            messageId: null,
+          },
+        },
+      ]
+
+      test.each(cases)('file path: $params.filePath', ({ params, expected }) => {
+        const result = FileLintAnalyzer.extractLintKeys(params)
+
+        expect(result)
+          .toStrictEqual(expected)
+      })
+    })
   })
 })
