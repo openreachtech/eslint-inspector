@@ -1,22 +1,22 @@
 # ESLint Inspector
 
-* `ESLintInspector` is a JavaScript module designed to validate whether your ESLint configurations are correctly set up. This module enables automated testing to ensure that your ESLint setup is functioning as expected, using Jest as the testing framework.
+* ESLintInspector is a JavaScript module designed to validate your ESLint configurations. This module enables automated testing to ensure that your ESLint setup is functioning as expected, using Jest as the testing framework.
 
 ## Installation
 
-1. Node.js is required. If it is not already installed, please do so before proceeding.
+* Node.js is required. If it is not already installed, please do so before proceeding.
 
-2. Jest or other testing tools are also required. You can install Jest or any other testing tool of your choice. The following is an example of installing Jest. For other testing tools, please refer to their specific installation guides.
+* A testing tool such as Jest is required. The following is an example of how to install Jest. If you prefer to use a different testing tool, please refer to its specific installation guide.
 
-    ```
-    npm install --save-dev jest
-    ```
+  ```
+  npm install --save-dev jest
+  ```
 
-3. You can install `ESLintInspector` with the following command:
+* You can install `ESLintInspector` with the following command:
 
-    ```
-    npm install --save-dev @openreachtech/eslint-inspector
-    ```
+  ```
+  npm install --save-dev @openreachtech/eslint-inspector
+  ```
 
 ## Usage
 
@@ -87,7 +87,7 @@
 
 ## Test Case
 
-* A test case for Jest is as follows:
+* Here is an example of a Jest test case:
 
   ```javascript
   const {
