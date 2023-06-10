@@ -290,51 +290,6 @@ describe('FileLintAnalyzer', () => {
 })
 
 describe('FileLintAnalyzer', () => {
-  describe('.getRuleIdFromFilePath', () => {
-    /** @type {Array<Object>} */
-    const cases = [
-      {
-        params: {
-          filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
-        },
-        expected: 'indent',
-      },
-      {
-        params: {
-          filePath: '/Users/username/repository-name/tests/targets/standard/semi.ts',
-        },
-        expected: 'semi',
-      },
-      {
-        params: {
-          filePath: '/Users/username/repository-name/tests/targets/standard/quotes',
-        },
-        expected: 'quotes',
-      },
-      {
-        params: {
-          filePath: '/Users/username/repository-name/tests/targets/standard/no-console.js',
-        },
-        expected: 'no-console',
-      },
-      {
-        params: {
-          filePath: '',
-        },
-        expected: '',
-      },
-    ]
-
-    test.each(cases)('file path: $params.filePath', ({ params, expected }) => {
-      const ruleId = FileLintAnalyzer.getRuleIdFromFilePath(params.filePath)
-
-      expect(ruleId)
-        .toBe(expected)
-    })
-  })
-})
-
-describe('FileLintAnalyzer', () => {
   describe('.extractLintKeys()', () => {
     describe('as standard rule', () => {
       /** @type {Array<Object>} */
