@@ -33,11 +33,36 @@ describe('LintKeyExtractor', () => {
   describe('.create()', () => {
     describe('to be instance of LintKeyExtractor', () => {
       const cases = [
-        { params: { filePath: '/root/tests/targets/standard/indent.js' } },
-        { params: { filePath: '/root/tests/targets/standard/semi.js' } },
-        { params: { filePath: '/root/tests/targets/standard/no-restricted-syntax.js' } },
-        { params: { filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js' } },
-        { params: { filePath: '/root/tests/targets/standard/no-restricted-syntax/ArrayForEach.js' } },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/indent.js',
+            plugins: [],
+          },
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/semi.js',
+            plugins: [],
+          },
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/no-restricted-syntax.js',
+            plugins: [],
+          },
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js',
+            plugins: [],
+          },
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/no-restricted-syntax/ArrayForEach.js',
+            plugins: [],
+          },
+        },
       ]
 
       test.each(cases)('filePath: $params.filePath', ({ params }) => {
@@ -50,11 +75,36 @@ describe('LintKeyExtractor', () => {
 
     describe('to call constructor', () => {
       const cases = [
-        { params: { filePath: '/root/tests/targets/standard/indent.js' } },
-        { params: { filePath: '/root/tests/targets/standard/semi.js' } },
-        { params: { filePath: '/root/tests/targets/standard/no-restricted-syntax.js' } },
-        { params: { filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js' } },
-        { params: { filePath: '/root/tests/targets/standard/no-restricted-syntax/ArrayForEach.js' } },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/indent.js',
+            plugins: [],
+          },
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/semi.js',
+            plugins: [],
+          },
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/no-restricted-syntax.js',
+            plugins: [],
+          },
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js',
+            plugins: [],
+          },
+        },
+        {
+          params: {
+            filePath: '/root/tests/targets/standard/no-restricted-syntax/ArrayForEach.js',
+            plugins: []
+          },
+        },
       ]
 
       test.each(cases)('filePath: $params.filePath', ({ params }) => {
