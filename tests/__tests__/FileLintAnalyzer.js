@@ -290,124 +290,130 @@ describe('FileLintAnalyzer', () => {
 })
 
 describe('FileLintAnalyzer', () => {
-  describe('.getRuleIdFromFilePath', () => {
-    /** @type {Array<Object>} */
-    const cases = [
-      {
-        params: {
-          filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
-        },
-        expected: 'indent',
-      },
-      {
-        params: {
-          filePath: '/Users/username/repository-name/tests/targets/standard/semi.ts',
-        },
-        expected: 'semi',
-      },
-      {
-        params: {
-          filePath: '/Users/username/repository-name/tests/targets/standard/quotes',
-        },
-        expected: 'quotes',
-      },
-      {
-        params: {
-          filePath: '/Users/username/repository-name/tests/targets/standard/no-console.js',
-        },
-        expected: 'no-console',
-      },
-      {
-        params: {
-          filePath: '',
-        },
-        expected: '',
-      },
-    ]
-
-    test.each(cases)('file path: $params.filePath', ({ params, expected }) => {
-      const ruleId = FileLintAnalyzer.getRuleIdFromFilePath(params.filePath)
-
-      expect(ruleId)
-        .toBe(expected)
-    })
-  })
-})
-
-describe('FileLintAnalyzer', () => {
   describe('.extractLintKeys()', () => {
-    /** @type {Array<Object>} */
-    const cases = [
-      {
-        params: {
-          filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+    describe('as standard rule', () => {
+      /** @type {Array<Object>} */
+      const cases = [
+        {
+          params: {
+            filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+          },
+          expected: {
+            ruleId: 'indent',
+            messageId: null,
+          },
         },
-        expected: {
-          ruleId: 'indent',
-          messageId: null,
+        {
+          params: {
+            filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+          },
+          expected: {
+            ruleId: 'semi',
+            messageId: null,
+          },
         },
-      },
-      {
-        params: {
-          filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+        {
+          params: {
+            filePath: '/Users/username/repository-name/tests/targets/standard/quotes.js',
+          },
+          expected: {
+            ruleId: 'quotes',
+            messageId: null,
+          },
         },
-        expected: {
-          ruleId: 'semi',
-          messageId: null,
+        {
+          params: {
+            filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax.js',
+          },
+          expected: {
+            ruleId: 'no-restricted-syntax',
+            messageId: null,
+          },
         },
-      },
-      {
-        params: {
-          filePath: '/Users/username/repository-name/tests/targets/standard/quotes.js',
+        {
+          params: {
+            filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noLet.js',
+          },
+          expected: {
+            ruleId: 'no-restricted-syntax',
+            messageId: 'noLet',
+          },
         },
-        expected: {
-          ruleId: 'quotes',
-          messageId: null,
+        {
+          params: {
+            filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/category/noArrayForEach.js',
+          },
+          expected: {
+            ruleId: 'no-restricted-syntax',
+            messageId: 'noArrayForEach',
+          },
         },
-      },
-      {
-        params: {
-          filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax.js',
+        {
+          params: {
+            filePath: '',
+          },
+          expected: {
+            ruleId: null,
+            messageId: null,
+          },
         },
-        expected: {
-          ruleId: 'no-restricted-syntax',
-          messageId: null,
-        },
-      },
-      {
-        params: {
-          filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noLet.js',
-        },
-        expected: {
-          ruleId: 'no-restricted-syntax',
-          messageId: 'noLet',
-        },
-      },
-      {
-        params: {
-          filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/category/noArrayForEach.js',
-        },
-        expected: {
-          ruleId: 'no-restricted-syntax',
-          messageId: 'noArrayForEach',
-        },
-      },
-      {
-        params: {
-          filePath: '',
-        },
-        expected: {
-          ruleId: null,
-          messageId: null,
-        },
-      },
-    ]
+      ]
 
-    test.each(cases)('file path: $params.filePath', ({ params, expected }) => {
-      const result = FileLintAnalyzer.extractLintKeys(params.filePath)
+      test.each(cases)('file path: $params.filePath', ({ params, expected }) => {
+        const result = FileLintAnalyzer.extractLintKeys(params)
 
-      expect(result)
-        .toStrictEqual(expected)
+        expect(result)
+          .toStrictEqual(expected)
+      })
+    })
+
+    describe('as plugin rule', () => {
+      /** @type {Array<Object>} */
+      const cases = [
+        {
+          params: {
+            filePath: '/Users/username/repository-name/tests/targets/jest/consistent-test-it.js',
+            plugins: [
+              'jest',
+            ],
+          },
+          expected: {
+            ruleId: 'jest/consistent-test-it',
+            messageId: null,
+          },
+        },
+        {
+          params: {
+            filePath: '/Users/username/repository-name/tests/targets/jest/no-alias-method.js',
+            plugins: [
+              'jest',
+            ],
+          },
+          expected: {
+            ruleId: 'jest/no-alias-method',
+            messageId: null,
+          },
+        },
+        {
+          params: {
+            filePath: '/Users/username/repository-name/tests/targets/jest/prefer-equality-matcher.js',
+            plugins: [
+              'jest',
+            ],
+          },
+          expected: {
+            ruleId: 'jest/prefer-equality-matcher',
+            messageId: null,
+          },
+        },
+      ]
+
+      test.each(cases)('file path: $params.filePath', ({ params, expected }) => {
+        const result = FileLintAnalyzer.extractLintKeys(params)
+
+        expect(result)
+          .toStrictEqual(expected)
+      })
     })
   })
 })

@@ -1,2 +1,13 @@
 extends:
   - '@openreachtech'
+plugins:
+  - jest
+rules:
+  jest/consistent-test-it:
+    - error
+    - fn: test
+      withinDescribe: test
+  jest/no-alias-methods:
+    - error
+  jest/prefer-equality-matcher:
+    - error
