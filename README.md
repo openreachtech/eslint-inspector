@@ -1,10 +1,16 @@
 # ESLint Inspector
 
-* `ESLintInspector` is a JavaScript module designed to validate whether your ESLint configurations are correctly set up. This module enables automated testing to ensure that your ESLint setup is functioning as expected, using Jest as the testing framework.
+* ESLintInspector is a JavaScript module designed to validate your ESLint configurations. This module enables automated testing to ensure that your ESLint setup is functioning as expected, using Jest as the testing framework.
 
 ## Installation
 
-* Node.js is required. If it is not installed yet, please do so before proceeding.
+* Node.js is required. If it is not already installed, please do so before proceeding.
+
+* A testing tool such as Jest is required. The following is an example of how to install Jest. If you prefer to use a different testing tool, please refer to its specific installation guide.
+
+  ```
+  npm install --save-dev jest
+  ```
 
 * You can install `ESLintInspector` with the following command:
 
@@ -15,12 +21,12 @@
 ## Usage
 
 1. First, place your ESLint configuration file (such as `.eslintrc.json`, `.eslintrc.js`, etc.) in the root directory of your project.
-2. Create directory of intent error codes, and put intent error files.
-3. Use `ESLintInspector` created with file path to the directory of intent error codes.
+2. Create a directory of intent error codes, and put intent error files in it.
+3. Use `ESLintInspector`, created with the file path to the directory of intent error codes.
 
 ## Structure of directories
 
-* Structure of directories for Jest.
+* Here is the structure of directories for Jest.
 
   ```
   /your-eslint-config-repository
@@ -42,7 +48,7 @@
 
 ## Intent Error Code Files
 
-* Create a code that contains lint to verify ESLint rules working. `ESLintInspector` uses the file name as the target rule ID to confirm.
+* Create a code that contains lint to verify that the ESLint rules are working. `ESLintInspector` uses the file name as the target rule ID to confirm.
 
 * The rule id `indent` will be confirmed  by `tests/intents/indent.js`
 
@@ -81,7 +87,7 @@
 
 ## Test Case
 
-* A test case for Jest as follows:
+* Here is an example of a Jest test case:
 
   ```javascript
   const {
@@ -177,7 +183,7 @@
 
 ## Note
 
-* When ESLint is applied to the ESLlint config repository, the files contained in the tests/intents directory make fail. To avoid it, specify the following options.
+* When ESLint is applied to the ESLlint config repository, the files contained in the tests/intents directory may fail. To avoid it, specify the following options.
 
   ```
   npx eslint --ignore-pattern /tests/intents/* .
