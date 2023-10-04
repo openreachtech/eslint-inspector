@@ -104,7 +104,7 @@ describe('LintKeyExtractor', () => {
         {
           params: {
             filePath: '/root/tests/targets/standard/no-restricted-syntax/ArrayForEach.js',
-            plugins: []
+            plugins: [],
           },
         },
       ]

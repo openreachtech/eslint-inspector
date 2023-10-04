@@ -474,7 +474,7 @@ describe('LintAnalyzer', () => {
                   nodeType: 'VariableDeclaration',
                   messageId: 'restrictedSyntax',
                   endLine: 5,
-                  endColumn: 12
+                  endColumn: 12,
                 },
                 {
                   ruleId: 'no-restricted-syntax',
@@ -485,7 +485,7 @@ describe('LintAnalyzer', () => {
                   nodeType: 'CallExpression',
                   messageId: 'restrictedSyntax',
                   endLine: 8,
-                  endColumn: 3
+                  endColumn: 3,
                 },
               ],
             },
@@ -500,7 +500,7 @@ describe('LintAnalyzer', () => {
               nodeType: 'VariableDeclaration',
               messageId: 'restrictedSyntax',
               endLine: 5,
-              endColumn: 12
+              endColumn: 12,
             },
           ],
         },
@@ -767,7 +767,7 @@ describe('LintAnalyzer', () => {
                     nodeType: 'VariableDeclaration',
                     messageId: 'restrictedSyntax',
                     endLine: 5,
-                    endColumn: 12
+                    endColumn: 12,
                   },
                   {
                     ruleId: 'no-restricted-syntax',
@@ -778,7 +778,7 @@ describe('LintAnalyzer', () => {
                     nodeType: 'CallExpression',
                     messageId: 'restrictedSyntax',
                     endLine: 8,
-                    endColumn: 3
+                    endColumn: 3,
                   },
                 ],
               },
@@ -793,7 +793,7 @@ describe('LintAnalyzer', () => {
                 nodeType: 'CallExpression',
                 messageId: 'restrictedSyntax',
                 endLine: 8,
-                endColumn: 3
+                endColumn: 3,
               },
             ],
           },
@@ -1268,7 +1268,7 @@ describe('LintAnalyzer', () => {
                     nodeType: 'CallExpression',
                     messageId: 'restrictedSyntax',
                     endLine: 8,
-                    endColumn: 3
+                    endColumn: 3,
                   },
                 ],
               },
@@ -1307,7 +1307,7 @@ describe('LintAnalyzer', () => {
                   message: '🔎 No lints that should be here\n              Never use `let`',
                   line: 0,
                   column: 0,
-                }
+                },
               ],
               fatalErrorCount: 1,
               errorCount: 1,
@@ -1331,7 +1331,7 @@ describe('LintAnalyzer', () => {
                   message: '🔎 No lints that should be here\n              Never use `Array#forEach()`',
                   line: 0,
                   column: 0,
-                }
+                },
               ],
               fatalErrorCount: 1,
               errorCount: 1,
