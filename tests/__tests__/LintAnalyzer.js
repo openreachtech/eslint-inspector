@@ -326,7 +326,7 @@ describe('LintAnalyzer', () => {
 })
 
 describe('LintAnalyzer', () => {
-  describe('#get:hitMessages', () => {
+  describe('#getHitLintMessages()', () => {
     describe('with ruleId only', () => {
       /** @type {Array<Object>} */
       const cases = [
@@ -449,7 +449,7 @@ describe('LintAnalyzer', () => {
       test.each(cases)('rule id: $params.ruleId', ({ params, expected }) => {
         const analyzer = LintAnalyzer.create(params)
 
-        const messages = analyzer.hitMessages
+        const messages = analyzer.getHitLintMessages()
 
         expect(messages)
           .toEqual(expected)
@@ -509,7 +509,7 @@ describe('LintAnalyzer', () => {
       test.each(cases)('rule id: $params.ruleId', ({ params, expected }) => {
         const analyzer = LintAnalyzer.create(params)
 
-        const messages = analyzer.hitMessages
+        const messages = analyzer.getHitLintMessages()
 
         expect(messages)
           .toEqual(expected)
