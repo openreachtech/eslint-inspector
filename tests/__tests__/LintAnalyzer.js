@@ -519,7 +519,7 @@ describe('LintAnalyzer', () => {
 })
 
 describe('LintAnalyzer', () => {
-  describe('#get:unexpectedMessages', () => {
+  describe('#getUnexpectedLintMessages()', () => {
     describe('with ruleId only', () => {
       describe('with expected message', () => {
         /** @type {Array<Object>} */
@@ -658,7 +658,7 @@ describe('LintAnalyzer', () => {
         test.each(cases)('rule id: $params.ruleId', ({ params, expected }) => {
           const analyzer = LintAnalyzer.create(params)
 
-          const messages = analyzer.unexpectedMessages
+          const messages = analyzer.getUnexpectedLintMessages()
 
           expect(messages)
             .toEqual(expected)
@@ -738,7 +738,7 @@ describe('LintAnalyzer', () => {
         test.each(cases)('rule id: $params.ruleId', ({ params }) => {
           const analyzer = LintAnalyzer.create(params)
 
-          const messages = analyzer.unexpectedMessages
+          const messages = analyzer.getUnexpectedLintMessages()
 
           expect(messages)
             .toBeInstanceOf(Array)
@@ -802,7 +802,7 @@ describe('LintAnalyzer', () => {
         test.each(cases)('rule id: $params.ruleId', ({ params, expected }) => {
           const analyzer = LintAnalyzer.create(params)
 
-          const messages = analyzer.unexpectedMessages
+          const messages = analyzer.getUnexpectedLintMessages()
 
           expect(messages)
             .toEqual(expected)
