@@ -27,7 +27,7 @@ describe('ESLintInspector', () => {
   describe('constructor', () => {
     describe('to keep property', () => {
       describe('#analyzers', () => {
-        /** @type {Array<Object>} */
+        /** @type {Array<object>} */
         const cases = [
           {
             params: {
@@ -133,7 +133,7 @@ describe('ESLintInspector', () => {
 describe('ESLintInspector', () => {
   describe('.create()', () => {
     describe('to return instance of', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
@@ -234,7 +234,7 @@ describe('ESLintInspector', () => {
     })
 
     describe('to call constructor', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {

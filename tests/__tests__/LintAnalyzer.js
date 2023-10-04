@@ -8,7 +8,7 @@ const LintAnalyzer = require('../../lib/LintAnalyzer')
 describe('LintAnalyzer', () => {
   describe('constructor', () => {
     describe('to keep property', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
@@ -130,7 +130,7 @@ describe('LintAnalyzer', () => {
 describe('LintAnalyzer', () => {
   describe('.create()', () => {
     describe('to be instance of LintAnalyzer', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
@@ -224,7 +224,7 @@ describe('LintAnalyzer', () => {
     })
 
     describe('to call constructor', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
@@ -328,7 +328,7 @@ describe('LintAnalyzer', () => {
 describe('LintAnalyzer', () => {
   describe('#getHitLintMessages()', () => {
     describe('with ruleId only', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
@@ -457,7 +457,7 @@ describe('LintAnalyzer', () => {
     })
 
     describe('with ruleId and message', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
@@ -522,7 +522,7 @@ describe('LintAnalyzer', () => {
   describe('#getUnexpectedLintMessages()', () => {
     describe('with ruleId only', () => {
       describe('with expected message', () => {
-        /** @type {Array<Object>} */
+        /** @type {Array<object>} */
         const cases = [
           {
             params: {
@@ -666,7 +666,7 @@ describe('LintAnalyzer', () => {
       })
 
       describe('without expected message', () => {
-        /** @type {Array<Object>} */
+        /** @type {Array<object>} */
         const cases = [
           {
             params: {
@@ -750,7 +750,7 @@ describe('LintAnalyzer', () => {
 
     describe('with ruleId and message', () => {
       describe('with expected message', () => {
-        /** @type {Array<Object>} */
+        /** @type {Array<object>} */
         const cases = [
           {
             params: {
@@ -815,7 +815,7 @@ describe('LintAnalyzer', () => {
 describe('LintAnalyzer', () => {
   describe('#worksAsExpected()', () => {
     describe('to be truthy', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
@@ -895,7 +895,7 @@ describe('LintAnalyzer', () => {
     })
 
     describe('to be falsy', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
@@ -1042,7 +1042,7 @@ describe('LintAnalyzer', () => {
   describe('#getUnexpectedLint()', () => {
     describe('with ruleId only', () => {
       describe('has hit messages', () => {
-        /** @type {Array<Object>} */
+        /** @type {Array<object>} */
         const cases = [
           {
             params: {
@@ -1139,7 +1139,7 @@ describe('LintAnalyzer', () => {
       })
 
       describe('has no hit messages', () => {
-        /** @type {Array<Object>} */
+        /** @type {Array<object>} */
         const cases = [
           {
             params: {
@@ -1228,7 +1228,7 @@ describe('LintAnalyzer', () => {
 
     describe('with ruleId and message', () => {
       describe('has hit messages', () => {
-        /** @type {Array<Object>} */
+        /** @type {Array<object>} */
         const cases = [
           {
             params: {
@@ -1287,7 +1287,7 @@ describe('LintAnalyzer', () => {
       })
 
       describe('has no hit messages', () => {
-        /** @type {Array<Object>} */
+        /** @type {Array<object>} */
         const cases = [
           {
             params: {
