@@ -1001,15 +1001,7 @@ describe('LintAnalyzer', () => {
 })
 
 describe('LintAnalyzer', () => {
-  describe('#generateNoLintMessage()', () => {
-    /** @type {Object} */
-    const lintAnalyzerParams = {
-      ruleId: 'sample-rule-id',
-      message: 'sample-message',
-      lint: {}
-    }
-    const analyzer = LintAnalyzer.create(lintAnalyzerParams)
-
+  describe('.generateNoLintMessage()', () => {
     const cases = [
       {
         params: {
@@ -1038,7 +1030,7 @@ describe('LintAnalyzer', () => {
     ]
 
     test.each(cases)('message: $params.message', ({ params, expected }) => {
-      const actual = analyzer.generateNoLintMessage(params.message)
+      const actual = LintAnalyzer.generateNoLintMessage(params.message)
 
       expect(actual)
         .toEqual(expected)
