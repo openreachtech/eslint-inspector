@@ -8,12 +8,12 @@ const LintAnalyzer = require('../../lib/LintAnalyzer')
 describe('LintAnalyzer', () => {
   describe('constructor', () => {
     describe('to keep property', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
             ruleId: 'indent',
-            message: /Expected indentation of \d+ spaces but found \d+./,
+            message: /Expected indentation of \d+ spaces but found \d+./u,
             lint: {
               filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
               messages: [
@@ -130,7 +130,7 @@ describe('LintAnalyzer', () => {
 describe('LintAnalyzer', () => {
   describe('.create()', () => {
     describe('to be instance of LintAnalyzer', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
@@ -224,7 +224,7 @@ describe('LintAnalyzer', () => {
     })
 
     describe('to call constructor', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
@@ -328,7 +328,7 @@ describe('LintAnalyzer', () => {
 describe('LintAnalyzer', () => {
   describe('#getHitLintMessages()', () => {
     describe('with ruleId only', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
@@ -457,7 +457,7 @@ describe('LintAnalyzer', () => {
     })
 
     describe('with ruleId and message', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
@@ -474,7 +474,7 @@ describe('LintAnalyzer', () => {
                   nodeType: 'VariableDeclaration',
                   messageId: 'restrictedSyntax',
                   endLine: 5,
-                  endColumn: 12
+                  endColumn: 12,
                 },
                 {
                   ruleId: 'no-restricted-syntax',
@@ -485,7 +485,7 @@ describe('LintAnalyzer', () => {
                   nodeType: 'CallExpression',
                   messageId: 'restrictedSyntax',
                   endLine: 8,
-                  endColumn: 3
+                  endColumn: 3,
                 },
               ],
             },
@@ -500,7 +500,7 @@ describe('LintAnalyzer', () => {
               nodeType: 'VariableDeclaration',
               messageId: 'restrictedSyntax',
               endLine: 5,
-              endColumn: 12
+              endColumn: 12,
             },
           ],
         },
@@ -522,7 +522,7 @@ describe('LintAnalyzer', () => {
   describe('#getUnexpectedLintMessages()', () => {
     describe('with ruleId only', () => {
       describe('with expected message', () => {
-        /** @type {Array<Object>} */
+        /** @type {Array<object>} */
         const cases = [
           {
             params: {
@@ -666,7 +666,7 @@ describe('LintAnalyzer', () => {
       })
 
       describe('without expected message', () => {
-        /** @type {Array<Object>} */
+        /** @type {Array<object>} */
         const cases = [
           {
             params: {
@@ -750,7 +750,7 @@ describe('LintAnalyzer', () => {
 
     describe('with ruleId and message', () => {
       describe('with expected message', () => {
-        /** @type {Array<Object>} */
+        /** @type {Array<object>} */
         const cases = [
           {
             params: {
@@ -767,7 +767,7 @@ describe('LintAnalyzer', () => {
                     nodeType: 'VariableDeclaration',
                     messageId: 'restrictedSyntax',
                     endLine: 5,
-                    endColumn: 12
+                    endColumn: 12,
                   },
                   {
                     ruleId: 'no-restricted-syntax',
@@ -778,7 +778,7 @@ describe('LintAnalyzer', () => {
                     nodeType: 'CallExpression',
                     messageId: 'restrictedSyntax',
                     endLine: 8,
-                    endColumn: 3
+                    endColumn: 3,
                   },
                 ],
               },
@@ -793,7 +793,7 @@ describe('LintAnalyzer', () => {
                 nodeType: 'CallExpression',
                 messageId: 'restrictedSyntax',
                 endLine: 8,
-                endColumn: 3
+                endColumn: 3,
               },
             ],
           },
@@ -815,7 +815,7 @@ describe('LintAnalyzer', () => {
 describe('LintAnalyzer', () => {
   describe('#worksAsExpected()', () => {
     describe('to be truthy', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
@@ -895,7 +895,7 @@ describe('LintAnalyzer', () => {
     })
 
     describe('to be falsy', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
@@ -1017,9 +1017,9 @@ describe('LintAnalyzer', () => {
       },
       {
         params: {
-          message: /Expected indentation of \d+ spaces but found \d+./,
+          message: /Expected indentation of \d+ spaces but found \d+./u,
         },
-        expected: '🔎 No lints that should be here\n              /Expected indentation of \\d+ spaces but found \\d+./',
+        expected: '🔎 No lints that should be here\n              /Expected indentation of \\d+ spaces but found \\d+./u',
       },
       {
         params: {
@@ -1042,7 +1042,7 @@ describe('LintAnalyzer', () => {
   describe('#getUnexpectedLint()', () => {
     describe('with ruleId only', () => {
       describe('has hit messages', () => {
-        /** @type {Array<Object>} */
+        /** @type {Array<object>} */
         const cases = [
           {
             params: {
@@ -1139,7 +1139,7 @@ describe('LintAnalyzer', () => {
       })
 
       describe('has no hit messages', () => {
-        /** @type {Array<Object>} */
+        /** @type {Array<object>} */
         const cases = [
           {
             params: {
@@ -1228,7 +1228,7 @@ describe('LintAnalyzer', () => {
 
     describe('with ruleId and message', () => {
       describe('has hit messages', () => {
-        /** @type {Array<Object>} */
+        /** @type {Array<object>} */
         const cases = [
           {
             params: {
@@ -1268,7 +1268,7 @@ describe('LintAnalyzer', () => {
                     nodeType: 'CallExpression',
                     messageId: 'restrictedSyntax',
                     endLine: 8,
-                    endColumn: 3
+                    endColumn: 3,
                   },
                 ],
               },
@@ -1287,7 +1287,7 @@ describe('LintAnalyzer', () => {
       })
 
       describe('has no hit messages', () => {
-        /** @type {Array<Object>} */
+        /** @type {Array<object>} */
         const cases = [
           {
             params: {
@@ -1307,7 +1307,7 @@ describe('LintAnalyzer', () => {
                   message: '🔎 No lints that should be here\n              Never use `let`',
                   line: 0,
                   column: 0,
-                }
+                },
               ],
               fatalErrorCount: 1,
               errorCount: 1,
@@ -1331,7 +1331,7 @@ describe('LintAnalyzer', () => {
                   message: '🔎 No lints that should be here\n              Never use `Array#forEach()`',
                   line: 0,
                   column: 0,
-                }
+                },
               ],
               fatalErrorCount: 1,
               errorCount: 1,

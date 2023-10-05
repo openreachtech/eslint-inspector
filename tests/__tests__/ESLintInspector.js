@@ -15,7 +15,7 @@ const FileLintAnalyzer = require('../../lib/FileLintAnalyzer')
 const LintAnalyzer = require('../../lib/LintAnalyzer')
 
 // same as /\x1b\[.+?m/g, it is to avoid no-control-regex rule
-const controlCharactersRemover = new RegExp(`${'\x1b'}\\[.+?m`, 'g')
+const controlCharactersRemover = new RegExp(`${'\x1b'}\\[.+?m`, 'gu')
 
 const CONTROL_CHARACTERS = require('../constants/control-characters')
 
@@ -27,7 +27,7 @@ describe('ESLintInspector', () => {
   describe('constructor', () => {
     describe('to keep property', () => {
       describe('#analyzers', () => {
-        /** @type {Array<Object>} */
+        /** @type {Array<object>} */
         const cases = [
           {
             params: {
@@ -133,7 +133,7 @@ describe('ESLintInspector', () => {
 describe('ESLintInspector', () => {
   describe('.create()', () => {
     describe('to return instance of', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
@@ -234,7 +234,7 @@ describe('ESLintInspector', () => {
     })
 
     describe('to call constructor', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
@@ -1924,12 +1924,15 @@ describe('ESLintInspector', () => {
     describe('to be formatted log', () => {
       const RESET = CONTROL_CHARACTERS.RESET_STYLE
       const BOLD = CONTROL_CHARACTERS.BOLD_STYLE
-      const COLOR_DEFAULT = CONTROL_CHARACTERS.COLOR_DEFAULT
-      const COLOR_RED = CONTROL_CHARACTERS.COLOR_RED
-      const COLOR_WHITE = CONTROL_CHARACTERS.COLOR_WHITE
-      const COLOR_GRAY = CONTROL_CHARACTERS.COLOR_GRAY
-      const UNDERLINE_OPEN = CONTROL_CHARACTERS.UNDERLINE_OPEN
-      const UNDERLINE_CLOSE = CONTROL_CHARACTERS.UNDERLINE_CLOSE
+
+      const {
+        COLOR_DEFAULT,
+        COLOR_RED,
+        COLOR_WHITE,
+        COLOR_GRAY,
+        UNDERLINE_OPEN,
+        UNDERLINE_CLOSE,
+      } = CONTROL_CHARACTERS
 
       const cases = [
         {
@@ -2072,7 +2075,7 @@ ${RESET}   ${COLOR_GRAY}3:18${COLOR_WHITE}  ${COLOR_RED}error${COLOR_DEFAULT}  E
 ${RESET}${RESET}
 ${RESET}${COLOR_RED}${BOLD}✖ 3 problems (3 errors, 0 warnings)${COLOR_WHITE}${COLOR_DEFAULT}${RESET}
 ${RESET}${COLOR_RED}${BOLD}${COLOR_WHITE}${COLOR_DEFAULT}${COLOR_RED}${BOLD}  3 errors and 0 warnings potentially fixable with the \`--fix\` option.${COLOR_WHITE}${COLOR_DEFAULT}${RESET}
-${RESET}${COLOR_RED}${BOLD}${COLOR_WHITE}${COLOR_DEFAULT}${RESET}`
+${RESET}${COLOR_RED}${BOLD}${COLOR_WHITE}${COLOR_DEFAULT}${RESET}`,
         },
       ]
 
@@ -2306,7 +2309,7 @@ describe('ESLintInspector', () => {
 describe('ESLintInspector', () => {
   describe('#getFormattedLogIfUnexpected()', () => {
     describe('with file paths', () => {
-      const basePath = __dirname.replace(/__tests__$/, '')
+      const basePath = __dirname.replace(/__tests__$/u, '')
 
       describe('to be null', () => {
         const cases = [
@@ -2370,7 +2373,7 @@ describe('ESLintInspector', () => {
               '\x1B[0m\x1B[0m',
               '\x1B[0m\x1B[31m\x1B[1m✖ 6 problems (6 errors, 0 warnings)\x1B[22m\x1B[39m\x1B[0m',
               '\x1B[0m\x1B[31m\x1B[1m\x1B[22m\x1B[39m\x1B[31m\x1B[1m  4 errors and 0 warnings potentially fixable with the `--fix` option.\x1B[22m\x1B[39m\x1B[0m',
-              '\x1B[0m\x1B[31m\x1B[1m\x1B[22m\x1B[39m\x1B[0m'
+              '\x1B[0m\x1B[31m\x1B[1m\x1B[22m\x1B[39m\x1B[0m',
             ]
               .join('\n'),
           },
@@ -2390,7 +2393,7 @@ describe('ESLintInspector', () => {
               '\x1B[0m              Object-Oriented Programming does not require `let` variable declaration  \x1B[2mno-restricted-syntax\x1B[22m\x1B[0m',
               '\x1B[0m\x1B[0m',
               '\x1B[0m\x1B[31m\x1B[1m✖ 1 problem (1 error, 0 warnings)\x1B[22m\x1B[39m\x1B[0m',
-              '\x1B[0m\x1B[31m\x1B[1m\x1B[22m\x1B[39m\x1B[0m'
+              '\x1B[0m\x1B[31m\x1B[1m\x1B[22m\x1B[39m\x1B[0m',
             ]
               .join('\n'),
           },
@@ -2456,7 +2459,7 @@ describe('ESLintInspector', () => {
               '\x1B[0m\x1B[0m',
               '\x1B[0m\x1B[31m\x1B[1m✖ 6 problems (6 errors, 0 warnings)\x1B[22m\x1B[39m\x1B[0m',
               '\x1B[0m\x1B[31m\x1B[1m\x1B[22m\x1B[39m\x1B[31m\x1B[1m  4 errors and 0 warnings potentially fixable with the `--fix` option.\x1B[22m\x1B[39m\x1B[0m',
-              '\x1B[0m\x1B[31m\x1B[1m\x1B[22m\x1B[39m\x1B[0m'
+              '\x1B[0m\x1B[31m\x1B[1m\x1B[22m\x1B[39m\x1B[0m',
             ]
               .join('\n'),
           },
