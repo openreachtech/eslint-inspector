@@ -4,3 +4,5 @@ rules:
   function-paren-newline:
     - off # error # 👀
     - consistent # multiline
+  jsdoc/imports-as-dependencies:
+    - off # error # 👀
