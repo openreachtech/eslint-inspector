@@ -54,7 +54,7 @@
   └── package.json      # Package information and dependencies
   ```
 
-* When want to confirm plugin rules, rule name includes `/`, thus we can not create lint error file with rule id as is. In such case, use the plugin name as a folder, and use the part after `/` as the file name.
+* If you want to confirm plugin rules, rule name includes `/`, thus we can not create lint error file with rule id as is. In such case, use the plugin name as a folder, and use the part after `/` as the file name.
 
   ```
   /your-eslint-config-repository
