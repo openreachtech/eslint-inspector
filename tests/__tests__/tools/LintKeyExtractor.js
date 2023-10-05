@@ -386,7 +386,7 @@ describe('LintKeyExtractor', () => {
       test.each(cases)('filePath: $params.filePath', ({ params }) => {
         const extractor = LintKeyExtractor.create(params)
 
-        expect(extractor.messageId)
+        expect(extractor.extractMessageId())
           .toBeNull()
       })
     })
@@ -416,7 +416,7 @@ describe('LintKeyExtractor', () => {
       test.each(cases)('filePath: $params.filePath', ({ params, expected }) => {
         const extractor = LintKeyExtractor.create(params)
 
-        expect(extractor.messageId)
+        expect(extractor.extractMessageId())
           .toBe(expected)
       })
     })
@@ -432,7 +432,7 @@ describe('LintKeyExtractor', () => {
       test.each(cases)('filePath: $params.filePath', ({ params }) => {
         const extractor = LintKeyExtractor.create(params)
 
-        expect(extractor.messageId)
+        expect(extractor.extractMessageId())
           .toBeNull()
       })
     })
