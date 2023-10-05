@@ -234,7 +234,7 @@ describe('LintKeyExtractor', () => {
 })
 
 describe('LintKeyExtractor', () => {
-  describe('#get:ruleId', () => {
+  describe('#extractRuleId()', () => {
     describe('with ruleId only', () => {
       const cases = [
         {
@@ -260,7 +260,7 @@ describe('LintKeyExtractor', () => {
       test.each(cases)('filePath: $params.filePath', ({ params, expected }) => {
         const extractor = LintKeyExtractor.create(params)
 
-        expect(extractor.ruleId)
+        expect(extractor.extractRuleId())
           .toBe(expected)
       })
     })
@@ -290,7 +290,7 @@ describe('LintKeyExtractor', () => {
       test.each(cases)('filePath: $params.filePath', ({ params, expected }) => {
         const extractor = LintKeyExtractor.create(params)
 
-        expect(extractor.ruleId)
+        expect(extractor.extractRuleId())
           .toBe(expected)
       })
     })
@@ -339,7 +339,7 @@ describe('LintKeyExtractor', () => {
       test.each(cases)('filePath: $params.filePath', ({ params, expected }) => {
         const extractor = LintKeyExtractor.create(params)
 
-        expect(extractor.ruleId)
+        expect(extractor.extractRuleId())
           .toBe(expected)
       })
     })
@@ -355,7 +355,7 @@ describe('LintKeyExtractor', () => {
       test.each(cases)('filePath: $params.filePath', ({ params }) => {
         const extractor = LintKeyExtractor.create(params)
 
-        expect(extractor.ruleId)
+        expect(extractor.extractRuleId())
           .toBeNull()
       })
     })
