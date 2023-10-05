@@ -19,7 +19,7 @@ describe('FileLintAnalyzer', () => {
 describe('FileLintAnalyzer', () => {
   describe('.create()', () => {
     describe('to be instance of FileLintAnalyzer', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
@@ -111,7 +111,7 @@ describe('FileLintAnalyzer', () => {
     })
 
     describe('to call constructor', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
@@ -292,7 +292,7 @@ describe('FileLintAnalyzer', () => {
 describe('FileLintAnalyzer', () => {
   describe('.extractLintKeys()', () => {
     describe('as standard rule', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
@@ -368,7 +368,7 @@ describe('FileLintAnalyzer', () => {
     })
 
     describe('as plugin rule', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
