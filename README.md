@@ -124,7 +124,7 @@
       configPath: '.eslintrc.yml',
     })
 
-    const unexpectedLog = await inspector.getFormattedLogIfUnexpected()
+    const unexpectedLog = await inspector.getUnexpectedLog()
 
     expect(unexpectedLog)
       .toBeNull()
@@ -189,7 +189,7 @@
       messageHash, // <----------------- ✅
     })
 
-    const unexpectedLog = await inspector.getFormattedLogIfUnexpected()
+    const unexpectedLog = await inspector.getUnexpectedLog()
 
     expect(unexpectedLog)
       .toBeNull()
