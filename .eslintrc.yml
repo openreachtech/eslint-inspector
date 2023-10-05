@@ -26,3 +26,5 @@ rules:
       message: 'JSDoc description must start with a capital letter.' # 'JSDoc description does not satisfy the regex pattern.'
       nonemptyTags: true
       tags: {}
+  jest/prefer-strict-equal:
+    - off # error # 👀
