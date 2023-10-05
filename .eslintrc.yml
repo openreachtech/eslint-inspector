@@ -28,3 +28,22 @@ rules:
       tags: {}
   jest/prefer-strict-equal:
     - off # error # 👀
+  jsdoc/require-jsdoc:
+    - error
+    - checkConstructors: true
+      checkGetters: true
+      checkSetters: true
+      contexts: []
+      enableFixer: true
+      exemptEmptyConstructors: false # true
+      exemptEmptyFunctions: false
+      fixerMessage: ''
+      # minLineCount: undefined
+      publicOnly: false
+      require:
+        ArrowFunctionExpression: false
+        ClassDeclaration: false # true # false # 👀
+        ClassExpression: false
+        FunctionDeclaration: true
+        FunctionExpression: false
+        MethodDefinition: true # false
