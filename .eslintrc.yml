@@ -1,2 +1,6 @@
 extends:
   - '@openreachtech'
+rules:
+  function-paren-newline:
+    - off # error # 👀
+    - consistent # multiline
