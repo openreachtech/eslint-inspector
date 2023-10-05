@@ -32,7 +32,7 @@
 2. Create a directory of intent error codes, and put intent error files in it.
 3. Use `ESLintInspector`, created with the file path to the directory of intent error codes.
 
-## Structure of directories
+## Structure of Directories
 
 * Here is the structure of directories for Jest.
 
