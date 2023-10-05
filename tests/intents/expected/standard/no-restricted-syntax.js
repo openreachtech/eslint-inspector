@@ -1,5 +1,11 @@
 'use strict'
 
+/* eslint-disable id-length */
+/* eslint-disable jest/require-hook */
+/* eslint-disable jest/no-conditional-in-test */
+/* eslint-disable jest/require-top-level-describe */
+/* eslint-disable no-plusplus */
+
 const array = [1, 3, 5]
 
 let sum = 0
@@ -34,14 +40,5 @@ for (const key in object) {
 for (const value of array) {
   total += value
 }
-
-test('xxx', () => {
-  if (it) {
-    return 'same'
-  }
-
-  expect(true)
-    .toBe(true)
-})
 
 module.exports = xxx + sum + total

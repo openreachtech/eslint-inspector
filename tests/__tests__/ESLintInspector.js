@@ -20,7 +20,7 @@ const controlCharactersRemover = new RegExp(`${'\x1b'}\\[.+?m`, 'gu')
 const CONTROL_CHARACTERS = require('../constants/control-characters')
 
 const messageHash = {
-  noLet: 'Object-Oriented Programming does not require `let` variable declaration.',
+  noLet: 'Never use let',
 }
 
 describe('ESLintInspector', () => {
@@ -2319,7 +2319,7 @@ describe('ESLintInspector', () => {
                 'tests/intents/expected/**',
               ],
               messageHash: {
-                noLet: 'Object-Oriented Programming does not require `let` variable declaration.',
+                noLet: 'Never use let',
               },
             },
           },
@@ -2329,7 +2329,7 @@ describe('ESLintInspector', () => {
                 'tests/intents/expected/standard/no-restricted-syntax/**',
               ],
               messageHash: {
-                noLet: 'Object-Oriented Programming does not require `let` variable declaration.',
+                noLet: 'Never use let',
               },
             },
           },
@@ -2353,7 +2353,7 @@ describe('ESLintInspector', () => {
                 'tests/intents/unexpected/**',
               ],
               messageHash: {
-                noLet: 'Object-Oriented Programming does not require `let` variable declaration.',
+                noLet: 'Never use let',
               },
             },
             expected: [
@@ -2365,7 +2365,7 @@ describe('ESLintInspector', () => {
               '\x1B[0m\x1B[0m',
               `\x1B[0m\x1B[4m${path.join(basePath, 'intents/unexpected/standard/no-restricted-syntax/noLet.js')}\x1B[24m\x1B[0m`,
               '\x1B[0m  \x1B[2m0:0\x1B[22m  \x1B[31merror\x1B[39m  🔎 No lints that should be here\x1B[0m',
-              '\x1B[0m              Object-Oriented Programming does not require `let` variable declaration  \x1B[2mno-restricted-syntax\x1B[22m\x1B[0m',
+              '\x1B[0m              Never use let  \x1B[2mno-restricted-syntax\x1B[22m\x1B[0m',
               '\x1B[0m\x1B[0m',
               `\x1B[0m\x1B[4m${path.join(basePath, 'intents/unexpected/standard/semi.js')}\x1B[24m\x1B[0m`,
               '\x1B[0m  \x1B[2m3:1\x1B[22m   \x1B[31merror\x1B[39m  Unexpected console statement  \x1B[2mno-console\x1B[22m\x1B[0m',
@@ -2383,14 +2383,14 @@ describe('ESLintInspector', () => {
                 'tests/intents/unexpected/standard/no-restricted-syntax/**',
               ],
               messageHash: {
-                noLet: 'Object-Oriented Programming does not require `let` variable declaration.',
+                noLet: 'Never use let',
               },
             },
             expected: [
               '\x1B[0m\x1B[0m',
               `\x1B[0m\x1B[4m${path.join(basePath, 'intents/unexpected/standard/no-restricted-syntax/noLet.js')}\x1B[24m\x1B[0m`,
               '\x1B[0m  \x1B[2m0:0\x1B[22m  \x1B[31merror\x1B[39m  🔎 No lints that should be here\x1B[0m',
-              '\x1B[0m              Object-Oriented Programming does not require `let` variable declaration  \x1B[2mno-restricted-syntax\x1B[22m\x1B[0m',
+              '\x1B[0m              Never use let  \x1B[2mno-restricted-syntax\x1B[22m\x1B[0m',
               '\x1B[0m\x1B[0m',
               '\x1B[0m\x1B[31m\x1B[1m✖ 1 problem (1 error, 0 warnings)\x1B[22m\x1B[39m\x1B[0m',
               '\x1B[0m\x1B[31m\x1B[1m\x1B[22m\x1B[39m\x1B[0m',
@@ -2425,7 +2425,7 @@ describe('ESLintInspector', () => {
               '\x1B[0m\x1B[0m',
               `\x1B[0m\x1B[4m${path.join(basePath, 'intents/no-lints/all/no-restricted-syntax/noLet.js')}\x1B[24m\x1B[0m`,
               '\x1B[0m  \x1B[2m0:0\x1B[22m  \x1B[31merror\x1B[39m  🔎 No lints that should be here\x1B[0m',
-              '\x1B[0m              Object-Oriented Programming does not require `let` variable declaration  \x1B[2mno-restricted-syntax\x1B[22m\x1B[0m',
+              '\x1B[0m              Never use let  \x1B[2mno-restricted-syntax\x1B[22m\x1B[0m',
               '\x1B[0m\x1B[0m',
               `\x1B[0m\x1B[4m${path.join(basePath, 'intents/no-lints/all/semi.js')}\x1B[24m\x1B[0m`,
               '\x1B[0m  \x1B[2m0:0\x1B[22m  \x1B[31merror\x1B[39m  🔎 No lints that should be here  \x1B[2msemi\x1B[22m\x1B[0m',
@@ -2451,7 +2451,7 @@ describe('ESLintInspector', () => {
               '\x1B[0m\x1B[0m',
               `\x1B[0m\x1B[4m${path.join(basePath, 'intents/no-lints/with-unexpected/no-restricted-syntax/noLet.js')}\x1B[24m\x1B[0m`,
               '\x1B[0m  \x1B[2m0:0\x1B[22m  \x1B[31merror\x1B[39m  🔎 No lints that should be here\x1B[0m',
-              '\x1B[0m              Object-Oriented Programming does not require `let` variable declaration  \x1B[2mno-restricted-syntax\x1B[22m\x1B[0m',
+              '\x1B[0m              Never use let  \x1B[2mno-restricted-syntax\x1B[22m\x1B[0m',
               '\x1B[0m\x1B[0m',
               `\x1B[0m\x1B[4m${path.join(basePath, 'intents/no-lints/with-unexpected/semi.js')}\x1B[24m\x1B[0m`,
               '\x1B[0m  \x1B[2m3:1\x1B[22m   \x1B[31merror\x1B[39m  Unexpected console statement  \x1B[2mno-console\x1B[22m\x1B[0m',

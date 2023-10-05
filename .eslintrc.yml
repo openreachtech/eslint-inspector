@@ -1,13 +1,52 @@
 extends:
   - '@openreachtech'
-plugins:
-  - jest
 rules:
-  jest/consistent-test-it:
+  function-paren-newline:
+    - off # error # 👀
+    - consistent # multiline
+  jsdoc/imports-as-dependencies:
+    - off # error # 👀
+  jsdoc/informative-docs:
+    - off # error # 👀
+    - aliases:
+        - an
+        - our
+      uselessWords:
+        - a
+        - an
+        - i
+        - in
+        - of
+        - s
+        - the
+  jsdoc/match-description:
+    - off # error # 👀
+    - mainDescription: true
+      matchDescription: ^\n?([A-Z`\d_][\s\S]*[.?!`]\s*)?$
+      message: 'JSDoc description must start with a capital letter.' # 'JSDoc description does not satisfy the regex pattern.'
+      nonemptyTags: true
+      tags: {}
+  jest/prefer-strict-equal:
+    - off # error # 👀
+  jest/require-hook:
+    - off # error # 👀
+    - allowedFunctionCalls: []
+  jsdoc/require-jsdoc:
     - error
-    - fn: test
-      withinDescribe: test
-  jest/no-alias-methods:
-    - error
-  jest/prefer-equality-matcher:
-    - error
+    - checkConstructors: true
+      checkGetters: true
+      checkSetters: true
+      contexts: []
+      enableFixer: true
+      exemptEmptyConstructors: false # true
+      exemptEmptyFunctions: false
+      fixerMessage: ''
+      # minLineCount: undefined
+      publicOnly: false
+      require:
+        ArrowFunctionExpression: false
+        ClassDeclaration: false # true # false # 👀
+        ClassExpression: false
+        FunctionDeclaration: true
+        FunctionExpression: false
+        MethodDefinition: true # false
