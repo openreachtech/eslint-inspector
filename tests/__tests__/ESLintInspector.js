@@ -15,7 +15,7 @@ const FileLintAnalyzer = require('../../lib/FileLintAnalyzer')
 const LintAnalyzer = require('../../lib/LintAnalyzer')
 
 // same as /\x1b\[.+?m/g, it is to avoid no-control-regex rule
-const controlCharactersRemover = new RegExp(`${'\x1b'}\\[.+?m`, 'g')
+const controlCharactersRemover = new RegExp(`${'\x1b'}\\[.+?m`, 'gu')
 
 const CONTROL_CHARACTERS = require('../constants/control-characters')
 
@@ -2306,7 +2306,7 @@ describe('ESLintInspector', () => {
 describe('ESLintInspector', () => {
   describe('#getFormattedLogIfUnexpected()', () => {
     describe('with file paths', () => {
-      const basePath = __dirname.replace(/__tests__$/, '')
+      const basePath = __dirname.replace(/__tests__$/u, '')
 
       describe('to be null', () => {
         const cases = [

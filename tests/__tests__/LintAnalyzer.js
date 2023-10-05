@@ -13,7 +13,7 @@ describe('LintAnalyzer', () => {
         {
           params: {
             ruleId: 'indent',
-            message: /Expected indentation of \d+ spaces but found \d+./,
+            message: /Expected indentation of \d+ spaces but found \d+./u,
             lint: {
               filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
               messages: [
@@ -1017,9 +1017,9 @@ describe('LintAnalyzer', () => {
       },
       {
         params: {
-          message: /Expected indentation of \d+ spaces but found \d+./,
+          message: /Expected indentation of \d+ spaces but found \d+./u,
         },
-        expected: '🔎 No lints that should be here\n              /Expected indentation of \\d+ spaces but found \\d+./',
+        expected: '🔎 No lints that should be here\n              /Expected indentation of \\d+ spaces but found \\d+./u',
       },
       {
         params: {
