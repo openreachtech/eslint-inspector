@@ -1,6 +1,6 @@
 # ESLint Inspector
 
-* ESLintInspector is a JavaScript module designed to validate your ESLint configurations. This module enables automated testing to ensure that your ESLint setup is functioning as expected, using Jest as the testing framework.
+* ESLintInspector is a JavaScript module designed to validate your ESLint configurations. This module enables automated testing to ensure that your ESLint setup is working as expected, using Jest as the testing framework.
 
 ## Installation
 
