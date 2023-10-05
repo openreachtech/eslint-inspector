@@ -21,7 +21,12 @@ describe('LintKeyExtractor', () => {
         ]
 
         test.each(cases)('filePath: $params.filePath', ({ params }) => {
-          const extractor = new LintKeyExtractor(params)
+          const constructorParams = {
+            ...params,
+            plugins: [],
+          }
+
+          const extractor = new LintKeyExtractor(constructorParams)
 
           expect(extractor)
             .toHaveProperty('filePath', params.filePath)
