@@ -54,6 +54,20 @@
   └── package.json      # Package information and dependencies
   ```
 
+* When want to confirm plugin rules, rule name includes `/`, thus we can not create lint error file with rule id as is. In such case, use the plugin name as a folder, and use the part after `/` as the file name.
+
+  ```
+  /your-eslint-config-repository
+  |
+  └── tests/
+      └── intents/
+          ├── jsdoc/                 # JSDoc rules
+          |   └ require-jsdoc.js     # Confirm to work rule id: `jsdoc/require-jsdoc`
+          |
+          └── jest/                  # Jest rules
+              └ no-disabled-tests.js # Confirm to work rule id: `jest/no-disabled-tests`
+  ```
+
 ## Intent Error Code Files
 
 * Create a code that contains lint to verify that the ESLint rules are working. `ESLintInspector` uses the file name as the target rule ID to confirm.
