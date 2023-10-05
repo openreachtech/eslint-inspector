@@ -43,7 +43,7 @@
   |   ├── __tests__/    # Test files
   |   |   └── eslint.js # Entry point to confirm ESLint config
   |   |
-  |   └── intents/      # Jest snapshots if necessary
+  |   └── linted/       # Intentional linted files root
   |       ├── nested/   # May use nested directory to categorize
   |       |   └ semi.js # Confirm to work rule id: `semi`
   |       |
@@ -60,7 +60,7 @@
   /your-eslint-config-repository
   |
   └── tests/
-      └── intents/
+      └── linted/
           ├── jsdoc/                 # JSDoc rules
           |   └ require-jsdoc.js     # Confirm to work rule id: `jsdoc/require-jsdoc`
           |
@@ -72,7 +72,7 @@
 
 * Create a code that contains lint to verify that the ESLint rules are working. `ESLintInspector` uses the file name as the target rule ID to confirm.
 
-* The rule id `indent` will be confirmed  by `tests/intents/indent.js`
+* The rule id `indent` will be confirmed  by `tests/linted/indent.js`
 
   ```javascript
   module.exports = function doubleValue (value, ignore) {
@@ -84,7 +84,7 @@
   }
   ```
 
-* The rule id `quotes` will be confirmed  by `tests/intents/quotes.js`
+* The rule id `quotes` will be confirmed  by `tests/linted/quotes.js`
 
   ```javascript
   const BUTTON_LABEL = {
@@ -95,7 +95,7 @@
   module.exports = BUTTON_LABEL
   ```
 
-* The rule id `semi` will be confirmed  by `tests/intents/nested/semi.js`
+* The rule id `semi` will be confirmed  by `tests/linted/nested/semi.js`
 
   ```javascript
   const MILLISECONDS_PER_ONE_DAY = 60 * 60 * 24 * 1000
@@ -119,7 +119,7 @@
   test('should work as expected', async () => {
     const inspector = await ESLintInspector.createAsyncWithFilePaths({
       filePaths: [
-        'tests/intents/',
+        'tests/linted/',
       ],
       configPath: '.eslintrc.yml',
     })
@@ -161,7 +161,7 @@
   /your-eslint-config-repository
   |
   └── tests/
-      └── intents/
+      └── linted/
           └── no-restricted-syntax/ # Confirm to work rule id: `no-restricted-syntax`
               ├── noLet.js          # message id: noLet "Never use `let`."
               └── noSwitch.js       # message id: noSwitch "Never use `switch` statement."
@@ -183,7 +183,7 @@
   test('should work as expected', async () => {
     const inspector = await ESLintInspector.createAsyncWithFilePaths({
       filePaths: [
-        'tests/intents/',
+        'tests/linted/',
       ],
       configPath: '.eslintrc.yml',
       messageHash, // <----------------- ✅
@@ -205,10 +205,10 @@
 
 ## Note
 
-* When ESLint is applied to the ESLlint config repository, the files contained in the tests/intents directory may fail. To avoid it, specify the following options.
+* When ESLint is applied to the ESLlint config repository, the files contained in the `tests/linted/` directory may fail. To avoid it, specify the following options.
 
   ```
-  npx eslint --ignore-pattern /tests/intents/* .
+  npx eslint . --ignore-pattern /tests/linted/*
   ```
 
 ## License
