@@ -2092,7 +2092,7 @@ ${RESET}${COLOR_RED}${BOLD}${COLOR_WHITE}${COLOR_DEFAULT}${RESET}`,
 })
 
 describe('ESLintInspector', () => {
-  describe('#getFormattedLogIfUnexpected()', () => {
+  describe('#getUnexpectedLog()', () => {
     describe('to be null', () => {
       const cases = [
         {
@@ -2183,7 +2183,7 @@ describe('ESLintInspector', () => {
       test.each(cases)('[0] rule id: $params.analyzers.0.ruleId', async ({ params }) => {
         const inspector = ESLintInspector.create(params)
 
-        const log = await inspector.getFormattedLogIfUnexpected()
+        const log = await inspector.getUnexpectedLog()
 
         expect(log)
           .toBeNull()
@@ -2295,7 +2295,7 @@ describe('ESLintInspector', () => {
       test.each(cases)('[0] rule id: $params.analyzers.0.ruleId', async ({ params }) => {
         const inspector = ESLintInspector.create(params)
 
-        const log = await inspector.getFormattedLogIfUnexpected()
+        const log = await inspector.getUnexpectedLog()
 
         expect(log)
           .toEqual(
@@ -2307,7 +2307,7 @@ describe('ESLintInspector', () => {
 })
 
 describe('ESLintInspector', () => {
-  describe('#getFormattedLogIfUnexpected()', () => {
+  describe('#getUnexpectedLog()', () => {
     describe('with file paths', () => {
       const basePath = __dirname.replace(/__tests__$/u, '')
 
@@ -2338,7 +2338,7 @@ describe('ESLintInspector', () => {
         test.each(cases)('file paths: $params.filePaths', async ({ params }) => {
           const inspector = await ESLintInspector.createAsyncWithFilePaths(params)
 
-          const log = await inspector.getFormattedLogIfUnexpected()
+          const log = await inspector.getUnexpectedLog()
 
           expect(log)
             .toBeNull()
@@ -2402,7 +2402,7 @@ describe('ESLintInspector', () => {
         test.each(cases)('file paths: $params.filePaths', async ({ params, expected }) => {
           const inspector = await ESLintInspector.createAsyncWithFilePaths(params)
 
-          const log = await inspector.getFormattedLogIfUnexpected()
+          const log = await inspector.getUnexpectedLog()
 
           expect(log.replace(controlCharactersRemover, ''))
             .toBe(expected.replace(controlCharactersRemover, ''))
@@ -2468,7 +2468,7 @@ describe('ESLintInspector', () => {
         test.each(cases)('file paths: $params.filePaths', async ({ params, expected }) => {
           const inspector = await ESLintInspector.createAsyncWithFilePaths(params)
 
-          const log = await inspector.getFormattedLogIfUnexpected()
+          const log = await inspector.getUnexpectedLog()
 
           expect(log.replace(controlCharactersRemover, ''))
             .toBe(expected.replace(controlCharactersRemover, ''))
