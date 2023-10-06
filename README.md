@@ -218,10 +218,8 @@ See [here](./LICENSE)
 
 ## Contribution
 
-* We welcome bug reports, feature requests, and code contributions. Please feel free to contact us through GitHub Issues or Pull Requests. Your contributions are highly appreciated!
+* We welcome bug reports, feature requests, and code contributions. Please feel free to contact us through GitHub Issues or Pull Requests. We strive to meet user expectations and your contributions are highly appreciated!
 
 ## Authors
 
 * [Open Reach Tech inc.](https://openreach.tech)
-
-* We strive to meet user expectations and welcome any kind of feedback.
