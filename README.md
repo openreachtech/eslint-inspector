@@ -70,7 +70,7 @@
 
 ## Intent Error Code Files
 
-* Create a code that contains lint to verify that the ESLint rules are working. `ESLintInspector` uses the file name as the target rule ID to confirm.
+* Create a code that contains lint to verify that the ESLint rules are working. `ESLintInspector` uses the file name as the target rule id to confirm.
 
 * The rule id `indent` will be confirmed  by `tests/linted/indent.js`
 
@@ -135,7 +135,7 @@
 
 * In some cases, you would like to have separate files for checking the behavior of some rules for each message. As of version 1.0, for the `no-restricted-syntax` rule, we can create a intent error file for each selector.
 
-* For strict inspections, create a intent error file with the folder name as the rule name and the message ID as the file name inside it.
+* For strict inspections, create a intent error file with the folder name as the rule name and the message id as the file name inside it.
 
 * `.eslintrc.yml`
 
@@ -170,7 +170,7 @@
 * Define message id and lint error message as an object hash and pass it as the argument to `ESLintInspector.createAsyncWithFilePaths()`.
 
   ```javascript
-  // Define object hash by message ID and lint error message.
+  // Define object hash by message id and lint error message.
   const messageHash = {
     noLet: 'Never use `let`.',
     noSwitch: 'Never use `switch` statement.',
