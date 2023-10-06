@@ -89,7 +89,7 @@
   ```javascript
   const BUTTON_LABEL = {
     POSITIVE: 'OK',
-    NEGATIVE: "cancel", // <----------------------- ❌ uses double quotes
+    NEGATIVE: "CANCEL", // <----------------------- ❌ uses double quotes
   }
 
   module.exports = BUTTON_LABEL
