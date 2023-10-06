@@ -222,6 +222,6 @@ See [here](./LICENSE)
 
 ## Authors
 
-* Open Reach Tech inc.
+* [Open Reach Tech inc.](https://openreach.tech)
 
 * We strive to meet user expectations and welcome any kind of feedback.
