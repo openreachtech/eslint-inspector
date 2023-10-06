@@ -133,7 +133,7 @@
 
 ## Strict Check with Lint Error Message
 
-* There are some cases where we would like to have separate files for checking the behavior of some rules for each message. Currently, for the `no-restricted-syntax` rule, we can create a intent error file for each selector.
+* In some cases, you would like to have separate files for checking the behavior of some rules for each message. Currently, for the `no-restricted-syntax` rule, we can create a intent error file for each selector.
 
 * For strict inspections, create a intent error file with the folder name as the rule name and the message ID as the file name inside it.
 
