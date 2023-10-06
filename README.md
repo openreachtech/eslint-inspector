@@ -78,7 +78,7 @@
   module.exports = function doubleValue (value, ignore) {
     if (ignore) {
       return value
-      } // <----------------------- ❌ has indent error
+      } // <----------------------- ❌ this line should be warned `indent`
 
     return value + value
   }
