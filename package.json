@@ -1,6 +1,6 @@
 {
   "name": "@openreachtech/eslint-inspector",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "This is the useful tools for for JavaScript test concerning ESLint configuration.",
   "files": [
     "lib/",
