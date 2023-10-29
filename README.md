@@ -1,6 +1,6 @@
 # ESLint Inspector
 
-* ESLintInspector is a JavaScript module designed to validate your ESLint configurations. This module enables automated testing to ensure that your ESLint setup is functioning as expected, using Jest as the testing framework.
+* ESLintInspector is a JavaScript module designed to validate your ESLint configurations. This module enables automated testing to ensure that your ESLint setup is working as expected, using Jest as the testing framework.
 
 ## Installation
 
@@ -10,6 +10,14 @@
 
   ```
   npm install --save-dev jest
+  ```
+
+* Create a `.npmrc` file in the root directory of your project and add any necessary configurations. This might be required for installing certain npm packages.
+
+* Please add the following line to your `.npmrc` file.
+
+  ```
+  @openreachtech:registry=https://npm.pkg.github.com
   ```
 
 * You can install `ESLintInspector` with the following command:
@@ -24,7 +32,7 @@
 2. Create a directory of intent error codes, and put intent error files in it.
 3. Use `ESLintInspector`, created with the file path to the directory of intent error codes.
 
-## Structure of directories
+## Structure of Directories
 
 * Here is the structure of directories for Jest.
 
@@ -35,7 +43,7 @@
   |   ├── __tests__/    # Test files
   |   |   └── eslint.js # Entry point to confirm ESLint config
   |   |
-  |   └── intents/      # Jest snapshots if necessary
+  |   └── linted/       # Intentional linted files root
   |       ├── nested/   # May use nested directory to categorize
   |       |   └ semi.js # Confirm to work rule id: `semi`
   |       |
@@ -46,34 +54,48 @@
   └── package.json      # Package information and dependencies
   ```
 
+* If you want to confirm plugin rules, rule name includes `/`, thus we can not create lint error file with rule id as is. In such case, use the plugin name as a folder, and use the part after `/` as the file name.
+
+  ```
+  /your-eslint-config-repository
+  |
+  └── tests/
+      └── linted/
+          ├── jsdoc/                 # JSDoc rules
+          |   └ require-jsdoc.js     # Confirm to work rule id: `jsdoc/require-jsdoc`
+          |
+          └── jest/                  # Jest rules
+              └ no-disabled-tests.js # Confirm to work rule id: `jest/no-disabled-tests`
+  ```
+
 ## Intent Error Code Files
 
-* Create a code that contains lint to verify that the ESLint rules are working. `ESLintInspector` uses the file name as the target rule ID to confirm.
+* Create a code that contains lint to verify that the ESLint rules are working. `ESLintInspector` uses the file name as the target rule id to confirm.
 
-* The rule id `indent` will be confirmed  by `tests/intents/indent.js`
+* The rule id `indent` will be confirmed  by `tests/linted/indent.js`
 
   ```javascript
   module.exports = function doubleValue (value, ignore) {
     if (ignore) {
       return value
-      } // <----------------------- ❌ has indent error
+      } // <----------------------- ❌ this line should be warned `indent`
 
     return value + value
   }
   ```
 
-* The rule id `quotes` will be confirmed  by `tests/intents/quotes.js`
+* The rule id `quotes` will be confirmed  by `tests/linted/quotes.js`
 
   ```javascript
   const BUTTON_LABEL = {
     POSITIVE: 'OK',
-    NEGATIVE: "cancel", // <----------------------- ❌ uses double quotes
+    NEGATIVE: "CANCEL", // <----------------------- ❌ uses double quotes
   }
 
   module.exports = BUTTON_LABEL
   ```
 
-* The rule id `semi` will be confirmed  by `tests/intents/nested/semi.js`
+* The rule id `semi` will be confirmed  by `tests/linted/nested/semi.js`
 
   ```javascript
   const MILLISECONDS_PER_ONE_DAY = 60 * 60 * 24 * 1000
@@ -97,12 +119,12 @@
   test('should work as expected', async () => {
     const inspector = await ESLintInspector.createAsyncWithFilePaths({
       filePaths: [
-        'tests/intents/',
+        'tests/linted/',
       ],
       configPath: '.eslintrc.yml',
     })
 
-    const unexpectedLog = await inspector.getFormattedLogIfUnexpected()
+    const unexpectedLog = await inspector.getUnexpectedLog()
 
     expect(unexpectedLog)
       .toBeNull()
@@ -111,9 +133,9 @@
 
 ## Strict Check with Lint Error Message
 
-* There are some cases where we would like to have separate files for checking the behavior of some rules for each message. Currently, for the `no-restricted-syntax` rule, we can create a intent error file for each selector.
+* In some cases, you would like to have separate files for checking the behavior of some rules for each message. As of version 1.0, for the `no-restricted-syntax` rule, we can create a intent error file for each selector.
 
-* For strict inspections, create a intent error file with the folder name as the rule name and the message ID as the file name inside it.
+* For strict inspections, create a intent error file with the folder name as the rule name and the message id as the file name inside it.
 
 * `.eslintrc.yml`
 
@@ -139,7 +161,7 @@
   /your-eslint-config-repository
   |
   └── tests/
-      └── intents/
+      └── linted/
           └── no-restricted-syntax/ # Confirm to work rule id: `no-restricted-syntax`
               ├── noLet.js          # message id: noLet "Never use `let`."
               └── noSwitch.js       # message id: noSwitch "Never use `switch` statement."
@@ -148,7 +170,7 @@
 * Define message id and lint error message as an object hash and pass it as the argument to `ESLintInspector.createAsyncWithFilePaths()`.
 
   ```javascript
-  // Define object hash by message ID and lint error message.
+  // Define object hash by message id and lint error message.
   const messageHash = {
     noLet: 'Never use `let`.',
     noSwitch: 'Never use `switch` statement.',
@@ -161,13 +183,13 @@
   test('should work as expected', async () => {
     const inspector = await ESLintInspector.createAsyncWithFilePaths({
       filePaths: [
-        'tests/intents/',
+        'tests/linted/',
       ],
       configPath: '.eslintrc.yml',
       messageHash, // <----------------- ✅
     })
 
-    const unexpectedLog = await inspector.getFormattedLogIfUnexpected()
+    const unexpectedLog = await inspector.getUnexpectedLog()
 
     expect(unexpectedLog)
       .toBeNull()
@@ -183,10 +205,10 @@
 
 ## Note
 
-* When ESLint is applied to the ESLlint config repository, the files contained in the tests/intents directory may fail. To avoid it, specify the following options.
+* When ESLint is applied to the ESLlint config repository, the files contained in the `tests/linted/` directory may fail. To avoid it, specify the following options.
 
   ```
-  npx eslint --ignore-pattern /tests/intents/* .
+  npx eslint . --ignore-pattern /tests/linted/*
   ```
 
 ## License
@@ -196,10 +218,8 @@ See [here](./LICENSE)
 
 ## Contribution
 
-* We welcome bug reports, feature requests, and code contributions. Please feel free to contact us through GitHub Issues or Pull Requests. Your contributions are highly appreciated!
+* We welcome bug reports, feature requests, and code contributions. Please feel free to contact us through GitHub Issues or Pull Requests. We strive to meet user expectations and your contributions are highly appreciated!
 
 ## Authors
 
-* Open Reach Tech inc.
-
-* We strive to meet user expectations and welcome any kind of feedback.
+* [Open Reach Tech inc.](https://openreach.tech)

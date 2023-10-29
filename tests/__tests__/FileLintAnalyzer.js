@@ -17,9 +17,9 @@ describe('FileLintAnalyzer', () => {
 })
 
 describe('FileLintAnalyzer', () => {
-  describe('.create()', () => {
+  describe('.createWithExtractedRuleId()', () => {
     describe('to be instance of FileLintAnalyzer', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
@@ -103,7 +103,7 @@ describe('FileLintAnalyzer', () => {
       ]
 
       test.each(cases)('file path: $params.lint.filePath', ({ params }) => {
-        const analyzer = FileLintAnalyzer.create(params)
+        const analyzer = FileLintAnalyzer.createWithExtractedRuleId(params)
 
         expect(analyzer)
           .toBeInstanceOf(FileLintAnalyzer)
@@ -111,7 +111,7 @@ describe('FileLintAnalyzer', () => {
     })
 
     describe('to call constructor', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
@@ -277,7 +277,7 @@ describe('FileLintAnalyzer', () => {
         const DerivedClass = ConstructorSpyGenerator.create({ jest })
           .generateSpyKitClass(FileLintAnalyzer)
 
-        DerivedClass.create(params)
+        DerivedClass.createWithExtractedRuleId(params)
 
         expect(DerivedClass.__spy__)
           .toHaveBeenCalledWith(expected)
@@ -292,7 +292,7 @@ describe('FileLintAnalyzer', () => {
 describe('FileLintAnalyzer', () => {
   describe('.extractLintKeys()', () => {
     describe('as standard rule', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
@@ -368,7 +368,7 @@ describe('FileLintAnalyzer', () => {
     })
 
     describe('as plugin rule', () => {
-      /** @type {Array<Object>} */
+      /** @type {Array<object>} */
       const cases = [
         {
           params: {
