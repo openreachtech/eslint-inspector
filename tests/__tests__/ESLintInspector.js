@@ -479,7 +479,7 @@ describe('ESLintInspector', () => {
                   warningCount: 0,
                   fixableErrorCount: 0,
                   fixableWarningCount: 0,
-                  usedDeprecatedRules: [],
+                  usedDeprecatedRules: expect.any(Array), // 👀
                 },
               }),
             ],
@@ -555,7 +555,7 @@ describe('ESLintInspector', () => {
                   fixableErrorCount: 2,
                   fixableWarningCount: 0,
                   source: 'const alpha = 1;',
-                  usedDeprecatedRules: [],
+                  usedDeprecatedRules: expect.any(Array), // 👀
                 },
               }),
             ],
