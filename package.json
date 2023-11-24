@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/openreachtech/eslint-inspector#readme",
   "devDependencies": {
-    "@openreachtech/eslint-config": "^2.0.0",
+    "@openreachtech/eslint-config": "^2.0.3",
     "@openreachtech/renchan-test-tools": "^1.0.0",
     "@types/jest": "^29.5.10",
     "eslint": "^8.54.0",
