@@ -32,6 +32,27 @@ describe('LintKeyExtractor', () => {
             .toHaveProperty('filePath', params.filePath)
         })
       })
+
+      describe('#plugins', () => {
+        const cases = [
+          { params: { plugins: [] } },
+          { params: { plugins: ['jest'] } },
+          { params: { plugins: ['jest', 'jsdoc'] } },
+          { params: { plugins: ['jest', 'jsdoc', 'openreachtech'] } },
+        ]
+
+        test.each(cases)('plugins: $params.plugins', ({ params }) => {
+          const constructorParams = {
+            ...params,
+            filePath: '/root/tests/targets/standard/target.js',
+          }
+
+          const extractor = new LintKeyExtractor(constructorParams)
+
+          expect(extractor)
+            .toHaveProperty('plugins', params.plugins)
+        })
+      })
     })
   })
 })
