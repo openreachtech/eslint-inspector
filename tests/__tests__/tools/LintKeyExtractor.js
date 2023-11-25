@@ -440,7 +440,7 @@ describe('LintKeyExtractor', () => {
 })
 
 describe('LintKeyExtractor', () => {
-  describe('#get:messageId', () => {
+  describe('#extractMessageId()', () => {
     describe('with ruleId only', () => {
       const cases = [
         {
