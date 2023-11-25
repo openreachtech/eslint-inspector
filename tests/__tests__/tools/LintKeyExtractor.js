@@ -23,6 +23,7 @@ describe('LintKeyExtractor', () => {
         test.each(cases)('filePath: $params.filePath', ({ params }) => {
           const constructorParams = {
             ...params,
+            groupedRuleIds: [],
             plugins: [],
           }
 
@@ -30,6 +31,27 @@ describe('LintKeyExtractor', () => {
 
           expect(extractor)
             .toHaveProperty('filePath', params.filePath)
+        })
+      })
+
+      describe('#groupedRuleIds', () => {
+        const cases = [
+          { params: { groupedRuleIds: [] } },
+          { params: { groupedRuleIds: ['no-restricted-properties'] } },
+          { params: { groupedRuleIds: ['no-restricted-properties', 'no-restricted-syntax'] } },
+        ]
+
+        test.each(cases)('groupedRuleIds: $params.groupedRuleIds', ({ params }) => {
+          const constructorParams = {
+            ...params,
+            filePath: '/root/tests/targets/standard/target.js',
+            plugins: [],
+          }
+
+          const extractor = new LintKeyExtractor(constructorParams)
+
+          expect(extractor)
+            .toHaveProperty('groupedRuleIds', params.groupedRuleIds)
         })
       })
 
@@ -45,6 +67,7 @@ describe('LintKeyExtractor', () => {
           const constructorParams = {
             ...params,
             filePath: '/root/tests/targets/standard/target.js',
+            groupedRuleIds: [],
           }
 
           const extractor = new LintKeyExtractor(constructorParams)
@@ -108,10 +131,21 @@ describe('LintKeyExtractor', () => {
             filePath: '/root/tests/targets/standard/indent.js',
             plugins: [],
           },
+          expected: {
+            filePath: '/root/tests/targets/standard/indent.js',
+            groupedRuleIds: [],
+            plugins: [],
+          },
         },
         {
           params: {
             filePath: '/root/tests/targets/standard/semi.js',
+            groupedRuleIds: ['no-restricted-syntax'],
+            plugins: [],
+          },
+          expected: {
+            filePath: '/root/tests/targets/standard/semi.js',
+            groupedRuleIds: ['no-restricted-syntax'],
             plugins: [],
           },
         },
@@ -120,29 +154,46 @@ describe('LintKeyExtractor', () => {
             filePath: '/root/tests/targets/standard/no-restricted-syntax.js',
             plugins: [],
           },
+          expected: {
+            filePath: '/root/tests/targets/standard/no-restricted-syntax.js',
+            groupedRuleIds: [],
+            plugins: [],
+          },
         },
         {
           params: {
             filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js',
+            groupedRuleIds: ['no-restricted-syntax'],
+            plugins: [],
+          },
+          expected: {
+            filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js',
+            groupedRuleIds: ['no-restricted-syntax'],
             plugins: [],
           },
         },
         {
           params: {
             filePath: '/root/tests/targets/standard/no-restricted-syntax/ArrayForEach.js',
+            groupedRuleIds: ['no-restricted-syntax'],
+            plugins: [],
+          },
+          expected: {
+            filePath: '/root/tests/targets/standard/no-restricted-syntax/ArrayForEach.js',
+            groupedRuleIds: ['no-restricted-syntax'],
             plugins: [],
           },
         },
       ]
 
-      test.each(cases)('filePath: $params.filePath', ({ params }) => {
+      test.each(cases)('filePath: $params.filePath', ({ params, expected }) => {
         const DerivedClass = ConstructorSpyGenerator.create({ jest })
           .generateSpyKitClass(LintKeyExtractor)
 
         DerivedClass.create(params)
 
         expect(DerivedClass.__spy__)
-          .toHaveBeenCalledWith(params)
+          .toHaveBeenCalledWith(expected)
 
         DerivedClass.__spy__
           .mockClear()
