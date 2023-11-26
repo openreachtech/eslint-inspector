@@ -297,6 +297,9 @@ describe('FileLintAnalyzer', () => {
         {
           params: {
             filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+            groupedRuleIds: [
+              'no-restricted-syntax',
+            ],
           },
           expected: {
             ruleId: 'indent',
@@ -306,6 +309,9 @@ describe('FileLintAnalyzer', () => {
         {
           params: {
             filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+            groupedRuleIds: [
+              'no-restricted-syntax',
+            ],
           },
           expected: {
             ruleId: 'semi',
@@ -315,6 +321,9 @@ describe('FileLintAnalyzer', () => {
         {
           params: {
             filePath: '/Users/username/repository-name/tests/targets/standard/quotes.js',
+            groupedRuleIds: [
+              'no-restricted-syntax',
+            ],
           },
           expected: {
             ruleId: 'quotes',
@@ -324,6 +333,9 @@ describe('FileLintAnalyzer', () => {
         {
           params: {
             filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax.js',
+            groupedRuleIds: [
+              'no-restricted-syntax',
+            ],
           },
           expected: {
             ruleId: 'no-restricted-syntax',
@@ -333,6 +345,9 @@ describe('FileLintAnalyzer', () => {
         {
           params: {
             filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noLet.js',
+            groupedRuleIds: [
+              'no-restricted-syntax',
+            ],
           },
           expected: {
             ruleId: 'no-restricted-syntax',
@@ -342,6 +357,9 @@ describe('FileLintAnalyzer', () => {
         {
           params: {
             filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/category/noArrayForEach.js',
+            groupedRuleIds: [
+              'no-restricted-syntax',
+            ],
           },
           expected: {
             ruleId: 'no-restricted-syntax',
@@ -351,6 +369,9 @@ describe('FileLintAnalyzer', () => {
         {
           params: {
             filePath: '',
+            groupedRuleIds: [
+              'no-restricted-syntax',
+            ],
           },
           expected: {
             ruleId: null,
