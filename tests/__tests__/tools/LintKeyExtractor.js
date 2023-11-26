@@ -87,6 +87,7 @@ describe('LintKeyExtractor', () => {
         {
           params: {
             filePath: '/root/tests/targets/standard/indent.js',
+            groupedRuleIds: [],
             plugins: [],
           },
         },
@@ -99,18 +100,21 @@ describe('LintKeyExtractor', () => {
         {
           params: {
             filePath: '/root/tests/targets/standard/no-restricted-syntax.js',
+            groupedRuleIds: [],
             plugins: [],
           },
         },
         {
           params: {
             filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js',
+            groupedRuleIds: ['no-restricted-syntax'],
             plugins: [],
           },
         },
         {
           params: {
             filePath: '/root/tests/targets/standard/no-restricted-syntax/ArrayForEach.js',
+            groupedRuleIds: ['no-restricted-syntax'],
             plugins: [],
           },
         },
