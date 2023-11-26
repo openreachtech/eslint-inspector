@@ -87,6 +87,7 @@ describe('LintKeyExtractor', () => {
         {
           params: {
             filePath: '/root/tests/targets/standard/indent.js',
+            groupedRuleIds: [],
             plugins: [],
           },
         },
@@ -99,18 +100,21 @@ describe('LintKeyExtractor', () => {
         {
           params: {
             filePath: '/root/tests/targets/standard/no-restricted-syntax.js',
+            groupedRuleIds: [],
             plugins: [],
           },
         },
         {
           params: {
             filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js',
+            groupedRuleIds: ['no-restricted-syntax'],
             plugins: [],
           },
         },
         {
           params: {
             filePath: '/root/tests/targets/standard/no-restricted-syntax/ArrayForEach.js',
+            groupedRuleIds: ['no-restricted-syntax'],
             plugins: [],
           },
         },
@@ -230,6 +234,7 @@ describe('LintKeyExtractor', () => {
         {
           params: {
             filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js',
+            groupedRuleIds: ['no-restricted-syntax'],
             plugins: [],
           },
           pathHash: path.parse('/root/tests/targets/standard/no-restricted-syntax/noLet.js'),
@@ -237,6 +242,7 @@ describe('LintKeyExtractor', () => {
         {
           params: {
             filePath: '/root/tests/targets/standard/no-restricted-syntax/ArrayForEach.js',
+            groupedRuleIds: ['no-restricted-syntax'],
             plugins: [],
           },
           pathHash: path.parse('/root/tests/targets/standard/no-restricted-syntax/ArrayForEach.js'),
@@ -258,6 +264,7 @@ describe('LintKeyExtractor', () => {
         {
           params: {
             filePath: '/Users/username/repository-name/tests/targets/jest/consistent-test-it.js',
+            groupedRuleIds: [],
             plugins: [
               'jest',
             ],
@@ -268,6 +275,7 @@ describe('LintKeyExtractor', () => {
         {
           params: {
             filePath: '/Users/username/repository-name/tests/targets/jest/no-alias-method.js',
+            groupedRuleIds: [],
             plugins: [
               'jest',
             ],
@@ -278,6 +286,7 @@ describe('LintKeyExtractor', () => {
         {
           params: {
             filePath: '/Users/username/repository-name/tests/targets/jest/prefer-equality-matcher.js',
+            groupedRuleIds: [],
             plugins: [
               'jest',
             ],
@@ -288,6 +297,7 @@ describe('LintKeyExtractor', () => {
         {
           params: {
             filePath: '/Users/username/repository-name/tests/targets/jsdoc/newline-after-description.js',
+            groupedRuleIds: [],
             plugins: [
               'jest',
               'jsdoc',
