@@ -591,22 +591,80 @@ describe('LintKeyExtractor', () => {
         {
           params: {
             filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js',
+            groupedRuleIds: [
+              'no-restricted-syntax',
+            ],
           },
           expected: 'noLet',
         },
         {
           params: {
             filePath: '/root/tests/targets/standard/no-restricted-syntax/noArrayForEach.js',
+            groupedRuleIds: [
+              'no-restricted-syntax',
+            ],
           },
           expected: 'noArrayForEach',
         },
         {
           params: {
             filePath: '/root/tests/targets/standard/no-restricted-syntax/loop-controls/noArrayForEach.js',
+            groupedRuleIds: [
+              'no-restricted-syntax',
+            ],
           },
           expected: 'noArrayForEach',
         },
       ]
+        .concat([
+          {
+            params: {
+              filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js',
+              groupedRuleIds: [
+                'no-restricted-syntax',
+                'jsdoc/no-restricted-syntax', // 👀 order of grouped rule is
+              ],
+            },
+            expected: 'noLet',
+          },
+          {
+            params: {
+              filePath: '/root/tests/targets/standard/jsdoc/no-restricted-syntax/functionDeclaration.js',
+              groupedRuleIds: [
+                'no-restricted-syntax',
+                'jsdoc/no-restricted-syntax', // 👀 order of grouped rule is
+              ],
+            },
+            expected: 'functionDeclaration',
+          },
+          {
+            params: {
+              filePath: '/root/tests/targets/standard/no-restricted-syntax/loop-controls/noArrayForEach.js',
+              groupedRuleIds: [
+                'no-restricted-syntax',
+              ],
+            },
+            expected: 'noArrayForEach',
+          },
+          {
+            params: {
+              filePath: '/root/tests/targets/standard/plugin-name/rule-name/messageId.js',
+              groupedRuleIds: [
+                'plugin-name/rule-name',
+              ],
+            },
+            expected: 'messageId',
+          },
+          {
+            params: {
+              filePath: '/root/tests/targets/standard/plugin-name/rule-name/categorized/messageId.js',
+              groupedRuleIds: [
+                'plugin-name/rule-name',
+              ],
+            },
+            expected: 'messageId',
+          },
+        ])
 
       test.each(cases)('filePath: $params.filePath', ({ params, expected }) => {
         const extractor = LintKeyExtractor.create(params)
