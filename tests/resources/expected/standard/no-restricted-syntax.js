@@ -1,9 +1,9 @@
 'use strict'
 
 /* eslint-disable id-length */
-/* eslint-disable jest/require-hook */
-/* eslint-disable jest/no-conditional-in-test */
-/* eslint-disable jest/require-top-level-describe */
+/* FIXME: eslint-disable jest/require-hook */
+/* FIXME: eslint-disable jest/no-conditional-in-test */
+/* FIXME: eslint-disable jest/require-top-level-describe */
 /* eslint-disable no-plusplus */
 
 const array = [1, 3, 5]
