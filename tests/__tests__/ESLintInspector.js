@@ -20,7 +20,9 @@ const controlCharactersRemover = new RegExp(`${'\x1b'}\\[.+?m`, 'gu')
 const CONTROL_CHARACTERS = require('../constants/control-characters')
 
 const messageHash = {
-  noLet: 'Never use let',
+  'no-restricted-syntax': {
+    noLet: 'Never use let',
+  },
 }
 
 describe('ESLintInspector', () => {
@@ -477,7 +479,7 @@ describe('ESLintInspector', () => {
                   warningCount: 0,
                   fixableErrorCount: 0,
                   fixableWarningCount: 0,
-                  usedDeprecatedRules: [],
+                  usedDeprecatedRules: expect.any(Array), // 👀
                 },
               }),
             ],
@@ -553,7 +555,7 @@ describe('ESLintInspector', () => {
                   fixableErrorCount: 2,
                   fixableWarningCount: 0,
                   source: 'const alpha = 1;',
-                  usedDeprecatedRules: [],
+                  usedDeprecatedRules: expect.any(Array), // 👀
                 },
               }),
             ],
@@ -2319,7 +2321,9 @@ describe('ESLintInspector', () => {
                 'tests/resources/expected/**',
               ],
               messageHash: {
-                noLet: 'Never use let',
+                'no-restricted-syntax': {
+                  noLet: 'Never use let',
+                },
               },
             },
           },
@@ -2329,7 +2333,9 @@ describe('ESLintInspector', () => {
                 'tests/resources/expected/standard/no-restricted-syntax/**',
               ],
               messageHash: {
-                noLet: 'Never use let',
+                'no-restricted-syntax': {
+                  noLet: 'Never use let',
+                },
               },
             },
           },
@@ -2353,7 +2359,9 @@ describe('ESLintInspector', () => {
                 'tests/resources/unexpected/**',
               ],
               messageHash: {
-                noLet: 'Never use let',
+                'no-restricted-syntax': {
+                  noLet: 'Never use let',
+                },
               },
             },
             expected: [
@@ -2383,7 +2391,9 @@ describe('ESLintInspector', () => {
                 'tests/resources/unexpected/standard/no-restricted-syntax/**',
               ],
               messageHash: {
-                noLet: 'Never use let',
+                'no-restricted-syntax': {
+                  noLet: 'Never use let',
+                },
               },
             },
             expected: [

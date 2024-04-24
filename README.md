@@ -172,8 +172,10 @@
   ```javascript
   // Define object hash by message id and lint error message.
   const messageHash = {
-    noLet: 'Never use `let`.',
-    noSwitch: 'Never use `switch` statement.',
+    'no-restricted-syntax': {
+      noLet: 'Never use `let`.',
+      noSwitch: 'Never use `switch` statement.',
+    },
   }
 
   const {

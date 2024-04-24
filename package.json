@@ -1,6 +1,6 @@
 {
   "name": "@openreachtech/eslint-inspector",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "This is the useful tools for for JavaScript test concerning ESLint configuration.",
   "files": [
     "lib/",
@@ -12,7 +12,7 @@
   "scripts": {
     "l": "npm run lint",
     "lint": "eslint --ignore-pattern /tests/resources/* .",
-    "test": "export NODE_ENV=development; jest --forceExit --detectOpenHandles"
+    "test": "export NODE_ENV=development; jest --forceExit --maxWorkers=5"
   },
   "repository": {
     "type": "git",
@@ -28,10 +28,10 @@
   },
   "homepage": "https://github.com/openreachtech/eslint-inspector#readme",
   "devDependencies": {
-    "@openreachtech/eslint-config": "^2.0.0",
+    "@openreachtech/eslint-config": "^2.0.3",
     "@openreachtech/renchan-test-tools": "^1.0.0",
-    "@types/jest": "^29.5.1",
-    "eslint": "^8.40.0",
-    "jest": "^29.5.0"
+    "@types/jest": "^29.5.10",
+    "eslint": "^8.54.0",
+    "jest": "^29.7.0"
   }
 }
