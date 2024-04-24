@@ -1,6 +1,7 @@
 'use strict'
 
 const jestPlugin = require('eslint-plugin-jest')
+const jsdocPlugin = require('eslint-plugin-jsdoc')
 
 /**
  * ESLint Config
@@ -59,6 +60,17 @@ module.exports = [
       'jest/prefer-lowercase-title': 'off',
       'jest/prefer-strict-equal': 'off',
       'jest/require-hook': 'off',
+    },
+  },
+
+  {
+    ...jsdocPlugin.configs['flat/recommended'],
+
+    rules: {
+      ...jsdocPlugin.configs['flat/recommended'].rules,
+
+      'jsdoc/require-jsdoc': 'off',
+      'jsdoc/tag-lines': 'off',
     },
   },
 ]
