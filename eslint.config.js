@@ -1,5 +1,7 @@
 'use strict'
 
+const jestPlugin = require('eslint-plugin-jest')
+
 /**
  * ESLint Config
  *
@@ -39,6 +41,24 @@ module.exports = [
       'one-var': 'off',
       'sort-keys': 'off',
       strict: 'off',
+    },
+  },
+
+  {
+    ...jestPlugin.configs['flat/all'],
+
+    rules: {
+      ...jestPlugin.configs['flat/all'].rules,
+
+      'jest/consistent-test-it': 'off',
+      'jest/no-alias-methods': 'off',
+      'jest/no-identical-title': 'off',
+      'jest/prefer-equality-matcher': 'off',
+      'jest/prefer-expect-assertions': 'off',
+      'jest/prefer-importing-jest-globals': 'off',
+      'jest/prefer-lowercase-title': 'off',
+      'jest/prefer-strict-equal': 'off',
+      'jest/require-hook': 'off',
     },
   },
 ]
