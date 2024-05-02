@@ -269,17 +269,17 @@ describe('LintKeyExtractor', () => {
       const cases = [
         {
           params: {
-            filePath: '/root/tests/targets/standard/indent.js',
+            filePath: '/root/tests/targets/standard$/indent.js',
           },
         },
         {
           params: {
-            filePath: '/root/tests/targets/standard/semi.js',
+            filePath: '/root/tests/targets/standard$/semi.js',
           },
         },
         {
           params: {
-            filePath: '/root/tests/targets/standard/no-restricted-syntax.js',
+            filePath: '/root/tests/targets/standard$/no-restricted-syntax.js',
           },
         },
       ]
@@ -296,28 +296,19 @@ describe('LintKeyExtractor', () => {
       const cases = [
         {
           params: {
-            filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js',
-            groupedRuleIds: [
-              'no-restricted-syntax',
-            ],
+            filePath: '/root/tests/targets/standard$/no-restricted-syntax/$noLet.js',
           },
           expected: 'noLet',
         },
         {
           params: {
-            filePath: '/root/tests/targets/standard/no-restricted-syntax/noArrayForEach.js',
-            groupedRuleIds: [
-              'no-restricted-syntax',
-            ],
+            filePath: '/root/tests/targets/standard$/no-restricted-syntax/$noArrayForEach.js',
           },
           expected: 'noArrayForEach',
         },
         {
           params: {
-            filePath: '/root/tests/targets/standard/no-restricted-syntax/loop-controls/noArrayForEach.js',
-            groupedRuleIds: [
-              'no-restricted-syntax',
-            ],
+            filePath: '/root/tests/targets/standard$/no-restricted-syntax/$loop-controls/noArrayForEach.js',
           },
           expected: 'noArrayForEach',
         },
@@ -325,48 +316,31 @@ describe('LintKeyExtractor', () => {
         .concat([
           {
             params: {
-              filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js',
-              groupedRuleIds: [
-                'no-restricted-syntax',
-                'jsdoc/no-restricted-syntax', // 👀 order of grouped rule is
-              ],
+              filePath: '/root/tests/targets/standard$/no-restricted-syntax/$noLet.js',
             },
             expected: 'noLet',
           },
           {
             params: {
-              filePath: '/root/tests/targets/standard/jsdoc/no-restricted-syntax/functionDeclaration.js',
-              groupedRuleIds: [
-                'no-restricted-syntax',
-                'jsdoc/no-restricted-syntax', // 👀 order of grouped rule is
-              ],
+              filePath: '/root/tests/targets/standard$/jsdoc/no-restricted-syntax/$functionDeclaration.js',
             },
             expected: 'functionDeclaration',
           },
           {
             params: {
-              filePath: '/root/tests/targets/standard/no-restricted-syntax/loop-controls/noArrayForEach.js',
-              groupedRuleIds: [
-                'no-restricted-syntax',
-              ],
+              filePath: '/root/tests/targets/standard$/no-restricted-syntax/$loop-controls/noArrayForEach.js',
             },
             expected: 'noArrayForEach',
           },
           {
             params: {
-              filePath: '/root/tests/targets/standard/plugin-name/rule-name/messageId.js',
-              groupedRuleIds: [
-                'plugin-name/rule-name',
-              ],
+              filePath: '/root/tests/targets/standard$/plugin-name/rule-name/$messageId.js',
             },
             expected: 'messageId',
           },
           {
             params: {
-              filePath: '/root/tests/targets/standard/plugin-name/rule-name/categorized/messageId.js',
-              groupedRuleIds: [
-                'plugin-name/rule-name',
-              ],
+              filePath: '/root/tests/targets/standard$/plugin-name/rule-name/$categorized/messageId.js',
             },
             expected: 'messageId',
           },
