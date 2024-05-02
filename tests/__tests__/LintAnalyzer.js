@@ -15,7 +15,7 @@ describe('LintAnalyzer', () => {
             ruleId: 'indent',
             message: /Expected indentation of \d+ spaces but found \d+./u,
             lint: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
               messages: [
                 {
                   ruleId: 'indent',
@@ -64,7 +64,7 @@ describe('LintAnalyzer', () => {
             ruleId: 'semi',
             message: 'Extra semicolon.',
             lint: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
               messages: [
                 {
                   ruleId: 'semi',
@@ -136,7 +136,7 @@ describe('LintAnalyzer', () => {
           params: {
             ruleId: 'indent',
             lint: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
               messages: [
                 {
                   ruleId: 'indent',
@@ -184,7 +184,7 @@ describe('LintAnalyzer', () => {
           params: {
             ruleId: 'semi',
             lint: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
               messages: [
                 {
                   ruleId: 'semi',
@@ -230,7 +230,7 @@ describe('LintAnalyzer', () => {
           params: {
             ruleId: 'indent',
             lint: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
               messages: [
                 {
                   ruleId: 'indent',
@@ -278,7 +278,7 @@ describe('LintAnalyzer', () => {
           params: {
             ruleId: 'semi',
             lint: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
               messages: [
                 {
                   ruleId: 'semi',
@@ -334,7 +334,7 @@ describe('LintAnalyzer', () => {
           params: {
             ruleId: 'indent',
             lint: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
               messages: [
                 {
                   ruleId: 'indent',
@@ -406,7 +406,7 @@ describe('LintAnalyzer', () => {
           params: {
             ruleId: 'semi',
             lint: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
               messages: [
                 {
                   ruleId: 'semi',
@@ -528,7 +528,7 @@ describe('LintAnalyzer', () => {
             params: {
               ruleId: 'indent',
               lint: {
-                filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                 messages: [
                   {
                     ruleId: 'indent',
@@ -600,7 +600,7 @@ describe('LintAnalyzer', () => {
             params: {
               ruleId: 'semi',
               lint: {
-                filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                 messages: [
                   {
                     ruleId: 'indent',
@@ -672,7 +672,7 @@ describe('LintAnalyzer', () => {
             params: {
               ruleId: 'indent',
               lint: {
-                filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                 messages: [
                   {
                     ruleId: 'indent',
@@ -712,7 +712,7 @@ describe('LintAnalyzer', () => {
             params: {
               ruleId: 'semi',
               lint: {
-                filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                 messages: [
                   {
                     ruleId: 'semi',
@@ -821,7 +821,7 @@ describe('LintAnalyzer', () => {
           params: {
             ruleId: 'indent',
             lint: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
               messages: [
                 {
                   ruleId: 'indent',
@@ -861,7 +861,7 @@ describe('LintAnalyzer', () => {
           params: {
             ruleId: 'semi',
             lint: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
               messages: [
                 {
                   ruleId: 'semi',
@@ -901,7 +901,7 @@ describe('LintAnalyzer', () => {
           params: {
             ruleId: 'indent',
             lint: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
               messages: [
                 {
                   ruleId: 'indent',
@@ -956,7 +956,7 @@ describe('LintAnalyzer', () => {
           params: {
             ruleId: 'semi',
             lint: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
               messages: [
                 {
                   ruleId: 'indent',
@@ -981,7 +981,7 @@ describe('LintAnalyzer', () => {
           params: {
             ruleId: 'quotes',
             lint: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/quotes.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/quotes.js',
               messages: [],
             },
           },
@@ -1049,7 +1049,7 @@ describe('LintAnalyzer', () => {
               ruleId: 'indent',
               message: null,
               lint: {
-                filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                 messages: [
                   {
                     ruleId: 'indent',
@@ -1105,7 +1105,7 @@ describe('LintAnalyzer', () => {
               ruleId: 'semi',
               message: null,
               lint: {
-                filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                 messages: [
                   {
                     ruleId: 'indent',
@@ -1146,12 +1146,12 @@ describe('LintAnalyzer', () => {
               ruleId: 'indent',
               message: null,
               lint: {
-                filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                 messages: [],
               },
             },
             expected: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
               fatalErrorCount: 1,
               errorCount: 1,
               messages: [
@@ -1170,12 +1170,12 @@ describe('LintAnalyzer', () => {
               ruleId: 'semi',
               message: null,
               lint: {
-                filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                 messages: [],
               },
             },
             expected: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
               fatalErrorCount: 1,
               errorCount: 1,
               messages: [
@@ -1194,12 +1194,12 @@ describe('LintAnalyzer', () => {
               ruleId: 'quotes',
               message: null,
               lint: {
-                filePath: '/Users/username/repository-name/tests/targets/standard/quotes.js',
+                filePath: '/Users/username/repository-name/tests/targets/standard$/quotes.js',
                 messages: [],
               },
             },
             expected: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/quotes.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/quotes.js',
               fatalErrorCount: 1,
               errorCount: 1,
               messages: [
@@ -1235,7 +1235,7 @@ describe('LintAnalyzer', () => {
               ruleId: 'no-restricted-syntax',
               message: 'Never use `let`',
               lint: {
-                filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noLet.js',
+                filePath: '/Users/username/repository-name/tests/targets/standard$/no-restricted-syntax/$noLet.js',
                 messages: [
                   {
                     ruleId: 'no-restricted-syntax',
@@ -1257,7 +1257,7 @@ describe('LintAnalyzer', () => {
               ruleId: 'no-restricted-syntax',
               message: 'Never use `Array#forEach()`',
               lint: {
-                filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noArrayForEach.js',
+                filePath: '/Users/username/repository-name/tests/targets/standard$/no-restricted-syntax/$noArrayForEach.js',
                 messages: [
                   {
                     ruleId: 'no-restricted-syntax',
@@ -1294,12 +1294,12 @@ describe('LintAnalyzer', () => {
               ruleId: 'no-restricted-syntax',
               message: 'Never use `let`',
               lint: {
-                filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noLet.js',
+                filePath: '/Users/username/repository-name/tests/targets/standard$/no-restricted-syntax/$noLet.js',
                 messages: [],
               },
             },
             expected: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noLet.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/no-restricted-syntax/$noLet.js',
               messages: [
                 {
                   ruleId: 'no-restricted-syntax',
@@ -1318,12 +1318,12 @@ describe('LintAnalyzer', () => {
               ruleId: 'no-restricted-syntax',
               message: 'Never use `Array#forEach()`',
               lint: {
-                filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noArrayForEach.js',
+                filePath: '/Users/username/repository-name/tests/targets/standard$/no-restricted-syntax/$noArrayForEach.js',
                 messages: [],
               },
             },
             expected: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noArrayForEach.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/no-restricted-syntax/$noArrayForEach.js',
               messages: [
                 {
                   ruleId: 'no-restricted-syntax',
