@@ -42,40 +42,12 @@ describe('LintKeyExtractor', () => {
   describe('.create()', () => {
     describe('to be instance of LintKeyExtractor', () => {
       const cases = [
-        {
-          params: {
-            filePath: '/root/tests/targets/standard/indent.js',
-            groupedRuleIds: [],
-            plugins: [],
-          },
-        },
-        {
-          params: {
-            filePath: '/root/tests/targets/standard/semi.js',
-            plugins: [],
-          },
-        },
-        {
-          params: {
-            filePath: '/root/tests/targets/standard/no-restricted-syntax.js',
-            groupedRuleIds: [],
-            plugins: [],
-          },
-        },
-        {
-          params: {
-            filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js',
-            groupedRuleIds: ['no-restricted-syntax'],
-            plugins: [],
-          },
-        },
-        {
-          params: {
-            filePath: '/root/tests/targets/standard/no-restricted-syntax/ArrayForEach.js',
-            groupedRuleIds: ['no-restricted-syntax'],
-            plugins: [],
-          },
-        },
+        { params: { filePath: '/root/tests/targets/standard$/indent.js' } },
+        { params: { filePath: '/root/tests/targets/standard$/semi.js' } },
+        { params: { filePath: '/root/tests/targets/standard$/no-restricted-syntax.js' } },
+        { params: { filePath: '/root/tests/targets/standard$/no-restricted-syntax/$noLet.js' } },
+        { params: { filePath: '/root/tests/targets/standard$/no-restricted-syntax/$ArrayForEach.js' } },
+        { params: { filePath: '/root/tests/targets/standard$/jsdoc/no-restricted-syntax/$functionDeclaration.js' } },
       ]
 
       test.each(cases)('filePath: $params.filePath', ({ params }) => {
@@ -88,74 +60,22 @@ describe('LintKeyExtractor', () => {
 
     describe('to call constructor', () => {
       const cases = [
-        {
-          params: {
-            filePath: '/root/tests/targets/standard/indent.js',
-            plugins: [],
-          },
-          expected: {
-            filePath: '/root/tests/targets/standard/indent.js',
-            groupedRuleIds: [],
-            plugins: [],
-          },
-        },
-        {
-          params: {
-            filePath: '/root/tests/targets/standard/semi.js',
-            groupedRuleIds: ['no-restricted-syntax'],
-            plugins: [],
-          },
-          expected: {
-            filePath: '/root/tests/targets/standard/semi.js',
-            groupedRuleIds: ['no-restricted-syntax'],
-            plugins: [],
-          },
-        },
-        {
-          params: {
-            filePath: '/root/tests/targets/standard/no-restricted-syntax.js',
-            plugins: [],
-          },
-          expected: {
-            filePath: '/root/tests/targets/standard/no-restricted-syntax.js',
-            groupedRuleIds: [],
-            plugins: [],
-          },
-        },
-        {
-          params: {
-            filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js',
-            groupedRuleIds: ['no-restricted-syntax'],
-            plugins: [],
-          },
-          expected: {
-            filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js',
-            groupedRuleIds: ['no-restricted-syntax'],
-            plugins: [],
-          },
-        },
-        {
-          params: {
-            filePath: '/root/tests/targets/standard/no-restricted-syntax/ArrayForEach.js',
-            groupedRuleIds: ['no-restricted-syntax'],
-            plugins: [],
-          },
-          expected: {
-            filePath: '/root/tests/targets/standard/no-restricted-syntax/ArrayForEach.js',
-            groupedRuleIds: ['no-restricted-syntax'],
-            plugins: [],
-          },
-        },
+        { params: { filePath: '/root/tests/targets/standard$/indent.js' } },
+        { params: { filePath: '/root/tests/targets/standard$/semi.js' } },
+        { params: { filePath: '/root/tests/targets/standard$/no-restricted-syntax.js' } },
+        { params: { filePath: '/root/tests/targets/standard$/no-restricted-syntax/$noLet.js' } },
+        { params: { filePath: '/root/tests/targets/standard$/no-restricted-syntax/$ArrayForEach.js' } },
+        { params: { filePath: '/root/tests/targets/standard$/jsdoc/no-restricted-syntax/$functionDeclaration.js' } },
       ]
 
-      test.each(cases)('filePath: $params.filePath', ({ params, expected }) => {
+      test.each(cases)('filePath: $params.filePath', ({ params }) => {
         const DerivedClass = ConstructorSpyGenerator.create({ jest })
           .generateSpyKitClass(LintKeyExtractor)
 
         DerivedClass.create(params)
 
         expect(DerivedClass.__spy__)
-          .toHaveBeenCalledWith(expected)
+          .toHaveBeenCalledWith(params)
 
         DerivedClass.__spy__
           .mockClear()
