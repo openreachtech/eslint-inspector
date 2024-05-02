@@ -13,11 +13,12 @@ describe('LintKeyExtractor', () => {
     describe('to keep property', () => {
       describe('#filePath', () => {
         const cases = [
-          { params: { filePath: '/root/tests/targets/standard/indent.js' } },
-          { params: { filePath: '/root/tests/targets/standard/semi.js' } },
-          { params: { filePath: '/root/tests/targets/standard/no-restricted-syntax.js' } },
-          { params: { filePath: '/root/tests/targets/standard/no-restricted-syntax/noLet.js' } },
-          { params: { filePath: '/root/tests/targets/standard/no-restricted-syntax/ArrayForEach.js' } },
+          { params: { filePath: '/root/tests/targets/standard$/indent.js' } },
+          { params: { filePath: '/root/tests/targets/standard$/semi.js' } },
+          { params: { filePath: '/root/tests/targets/standard$/no-restricted-syntax.js' } },
+          { params: { filePath: '/root/tests/targets/standard$/no-restricted-syntax/$noLet.js' } },
+          { params: { filePath: '/root/tests/targets/standard$/no-restricted-syntax/$ArrayForEach.js' } },
+          { params: { filePath: '/root/tests/targets/standard$/jsdoc/no-restricted-syntax/$functionDeclaration.js' } },
         ]
 
         test.each(cases)('filePath: $params.filePath', ({ params }) => {
@@ -31,49 +32,6 @@ describe('LintKeyExtractor', () => {
 
           expect(extractor)
             .toHaveProperty('filePath', params.filePath)
-        })
-      })
-
-      describe('#groupedRuleIds', () => {
-        const cases = [
-          { params: { groupedRuleIds: [] } },
-          { params: { groupedRuleIds: ['no-restricted-properties'] } },
-          { params: { groupedRuleIds: ['no-restricted-properties', 'no-restricted-syntax'] } },
-        ]
-
-        test.each(cases)('groupedRuleIds: $params.groupedRuleIds', ({ params }) => {
-          const constructorParams = {
-            ...params,
-            filePath: '/root/tests/targets/standard/target.js',
-            plugins: [],
-          }
-
-          const extractor = new LintKeyExtractor(constructorParams)
-
-          expect(extractor)
-            .toHaveProperty('groupedRuleIds', params.groupedRuleIds)
-        })
-      })
-
-      describe('#plugins', () => {
-        const cases = [
-          { params: { plugins: [] } },
-          { params: { plugins: ['jest'] } },
-          { params: { plugins: ['jest', 'jsdoc'] } },
-          { params: { plugins: ['jest', 'jsdoc', 'openreachtech'] } },
-        ]
-
-        test.each(cases)('plugins: $params.plugins', ({ params }) => {
-          const constructorParams = {
-            ...params,
-            filePath: '/root/tests/targets/standard/target.js',
-            groupedRuleIds: [],
-          }
-
-          const extractor = new LintKeyExtractor(constructorParams)
-
-          expect(extractor)
-            .toHaveProperty('plugins', params.plugins)
         })
       })
     })
