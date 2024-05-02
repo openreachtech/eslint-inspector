@@ -12,7 +12,7 @@
   "scripts": {
     "l": "npm run lint",
     "lint": "eslint --ignore-pattern /tests/resources/* .",
-    "test": "export NODE_ENV=development; jest --forceExit --maxWorkers=5"
+    "test": "export NODE_ENV=development; export NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\"; jest --forceExit --maxWorkers=5"
   },
   "repository": {
     "type": "git",
