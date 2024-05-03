@@ -6,6 +6,6 @@ module.exports = {
     '<rootDir>/jest/setupAfterEnv.js',
   ],
   testPathIgnorePatterns: [
-    '/node_modules/',
+    '<rootDir>/node_modules/',
   ],
 }
