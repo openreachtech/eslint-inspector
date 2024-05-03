@@ -5,6 +5,6 @@ module.exports = {
     '@openreachtech/renchan-test-tools/lib/environment/setupAfterEnv.js',
   ],
   testPathIgnorePatterns: [
-    '/node_modules/',
+    '<rootDir>/node_modules/',
   ],
 }
