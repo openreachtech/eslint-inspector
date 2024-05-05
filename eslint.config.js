@@ -15,6 +15,7 @@ module.exports = [
       parserOptions: {
         ecmaVersion: 'latest',
       },
+      sourceType: 'commonjs',
     },
     ignores: [
       '**/node_modules/**',
