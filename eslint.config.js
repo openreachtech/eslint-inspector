@@ -27,9 +27,6 @@ module.exports = [
   {
     ignores: [
       '**/node_modules/**',
-      '**/tests/resources/expected/**',
-      '**/tests/resources/no-lints/**',
-      '**/tests/resources/unexpected/**',
     ],
   },
 
