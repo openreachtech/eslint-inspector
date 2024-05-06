@@ -2311,7 +2311,7 @@ describe('ESLintInspector', () => {
 describe('ESLintInspector', () => {
   describe('#getUnexpectedLog()', () => {
     describe('with file paths', () => {
-      const basePath = __dirname.replace(/__tests__$/u, '')
+      const basePath = path.resolve('./tests/')
 
       describe('to be null', () => {
         const cases = [
