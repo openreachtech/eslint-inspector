@@ -149,26 +149,34 @@
 
 ## Strict Check with Lint Error Message
 
-* In some cases, you would like to have separate files for checking the behavior of some rules for each message. As of version 1.0, for the `no-restricted-syntax` rule, we can create a intent error file for each selector.
+* In some cases, you would like to have separate files for checking the behavior of some rules for each message. You guys can create a intent error file for each rule.
 
 * For strict inspections, create a intent error file with the folder name as the rule name and the message id as the file name inside it.
 
-* `.eslintrc.yml`
+* `eslint.config.js`
 
-  ```yml
-  ...
+  ```js
+  'use strict'
 
-  rules:
+  module.exports = [
     ...
 
-    no-restricted-syntax:
-      - error
-      - selector: 'VariableDeclaration[kind="let"]'
-        message: 'Never use `let`.'
-      - selector: 'SwitchStatement'
-        message: 'Never use `switch` statement.'
-
-    ...
+    {
+      rules: {
+        'no-restricted-syntax': [
+          'error',
+          {
+            selector: 'SwitchStatement',
+            message: 'Never use switch',
+          },
+          {
+            selector: 'VariableDeclaration[kind=let]',
+            message: 'Never use let',
+          },
+        ],
+      },
+    },
+  ]
   ```
 
 * Structure of directories for Jest.
@@ -189,8 +197,8 @@
   // Define object hash by message id and lint error message.
   const messageHash = {
     'no-restricted-syntax': {
-      noLet: 'Never use `let`.',
-      noSwitch: 'Never use `switch` statement.',
+      noLet: 'Never use let',
+      noSwitch: 'Never use switch',
     },
   }
 
