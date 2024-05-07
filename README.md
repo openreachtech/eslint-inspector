@@ -6,6 +6,11 @@
 
 * Node.js is required. If it is not already installed, please do so before proceeding.
 
+  | tools | version |
+  | :-- | :-- |
+  | Node.js | ^20.12.2 |
+  | npm | ^10.5.0 |
+
 * A testing tool such as Jest is required. The following is an example of how to install Jest. If you prefer to use a different testing tool, please refer to its specific installation guide.
 
   ```
