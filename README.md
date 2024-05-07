@@ -34,11 +34,10 @@
 ## Usage
 
 1. First, place your ESLint configuration file `eslint.config.js` in the root directory of your project.
-2. Create a directory of intent error codes, and put intent error files in it.
-3. A directory is named with `$`-suffix like `xxx$/`.
-4. An intent error file is named with the ESLint rule name.
+2. Create a directory to store codes that consist of intentional lint errors. The directory you have created should be named with the suffix `$`, like `xxx$/`
+3. Inside this directory, you should create respective files for each ESLint rule that you want to validate.
 
-* Example: a directory of an intentional linted files
+* Example: We have created a folder named `linted$/` to store codes with intentional lint errors. Here's how the structure should look like:
 
   ```
   linted$/
