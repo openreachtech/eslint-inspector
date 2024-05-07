@@ -12,6 +12,9 @@ const openreachtechPlugin = require('eslint-plugin-openreachtech')
 module.exports = [
   {
     languageOptions: {
+      globals: {
+        console: 'readonly',
+      },
       parserOptions: {
         ecmaVersion: 'latest',
       },
