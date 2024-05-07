@@ -24,7 +24,7 @@ describe('FileLintAnalyzer', () => {
         {
           params: {
             lint: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
               messages: [
                 {
                   ruleId: 'indent',
@@ -71,7 +71,7 @@ describe('FileLintAnalyzer', () => {
         {
           params: {
             lint: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
               messages: [
                 {
                   ruleId: 'semi',
@@ -116,7 +116,7 @@ describe('FileLintAnalyzer', () => {
         {
           params: {
             lint: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
               messages: [
                 {
                   ruleId: 'indent',
@@ -163,7 +163,7 @@ describe('FileLintAnalyzer', () => {
             ruleId: 'indent',
             message: null,
             lint: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
               messages: [
                 {
                   ruleId: 'indent',
@@ -210,7 +210,7 @@ describe('FileLintAnalyzer', () => {
         {
           params: {
             lint: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
               messages: [
                 {
                   ruleId: 'semi',
@@ -242,7 +242,7 @@ describe('FileLintAnalyzer', () => {
             ruleId: 'semi',
             message: null,
             lint: {
-              filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+              filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
               messages: [
                 {
                   ruleId: 'semi',
@@ -296,10 +296,7 @@ describe('FileLintAnalyzer', () => {
       const cases = [
         {
           params: {
-            filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
-            groupedRuleIds: [
-              'no-restricted-syntax',
-            ],
+            filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
           },
           expected: {
             ruleId: 'indent',
@@ -308,10 +305,7 @@ describe('FileLintAnalyzer', () => {
         },
         {
           params: {
-            filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
-            groupedRuleIds: [
-              'no-restricted-syntax',
-            ],
+            filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
           },
           expected: {
             ruleId: 'semi',
@@ -320,10 +314,7 @@ describe('FileLintAnalyzer', () => {
         },
         {
           params: {
-            filePath: '/Users/username/repository-name/tests/targets/standard/quotes.js',
-            groupedRuleIds: [
-              'no-restricted-syntax',
-            ],
+            filePath: '/Users/username/repository-name/tests/targets/standard$/quotes.js',
           },
           expected: {
             ruleId: 'quotes',
@@ -332,10 +323,7 @@ describe('FileLintAnalyzer', () => {
         },
         {
           params: {
-            filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax.js',
-            groupedRuleIds: [
-              'no-restricted-syntax',
-            ],
+            filePath: '/Users/username/repository-name/tests/targets/standard$/no-restricted-syntax.js',
           },
           expected: {
             ruleId: 'no-restricted-syntax',
@@ -344,10 +332,7 @@ describe('FileLintAnalyzer', () => {
         },
         {
           params: {
-            filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/noLet.js',
-            groupedRuleIds: [
-              'no-restricted-syntax',
-            ],
+            filePath: '/Users/username/repository-name/tests/targets/standard$/no-restricted-syntax/$noLet.js',
           },
           expected: {
             ruleId: 'no-restricted-syntax',
@@ -356,10 +341,7 @@ describe('FileLintAnalyzer', () => {
         },
         {
           params: {
-            filePath: '/Users/username/repository-name/tests/targets/standard/no-restricted-syntax/category/noArrayForEach.js',
-            groupedRuleIds: [
-              'no-restricted-syntax',
-            ],
+            filePath: '/Users/username/repository-name/tests/targets/standard$/no-restricted-syntax/$category/noArrayForEach.js',
           },
           expected: {
             ruleId: 'no-restricted-syntax',
@@ -369,9 +351,6 @@ describe('FileLintAnalyzer', () => {
         {
           params: {
             filePath: '',
-            groupedRuleIds: [
-              'no-restricted-syntax',
-            ],
           },
           expected: {
             ruleId: null,
@@ -393,10 +372,7 @@ describe('FileLintAnalyzer', () => {
       const cases = [
         {
           params: {
-            filePath: '/Users/username/repository-name/tests/targets/jest/consistent-test-it.js',
-            plugins: [
-              'jest',
-            ],
+            filePath: '/Users/username/repository-name/tests/targets$/jest/consistent-test-it.js',
           },
           expected: {
             ruleId: 'jest/consistent-test-it',
@@ -405,10 +381,7 @@ describe('FileLintAnalyzer', () => {
         },
         {
           params: {
-            filePath: '/Users/username/repository-name/tests/targets/jest/no-alias-method.js',
-            plugins: [
-              'jest',
-            ],
+            filePath: '/Users/username/repository-name/tests/targets$/jest/no-alias-method.js',
           },
           expected: {
             ruleId: 'jest/no-alias-method',
@@ -417,10 +390,7 @@ describe('FileLintAnalyzer', () => {
         },
         {
           params: {
-            filePath: '/Users/username/repository-name/tests/targets/jest/prefer-equality-matcher.js',
-            plugins: [
-              'jest',
-            ],
+            filePath: '/Users/username/repository-name/tests/targets$/jest/prefer-equality-matcher.js',
           },
           expected: {
             ruleId: 'jest/prefer-equality-matcher',
