@@ -386,14 +386,6 @@ describe('ESLintInspector', () => {
       const cases = [
         {
           params: {
-            filePaths: [],
-          },
-          expected: {
-            analyzers: [],
-          },
-        },
-        {
-          params: {
             filePaths: [
               'tests/resources/expected$/standard$/indent.js',
               'tests/resources/expected$/standard$/semi.js',
@@ -424,6 +416,51 @@ describe('ESLintInspector', () => {
           .toHaveBeenCalledWith({
             analyzers: expected.analyzers,
           })
+
+        lintFilesSpy.mockRestore()
+        createESLintClientSpy.mockRestore()
+        createSpy.mockRestore()
+      })
+    })
+
+    describe('not to call ESLint#lintFiles()', () => {
+      const cases = [
+        {
+          params: {
+            filePaths: [],
+          },
+        },
+        {
+          params: {
+            filePaths: undefined,
+          },
+        },
+        {
+          params: {
+            filePaths: null,
+          },
+        },
+      ]
+
+      test.each(cases)('filePaths: $params.filePaths', async ({ params }) => {
+        const expectedArgs = {
+          analyzers: [],
+        }
+
+        const mockClient = new ESLint()
+
+        const lintFilesSpy = jest.spyOn(mockClient, 'lintFiles')
+        const createESLintClientSpy = jest.spyOn(ESLintInspector, 'createESLintClient')
+          .mockReturnValue(mockClient)
+        const createSpy = jest.spyOn(ESLintInspector, 'create')
+
+        await ESLintInspector.createAsyncWithFilePaths(params)
+
+        expect(lintFilesSpy)
+          .not
+          .toHaveBeenCalledWith(params.filePaths)
+        expect(createSpy)
+          .toHaveBeenCalledWith(expectedArgs)
 
         lintFilesSpy.mockRestore()
         createESLintClientSpy.mockRestore()
