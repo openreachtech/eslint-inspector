@@ -126,7 +126,6 @@
       filePaths: [
         'tests/linted/',
       ],
-      configPath: '.eslintrc.yml',
     })
 
     const unexpectedLog = await inspector.getUnexpectedLog()
@@ -192,7 +191,6 @@
       filePaths: [
         'tests/linted/',
       ],
-      configPath: '.eslintrc.yml',
       messageHash, // <----------------- ✅
     })
 
