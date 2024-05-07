@@ -33,9 +33,21 @@
 
 ## Usage
 
-1. First, place your ESLint configuration file (such as `.eslintrc.json`, `.eslintrc.js`, etc.) in the root directory of your project.
+1. First, place your ESLint configuration file `eslint.config.js` in the root directory of your project.
 2. Create a directory of intent error codes, and put intent error files in it.
-3. Use `ESLintInspector`, created with the file path to the directory of intent error codes.
+3. A directory is named with `$`-suffix like `xxx$/`.
+4. An intent error file is named with the ESLint rule name.
+
+* Example: a directory of an intentional linted files
+
+  ```
+  linted$/
+  ├── nested$/  # May use nested directory to categorize
+  |   └ semi.js # Confirm to work rule id: `semi`
+  |
+  ├── indent.js # Confirm to work rule id: `indent`
+  └── quotes.js # Confirm to work rule id: `quotes`
+  ```
 
 ## Structure of Directories
 
