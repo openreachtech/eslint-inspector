@@ -149,7 +149,7 @@
 
 ## Strict Check with Lint Error Message
 
-* In some cases, you would like to have separate files for checking the behavior of some rules for each message. You guys can create a intent error file for each rule.
+* In some cases, you would like to have separate files for checking the behavior of some rules for each message. You can create a intent error file for each rule.
 
 * For strict inspections, create a intent error file with the folder name as the rule name and the message id as the file name inside it.
 
