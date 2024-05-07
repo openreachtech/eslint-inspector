@@ -5,7 +5,6 @@
   "files": [
     "lib/",
     "LICENSE",
-    "package.json",
     "README.md"
   ],
   "main": "index.js",
@@ -19,7 +18,8 @@
     "url": "git+https://github.com/openreachtech/eslint-inspector.git"
   },
   "keywords": [
-    "ESLint"
+    "ESLint",
+    "inspector"
   ],
   "author": "Open Reach Tech inc.",
   "license": "MIT",
