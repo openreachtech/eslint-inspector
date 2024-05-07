@@ -42,7 +42,7 @@ describe('ESLintInspector', () => {
                 LintAnalyzer.create({
                   ruleId: 'indent',
                   lint: {
-                    filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                    filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                     messages: [
                       {
                         ruleId: 'indent',
@@ -88,7 +88,7 @@ describe('ESLintInspector', () => {
                 LintAnalyzer.create({
                   ruleId: 'semi',
                   lint: {
-                    filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                    filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                     messages: [
                       {
                         ruleId: 'semi',
@@ -148,7 +148,7 @@ describe('ESLintInspector', () => {
               LintAnalyzer.create({
                 ruleId: 'indent',
                 lint: {
-                  filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                  filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                   messages: [
                     {
                       ruleId: 'indent',
@@ -194,7 +194,7 @@ describe('ESLintInspector', () => {
               LintAnalyzer.create({
                 ruleId: 'semi',
                 lint: {
-                  filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                  filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                   messages: [
                     {
                       ruleId: 'semi',
@@ -249,7 +249,7 @@ describe('ESLintInspector', () => {
               LintAnalyzer.create({
                 ruleId: 'indent',
                 lint: {
-                  filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                  filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                   messages: [
                     {
                       ruleId: 'indent',
@@ -295,7 +295,7 @@ describe('ESLintInspector', () => {
               LintAnalyzer.create({
                 ruleId: 'semi',
                 lint: {
-                  filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                  filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                   messages: [
                     {
                       ruleId: 'semi',
@@ -367,8 +367,8 @@ describe('ESLintInspector', () => {
         {
           params: {
             filePaths: [
-              'tests/resources/expected/standard/indent.js',
-              'tests/resources/expected/standard/semi.js',
+              'tests/resources/expected$/standard$/indent.js',
+              'tests/resources/expected$/standard$/semi.js',
             ],
           },
         },
@@ -386,17 +386,9 @@ describe('ESLintInspector', () => {
       const cases = [
         {
           params: {
-            filePaths: [],
-          },
-          expected: {
-            analyzers: [],
-          },
-        },
-        {
-          params: {
             filePaths: [
-              'tests/resources/expected/standard/indent.js',
-              'tests/resources/expected/standard/semi.js',
+              'tests/resources/expected$/standard$/indent.js',
+              'tests/resources/expected$/standard$/semi.js',
             ],
           },
           expected: {
@@ -424,6 +416,51 @@ describe('ESLintInspector', () => {
           .toHaveBeenCalledWith({
             analyzers: expected.analyzers,
           })
+
+        lintFilesSpy.mockRestore()
+        createESLintClientSpy.mockRestore()
+        createSpy.mockRestore()
+      })
+    })
+
+    describe('not to call ESLint#lintFiles()', () => {
+      const cases = [
+        {
+          params: {
+            filePaths: [],
+          },
+        },
+        {
+          params: {
+            filePaths: undefined,
+          },
+        },
+        {
+          params: {
+            filePaths: null,
+          },
+        },
+      ]
+
+      test.each(cases)('filePaths: $params.filePaths', async ({ params }) => {
+        const expectedArgs = {
+          analyzers: [],
+        }
+
+        const mockClient = new ESLint()
+
+        const lintFilesSpy = jest.spyOn(mockClient, 'lintFiles')
+        const createESLintClientSpy = jest.spyOn(ESLintInspector, 'createESLintClient')
+          .mockReturnValue(mockClient)
+        const createSpy = jest.spyOn(ESLintInspector, 'create')
+
+        await ESLintInspector.createAsyncWithFilePaths(params)
+
+        expect(lintFilesSpy)
+          .not
+          .toHaveBeenCalledWith(params.filePaths)
+        expect(createSpy)
+          .toHaveBeenCalledWith(expectedArgs)
 
         lintFilesSpy.mockRestore()
         createESLintClientSpy.mockRestore()
@@ -603,7 +640,7 @@ describe('ESLintInspector', () => {
               LintAnalyzer.create({
                 ruleId: 'indent',
                 lint: {
-                  filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                  filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                   messages: [
                     {
                       ruleId: 'indent',
@@ -649,7 +686,7 @@ describe('ESLintInspector', () => {
               LintAnalyzer.create({
                 ruleId: 'semi',
                 lint: {
-                  filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                  filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                   messages: [
                     {
                       ruleId: 'semi',
@@ -700,7 +737,7 @@ describe('ESLintInspector', () => {
               LintAnalyzer.create({
                 ruleId: 'indent',
                 lint: {
-                  filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                  filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                   messages: [
                     {
                       ruleId: 'semi',
@@ -731,7 +768,7 @@ describe('ESLintInspector', () => {
               LintAnalyzer.create({
                 ruleId: 'semi',
                 lint: {
-                  filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                  filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                   messages: [
                     {
                       ruleId: 'indent',
@@ -801,7 +838,7 @@ describe('ESLintInspector', () => {
               LintAnalyzer.create({
                 ruleId: 'indent',
                 lint: {
-                  filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                  filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                   messages: [
                     {
                       ruleId: 'indent',
@@ -862,7 +899,7 @@ describe('ESLintInspector', () => {
               LintAnalyzer.create({
                 ruleId: 'semi',
                 lint: {
-                  filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                  filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                   messages: [
                     {
                       ruleId: 'indent',
@@ -948,7 +985,7 @@ describe('ESLintInspector', () => {
               LintAnalyzer.create({
                 ruleId: 'indent',
                 lint: {
-                  filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                  filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                   messages: [
                     {
                       ruleId: 'indent',
@@ -994,7 +1031,7 @@ describe('ESLintInspector', () => {
               LintAnalyzer.create({
                 ruleId: 'semi',
                 lint: {
-                  filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                  filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                   messages: [
                     {
                       ruleId: 'semi',
@@ -1054,7 +1091,7 @@ describe('ESLintInspector', () => {
               LintAnalyzer.create({
                 ruleId: 'indent',
                 lint: {
-                  filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                  filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                   messages: [
                     {
                       ruleId: 'indent',
@@ -1106,7 +1143,7 @@ describe('ESLintInspector', () => {
               LintAnalyzer.create({
                 ruleId: 'semi',
                 lint: {
-                  filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                  filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                   messages: [
                     {
                       ruleId: 'semi',
@@ -1143,7 +1180,7 @@ describe('ESLintInspector', () => {
               LintAnalyzer.create({
                 ruleId: 'indent',
                 lint: {
-                  filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                  filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                   messages: [
                     {
                       ruleId: 'indent',
@@ -1189,7 +1226,7 @@ describe('ESLintInspector', () => {
               LintAnalyzer.create({
                 ruleId: 'semi',
                 lint: {
-                  filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                  filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                   messages: [
                     {
                       ruleId: 'semi',
@@ -1241,7 +1278,7 @@ describe('ESLintInspector', () => {
                 LintAnalyzer.create({
                   ruleId: 'indent',
                   lint: {
-                    filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                    filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                     messages: [
                       {
                         ruleId: 'indent',
@@ -1308,7 +1345,7 @@ describe('ESLintInspector', () => {
                 LintAnalyzer.create({
                   ruleId: 'indent',
                   lint: {
-                    filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                    filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                     messages: [
                       {
                         ruleId: 'semi',
@@ -1345,7 +1382,7 @@ describe('ESLintInspector', () => {
                 LintAnalyzer.create({
                   ruleId: 'indent',
                   lint: {
-                    filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                    filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                     messages: [],
                     suppressedMessages: [],
                     errorCount: 2,
@@ -1366,7 +1403,7 @@ describe('ESLintInspector', () => {
                 LintAnalyzer.create({
                   ruleId: 'semi',
                   lint: {
-                    filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                    filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                     messages: [
                       {
                         ruleId: 'indent',
@@ -1433,7 +1470,7 @@ describe('ESLintInspector', () => {
                 LintAnalyzer.create({
                   ruleId: 'semi',
                   lint: {
-                    filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                    filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                     messages: [
                       {
                         ruleId: 'indent',
@@ -1485,7 +1522,7 @@ describe('ESLintInspector', () => {
                 LintAnalyzer.create({
                   ruleId: 'semi',
                   lint: {
-                    filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                    filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                     messages: [],
                     suppressedMessages: [],
                     errorCount: 1,
@@ -1506,7 +1543,7 @@ describe('ESLintInspector', () => {
                 LintAnalyzer.create({
                   ruleId: 'indent',
                   lint: {
-                    filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                    filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                     messages: [
                       {
                         ruleId: 'semi',
@@ -1537,7 +1574,7 @@ describe('ESLintInspector', () => {
                 LintAnalyzer.create({
                   ruleId: 'semi',
                   lint: {
-                    filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                    filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                     messages: [
                       {
                         ruleId: 'indent',
@@ -1603,7 +1640,7 @@ describe('ESLintInspector', () => {
                 LintAnalyzer.create({
                   ruleId: 'indent',
                   lint: {
-                    filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                    filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                     messages: [
                       {
                         ruleId: 'indent',
@@ -1649,7 +1686,7 @@ describe('ESLintInspector', () => {
                 LintAnalyzer.create({
                   ruleId: 'semi',
                   lint: {
-                    filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                    filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                     messages: [
                       {
                         ruleId: 'semi',
@@ -1701,7 +1738,7 @@ describe('ESLintInspector', () => {
                 LintAnalyzer.create({
                   ruleId: 'indent',
                   lint: {
-                    filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                    filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                     messages: [
                       {
                         ruleId: 'indent',
@@ -1762,7 +1799,7 @@ describe('ESLintInspector', () => {
                 LintAnalyzer.create({
                   ruleId: 'semi',
                   lint: {
-                    filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                    filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                     messages: [
                       {
                         ruleId: 'semi',
@@ -1799,7 +1836,7 @@ describe('ESLintInspector', () => {
                 LintAnalyzer.create({
                   ruleId: 'indent',
                   lint: {
-                    filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                    filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                     messages: [
                       {
                         ruleId: 'indent',
@@ -1860,7 +1897,7 @@ describe('ESLintInspector', () => {
                 LintAnalyzer.create({
                   ruleId: 'semi',
                   lint: {
-                    filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                    filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                     messages: [
                       {
                         ruleId: 'semi',
@@ -1943,7 +1980,7 @@ describe('ESLintInspector', () => {
               LintAnalyzer.create({
                 ruleId: 'indent',
                 lint: {
-                  filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                  filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                   messages: [
                     {
                       ruleId: 'indent',
@@ -2004,7 +2041,7 @@ describe('ESLintInspector', () => {
               LintAnalyzer.create({
                 ruleId: 'semi',
                 lint: {
-                  filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                  filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                   messages: [
                     {
                       ruleId: 'indent',
@@ -2065,12 +2102,12 @@ describe('ESLintInspector', () => {
             ],
           },
           expected: `${RESET}${RESET}
-${RESET}${UNDERLINE_OPEN}/Users/username/repository-name/tests/targets/standard/indent.js${UNDERLINE_CLOSE}${RESET}
+${RESET}${UNDERLINE_OPEN}/Users/username/repository-name/tests/targets/standard$/indent.js${UNDERLINE_CLOSE}${RESET}
 ${RESET}   ${COLOR_GRAY}9:1${COLOR_WHITE}   ${COLOR_RED}error${COLOR_DEFAULT}  Expected indentation of 4 spaces but found 6  ${COLOR_GRAY}indent${COLOR_WHITE}${RESET}
 ${RESET}  ${COLOR_GRAY}11:1${COLOR_WHITE}   ${COLOR_RED}error${COLOR_DEFAULT}  Expected indentation of 2 spaces but found 4  ${COLOR_GRAY}indent${COLOR_WHITE}${RESET}
 ${RESET}   ${COLOR_GRAY}3:18${COLOR_WHITE}  ${COLOR_RED}error${COLOR_DEFAULT}  Extra semicolon                               ${COLOR_GRAY}semi${COLOR_WHITE}${RESET}
 ${RESET}${RESET}
-${RESET}${UNDERLINE_OPEN}/Users/username/repository-name/tests/targets/standard/semi.js${UNDERLINE_CLOSE}${RESET}
+${RESET}${UNDERLINE_OPEN}/Users/username/repository-name/tests/targets/standard$/semi.js${UNDERLINE_CLOSE}${RESET}
 ${RESET}   ${COLOR_GRAY}9:1${COLOR_WHITE}   ${COLOR_RED}error${COLOR_DEFAULT}  Expected indentation of 4 spaces but found 6  ${COLOR_GRAY}indent${COLOR_WHITE}${RESET}
 ${RESET}  ${COLOR_GRAY}11:1${COLOR_WHITE}   ${COLOR_RED}error${COLOR_DEFAULT}  Expected indentation of 2 spaces but found 4  ${COLOR_GRAY}indent${COLOR_WHITE}${RESET}
 ${RESET}   ${COLOR_GRAY}3:18${COLOR_WHITE}  ${COLOR_RED}error${COLOR_DEFAULT}  Extra semicolon                               ${COLOR_GRAY}semi${COLOR_WHITE}${RESET}
@@ -2103,7 +2140,7 @@ describe('ESLintInspector', () => {
               LintAnalyzer.create({
                 ruleId: 'indent',
                 lint: {
-                  filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                  filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                   messages: [
                     {
                       ruleId: 'indent',
@@ -2149,7 +2186,7 @@ describe('ESLintInspector', () => {
               LintAnalyzer.create({
                 ruleId: 'semi',
                 lint: {
-                  filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                  filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                   messages: [
                     {
                       ruleId: 'semi',
@@ -2200,7 +2237,7 @@ describe('ESLintInspector', () => {
               LintAnalyzer.create({
                 ruleId: 'indent',
                 lint: {
-                  filePath: '/Users/username/repository-name/tests/targets/standard/indent.js',
+                  filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                   messages: [
                     {
                       ruleId: 'indent',
@@ -2261,7 +2298,7 @@ describe('ESLintInspector', () => {
               LintAnalyzer.create({
                 ruleId: 'semi',
                 lint: {
-                  filePath: '/Users/username/repository-name/tests/targets/standard/semi.js',
+                  filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                   messages: [
                     {
                       ruleId: 'indent',
@@ -2311,14 +2348,14 @@ describe('ESLintInspector', () => {
 describe('ESLintInspector', () => {
   describe('#getUnexpectedLog()', () => {
     describe('with file paths', () => {
-      const basePath = __dirname.replace(/__tests__$/u, '')
+      const basePath = path.resolve('./tests/')
 
       describe('to be null', () => {
         const cases = [
           {
             params: {
               filePaths: [
-                'tests/resources/expected/**',
+                'tests/resources/expected$/**',
               ],
               messageHash: {
                 'no-restricted-syntax': {
@@ -2330,7 +2367,7 @@ describe('ESLintInspector', () => {
           {
             params: {
               filePaths: [
-                'tests/resources/expected/standard/no-restricted-syntax/**',
+                'tests/resources/expected$/standard$/no-restricted-syntax/**',
               ],
               messageHash: {
                 'no-restricted-syntax': {
@@ -2366,16 +2403,16 @@ describe('ESLintInspector', () => {
             },
             expected: [
               '\x1B[0m\x1B[0m',
-              `\x1B[0m\x1B[4m${path.join(basePath, 'resources/unexpected/standard/indent.js')}\x1B[24m\x1B[0m`,
+              `\x1B[0m\x1B[4m${path.join(basePath, 'resources/unexpected/standard$/indent.js')}\x1B[24m\x1B[0m`,
               '\x1B[0m   \x1B[2m7:1\x1B[22m   \x1B[31merror\x1B[39m  Expected indentation of 4 spaces but found 6  \x1B[2mindent\x1B[22m\x1B[0m',
               '\x1B[0m   \x1B[2m8:1\x1B[22m   \x1B[31merror\x1B[39m  Expected indentation of 2 spaces but found 4  \x1B[2mindent\x1B[22m\x1B[0m',
               '\x1B[0m  \x1B[2m10:23\x1B[22m  \x1B[31merror\x1B[39m  Extra semicolon                               \x1B[2msemi\x1B[22m\x1B[0m',
               '\x1B[0m\x1B[0m',
-              `\x1B[0m\x1B[4m${path.join(basePath, 'resources/unexpected/standard/no-restricted-syntax/noLet.js')}\x1B[24m\x1B[0m`,
+              `\x1B[0m\x1B[4m${path.join(basePath, 'resources/unexpected/standard$/no-restricted-syntax/$noLet.js')}\x1B[24m\x1B[0m`,
               '\x1B[0m  \x1B[2m0:0\x1B[22m  \x1B[31merror\x1B[39m  🔎 No lints that should be here\x1B[0m',
               '\x1B[0m              Never use let  \x1B[2mno-restricted-syntax\x1B[22m\x1B[0m',
               '\x1B[0m\x1B[0m',
-              `\x1B[0m\x1B[4m${path.join(basePath, 'resources/unexpected/standard/semi.js')}\x1B[24m\x1B[0m`,
+              `\x1B[0m\x1B[4m${path.join(basePath, 'resources/unexpected/standard$/semi.js')}\x1B[24m\x1B[0m`,
               '\x1B[0m  \x1B[2m3:1\x1B[22m   \x1B[31merror\x1B[39m  Unexpected console statement  \x1B[2mno-console\x1B[22m\x1B[0m',
               '\x1B[0m  \x1B[2m5:18\x1B[22m  \x1B[31merror\x1B[39m  Extra semicolon               \x1B[2msemi\x1B[22m\x1B[0m',
               '\x1B[0m\x1B[0m',
@@ -2388,7 +2425,7 @@ describe('ESLintInspector', () => {
           {
             params: {
               filePaths: [
-                'tests/resources/unexpected/standard/no-restricted-syntax/**',
+                'tests/resources/unexpected/standard$/no-restricted-syntax/**',
               ],
               messageHash: {
                 'no-restricted-syntax': {
@@ -2398,7 +2435,7 @@ describe('ESLintInspector', () => {
             },
             expected: [
               '\x1B[0m\x1B[0m',
-              `\x1B[0m\x1B[4m${path.join(basePath, 'resources/unexpected/standard/no-restricted-syntax/noLet.js')}\x1B[24m\x1B[0m`,
+              `\x1B[0m\x1B[4m${path.join(basePath, 'resources/unexpected/standard$/no-restricted-syntax/$noLet.js')}\x1B[24m\x1B[0m`,
               '\x1B[0m  \x1B[2m0:0\x1B[22m  \x1B[31merror\x1B[39m  🔎 No lints that should be here\x1B[0m',
               '\x1B[0m              Never use let  \x1B[2mno-restricted-syntax\x1B[22m\x1B[0m',
               '\x1B[0m\x1B[0m',
@@ -2424,20 +2461,20 @@ describe('ESLintInspector', () => {
           {
             params: {
               filePaths: [
-                'tests/resources/no-lints/all/**',
+                'tests/resources/no-lints/all$/**',
               ],
               messageHash,
             },
             expected: [
               '\x1B[0m\x1B[0m',
-              `\x1B[0m\x1B[4m${path.join(basePath, 'resources/no-lints/all/indent.js')}\x1B[24m\x1B[0m`,
+              `\x1B[0m\x1B[4m${path.join(basePath, 'resources/no-lints/all$/indent.js')}\x1B[24m\x1B[0m`,
               '\x1B[0m  \x1B[2m0:0\x1B[22m  \x1B[31merror\x1B[39m  🔎 No lints that should be here  \x1B[2mindent\x1B[22m\x1B[0m',
               '\x1B[0m\x1B[0m',
-              `\x1B[0m\x1B[4m${path.join(basePath, 'resources/no-lints/all/no-restricted-syntax/noLet.js')}\x1B[24m\x1B[0m`,
+              `\x1B[0m\x1B[4m${path.join(basePath, 'resources/no-lints/all$/no-restricted-syntax/$noLet.js')}\x1B[24m\x1B[0m`,
               '\x1B[0m  \x1B[2m0:0\x1B[22m  \x1B[31merror\x1B[39m  🔎 No lints that should be here\x1B[0m',
               '\x1B[0m              Never use let  \x1B[2mno-restricted-syntax\x1B[22m\x1B[0m',
               '\x1B[0m\x1B[0m',
-              `\x1B[0m\x1B[4m${path.join(basePath, 'resources/no-lints/all/semi.js')}\x1B[24m\x1B[0m`,
+              `\x1B[0m\x1B[4m${path.join(basePath, 'resources/no-lints/all$/semi.js')}\x1B[24m\x1B[0m`,
               '\x1B[0m  \x1B[2m0:0\x1B[22m  \x1B[31merror\x1B[39m  🔎 No lints that should be here  \x1B[2msemi\x1B[22m\x1B[0m',
               '\x1B[0m\x1B[0m',
               '\x1B[0m\x1B[31m\x1B[1m✖ 3 problems (3 errors, 0 warnings)\x1B[22m\x1B[39m\x1B[0m',
@@ -2448,22 +2485,22 @@ describe('ESLintInspector', () => {
           {
             params: {
               filePaths: [
-                'tests/resources/no-lints/with-unexpected/**',
+                'tests/resources/no-lints/with-unexpected$/**',
               ],
               messageHash,
             },
             expected: [
               '\x1B[0m\x1B[0m',
-              `\x1B[0m\x1B[4m${path.join(basePath, 'resources/no-lints/with-unexpected/indent.js')}\x1B[24m\x1B[0m`,
+              `\x1B[0m\x1B[4m${path.join(basePath, 'resources/no-lints/with-unexpected$/indent.js')}\x1B[24m\x1B[0m`,
               '\x1B[0m   \x1B[2m7:1\x1B[22m   \x1B[31merror\x1B[39m  Expected indentation of 4 spaces but found 6  \x1B[2mindent\x1B[22m\x1B[0m',
               '\x1B[0m   \x1B[2m8:1\x1B[22m   \x1B[31merror\x1B[39m  Expected indentation of 2 spaces but found 4  \x1B[2mindent\x1B[22m\x1B[0m',
               '\x1B[0m  \x1B[2m10:23\x1B[22m  \x1B[31merror\x1B[39m  Extra semicolon                               \x1B[2msemi\x1B[22m\x1B[0m',
               '\x1B[0m\x1B[0m',
-              `\x1B[0m\x1B[4m${path.join(basePath, 'resources/no-lints/with-unexpected/no-restricted-syntax/noLet.js')}\x1B[24m\x1B[0m`,
+              `\x1B[0m\x1B[4m${path.join(basePath, 'resources/no-lints/with-unexpected$/no-restricted-syntax/$noLet.js')}\x1B[24m\x1B[0m`,
               '\x1B[0m  \x1B[2m0:0\x1B[22m  \x1B[31merror\x1B[39m  🔎 No lints that should be here\x1B[0m',
               '\x1B[0m              Never use let  \x1B[2mno-restricted-syntax\x1B[22m\x1B[0m',
               '\x1B[0m\x1B[0m',
-              `\x1B[0m\x1B[4m${path.join(basePath, 'resources/no-lints/with-unexpected/semi.js')}\x1B[24m\x1B[0m`,
+              `\x1B[0m\x1B[4m${path.join(basePath, 'resources/no-lints/with-unexpected$/semi.js')}\x1B[24m\x1B[0m`,
               '\x1B[0m  \x1B[2m3:1\x1B[22m   \x1B[31merror\x1B[39m  Unexpected console statement  \x1B[2mno-console\x1B[22m\x1B[0m',
               '\x1B[0m  \x1B[2m5:18\x1B[22m  \x1B[31merror\x1B[39m  Extra semicolon               \x1B[2msemi\x1B[22m\x1B[0m',
               '\x1B[0m\x1B[0m',

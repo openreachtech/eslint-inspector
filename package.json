@@ -1,25 +1,25 @@
 {
   "name": "@openreachtech/eslint-inspector",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "This is the useful tools for for JavaScript test concerning ESLint configuration.",
   "files": [
     "lib/",
     "LICENSE",
-    "package.json",
     "README.md"
   ],
   "main": "index.js",
   "scripts": {
     "l": "npm run lint",
-    "lint": "eslint --ignore-pattern /tests/resources/* .",
-    "test": "export NODE_ENV=development; jest --forceExit --maxWorkers=5"
+    "lint": "eslint . --ignore-pattern 'tests/resources/*'",
+    "test": "export NODE_ENV=development; export NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\"; jest --forceExit --maxWorkers=5"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/openreachtech/eslint-inspector.git"
   },
   "keywords": [
-    "ESLint"
+    "ESLint",
+    "inspector"
   ],
   "author": "Open Reach Tech inc.",
   "license": "MIT",
@@ -30,8 +30,10 @@
   "devDependencies": {
     "@openreachtech/eslint-config": "^2.0.3",
     "@openreachtech/renchan-test-tools": "^1.0.0",
-    "@types/jest": "^29.5.10",
-    "eslint": "^8.54.0",
+    "@types/jest": "^29.5.12",
+    "eslint": "^9.2.0",
+    "eslint-plugin-jest": "^28.5.0",
+    "eslint-plugin-jsdoc": "^48.2.3",
     "jest": "^29.7.0"
   }
 }
