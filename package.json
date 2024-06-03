@@ -8,6 +8,14 @@
     "README.md"
   ],
   "main": "index.js",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js",
+      "node": "./index.js",
+      "default": "./index.js"
+    }
+  },
   "type": "commonjs",
   "scripts": {
     "l": "npm run lint",
