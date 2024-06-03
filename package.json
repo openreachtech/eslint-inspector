@@ -1,13 +1,21 @@
 {
   "name": "@openreachtech/eslint-inspector",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "This is the useful tools for for JavaScript test concerning ESLint configuration.",
   "files": [
-    "lib/",
-    "LICENSE",
-    "README.md"
+    "index.mjs",
+    "lib/"
   ],
   "main": "index.js",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js",
+      "node": "./index.js",
+      "default": "./index.js"
+    }
+  },
+  "type": "commonjs",
   "scripts": {
     "l": "npm run lint",
     "lint": "eslint . --ignore-pattern 'tests/resources/*'",
@@ -32,8 +40,6 @@
     "@openreachtech/renchan-test-tools": "^1.0.0",
     "@types/jest": "^29.5.12",
     "eslint": "^9.3.0",
-    "eslint-plugin-jest": "^28.5.0",
-    "eslint-plugin-jsdoc": "^48.2.3",
     "jest": "^29.7.0"
   }
 }
