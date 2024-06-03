@@ -4,9 +4,7 @@
   "description": "This is the useful tools for for JavaScript test concerning ESLint configuration.",
   "files": [
     "index.mjs",
-    "lib/",
-    "LICENSE",
-    "README.md"
+    "lib/"
   ],
   "main": "index.js",
   "exports": {
