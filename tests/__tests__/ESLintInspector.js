@@ -40,12 +40,12 @@ describe('ESLintInspector', () => {
             params: {
               analyzers: [
                 LintAnalyzer.create({
-                  ruleId: 'indent',
+                  ruleId: '@stylistic/indent',
                   lint: {
                     filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                     messages: [
                       {
-                        ruleId: 'indent',
+                        ruleId: '@stylistic/indent',
                         severity: 2,
                         message: 'Expected indentation of 4 spaces but found 6.',
                         line: 9,
@@ -60,7 +60,7 @@ describe('ESLintInspector', () => {
                         },
                       },
                       {
-                        ruleId: 'indent',
+                        ruleId: '@stylistic/indent',
                         severity: 2,
                         message: 'Expected indentation of 2 spaces but found 4.',
                         line: 11,
@@ -86,12 +86,12 @@ describe('ESLintInspector', () => {
                   },
                 }),
                 LintAnalyzer.create({
-                  ruleId: 'semi',
+                  ruleId: '@stylistic/semi',
                   lint: {
                     filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                     messages: [
                       {
-                        ruleId: 'semi',
+                        ruleId: '@stylistic/semi',
                         severity: 2,
                         message: 'Extra semicolon.',
                         line: 3,
@@ -146,12 +146,12 @@ describe('ESLintInspector', () => {
           params: {
             analyzers: [
               LintAnalyzer.create({
-                ruleId: 'indent',
+                ruleId: '@stylistic/indent',
                 lint: {
                   filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                   messages: [
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 4 spaces but found 6.',
                       line: 9,
@@ -166,7 +166,7 @@ describe('ESLintInspector', () => {
                       },
                     },
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 2 spaces but found 4.',
                       line: 11,
@@ -247,12 +247,12 @@ describe('ESLintInspector', () => {
           params: {
             analyzers: [
               LintAnalyzer.create({
-                ruleId: 'indent',
+                ruleId: '@stylistic/indent',
                 lint: {
                   filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                   messages: [
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 4 spaces but found 6.',
                       line: 9,
@@ -267,7 +267,7 @@ describe('ESLintInspector', () => {
                       },
                     },
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 2 spaces but found 4.',
                       line: 11,
@@ -476,13 +476,13 @@ describe('ESLintInspector', () => {
       const cases = [
         {
           params: {
-            ruleId: 'indent',
+            ruleId: '@stylistic/indent',
             text: '',
           },
         },
         {
           params: {
-            ruleId: 'semi',
+            ruleId: '@stylistic/semi',
             text: 'const alpha = 1;',
           },
         },
@@ -500,13 +500,13 @@ describe('ESLintInspector', () => {
       const cases = [
         {
           params: {
-            ruleId: 'indent',
+            ruleId: '@stylistic/indent',
             text: '',
           },
           expected: {
             analyzers: [
               LintAnalyzer.create({
-                ruleId: 'indent',
+                ruleId: '@stylistic/indent',
                 lint: {
                   filePath: '<text>',
                   messages: [],
@@ -524,13 +524,13 @@ describe('ESLintInspector', () => {
         },
         {
           params: {
-            ruleId: 'semi',
+            ruleId: '@stylistic/semi',
             text: 'const alpha = 1;',
           },
           expected: {
             analyzers: [
               LintAnalyzer.create({
-                ruleId: 'semi',
+                ruleId: '@stylistic/semi',
                 lint: {
                   filePath: '<text>',
                   messages: [
@@ -557,7 +557,7 @@ describe('ESLintInspector', () => {
                       endColumn: 12,
                     },
                     {
-                      ruleId: 'semi',
+                      ruleId: '@stylistic/semi',
                       severity: 2,
                       message: 'Extra semicolon.',
                       line: 1,
@@ -572,7 +572,7 @@ describe('ESLintInspector', () => {
                       },
                     },
                     {
-                      ruleId: 'eol-last',
+                      ruleId: '@stylistic/eol-last',
                       severity: 2,
                       message: 'Newline required at end of file but not found.',
                       line: 1,
@@ -638,12 +638,12 @@ describe('ESLintInspector', () => {
           params: {
             analyzers: [
               LintAnalyzer.create({
-                ruleId: 'indent',
+                ruleId: '@stylistic/indent',
                 lint: {
                   filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                   messages: [
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 4 spaces but found 6.',
                       line: 9,
@@ -658,7 +658,7 @@ describe('ESLintInspector', () => {
                       },
                     },
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 2 spaces but found 4.',
                       line: 11,
@@ -735,7 +735,7 @@ describe('ESLintInspector', () => {
           params: {
             analyzers: [
               LintAnalyzer.create({
-                ruleId: 'indent',
+                ruleId: '@stylistic/indent',
                 lint: {
                   filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                   messages: [
@@ -771,7 +771,7 @@ describe('ESLintInspector', () => {
                   filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                   messages: [
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 4 spaces but found 6.',
                       line: 9,
@@ -786,7 +786,7 @@ describe('ESLintInspector', () => {
                       },
                     },
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 2 spaces but found 4.',
                       line: 11,
@@ -836,12 +836,12 @@ describe('ESLintInspector', () => {
           params: {
             analyzers: [
               LintAnalyzer.create({
-                ruleId: 'indent',
+                ruleId: '@stylistic/indent',
                 lint: {
                   filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                   messages: [
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 4 spaces but found 6.',
                       line: 9,
@@ -856,7 +856,7 @@ describe('ESLintInspector', () => {
                       },
                     },
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 2 spaces but found 4.',
                       line: 11,
@@ -902,7 +902,7 @@ describe('ESLintInspector', () => {
                   filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                   messages: [
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 4 spaces but found 6.',
                       line: 9,
@@ -917,7 +917,7 @@ describe('ESLintInspector', () => {
                       },
                     },
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 2 spaces but found 4.',
                       line: 11,
@@ -983,12 +983,12 @@ describe('ESLintInspector', () => {
           params: {
             analyzers: [
               LintAnalyzer.create({
-                ruleId: 'indent',
+                ruleId: '@stylistic/indent',
                 lint: {
                   filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                   messages: [
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 4 spaces but found 6.',
                       line: 9,
@@ -1003,7 +1003,7 @@ describe('ESLintInspector', () => {
                       },
                     },
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 2 spaces but found 4.',
                       line: 11,
@@ -1089,12 +1089,12 @@ describe('ESLintInspector', () => {
           params: {
             analyzers: [
               LintAnalyzer.create({
-                ruleId: 'indent',
+                ruleId: '@stylistic/indent',
                 lint: {
                   filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                   messages: [
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 4 spaces but found 6.',
                       line: 9,
@@ -1109,7 +1109,7 @@ describe('ESLintInspector', () => {
                       },
                     },
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 2 spaces but found 4.',
                       line: 11,
@@ -1178,12 +1178,12 @@ describe('ESLintInspector', () => {
           params: {
             analyzers: [
               LintAnalyzer.create({
-                ruleId: 'indent',
+                ruleId: '@stylistic/indent',
                 lint: {
                   filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                   messages: [
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 4 spaces but found 6.',
                       line: 9,
@@ -1198,7 +1198,7 @@ describe('ESLintInspector', () => {
                       },
                     },
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 2 spaces but found 4.',
                       line: 11,
@@ -1276,12 +1276,12 @@ describe('ESLintInspector', () => {
             params: {
               analyzers: [
                 LintAnalyzer.create({
-                  ruleId: 'indent',
+                  ruleId: '@stylistic/indent',
                   lint: {
                     filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                     messages: [
                       {
-                        ruleId: 'indent',
+                        ruleId: '@stylistic/indent',
                         severity: 2,
                         message: 'Expected indentation of 4 spaces but found 6.',
                         line: 9,
@@ -1296,7 +1296,7 @@ describe('ESLintInspector', () => {
                         },
                       },
                       {
-                        ruleId: 'indent',
+                        ruleId: '@stylistic/indent',
                         severity: 2,
                         message: 'Expected indentation of 2 spaces but found 4.',
                         line: 11,
@@ -1343,7 +1343,7 @@ describe('ESLintInspector', () => {
             params: {
               analyzers: [
                 LintAnalyzer.create({
-                  ruleId: 'indent',
+                  ruleId: '@stylistic/indent',
                   lint: {
                     filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                     messages: [
@@ -1380,7 +1380,7 @@ describe('ESLintInspector', () => {
             params: {
               analyzers: [
                 LintAnalyzer.create({
-                  ruleId: 'indent',
+                  ruleId: '@stylistic/indent',
                   lint: {
                     filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                     messages: [],
@@ -1406,7 +1406,7 @@ describe('ESLintInspector', () => {
                     filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                     messages: [
                       {
-                        ruleId: 'indent',
+                        ruleId: '@stylistic/indent',
                         severity: 2,
                         message: 'Expected indentation of 4 spaces but found 6.',
                         line: 9,
@@ -1421,7 +1421,7 @@ describe('ESLintInspector', () => {
                         },
                       },
                       {
-                        ruleId: 'indent',
+                        ruleId: '@stylistic/indent',
                         severity: 2,
                         message: 'Expected indentation of 2 spaces but found 4.',
                         line: 11,
@@ -1473,7 +1473,7 @@ describe('ESLintInspector', () => {
                     filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                     messages: [
                       {
-                        ruleId: 'indent',
+                        ruleId: '@stylistic/indent',
                         severity: 2,
                         message: 'Expected indentation of 4 spaces but found 6.',
                         line: 9,
@@ -1488,7 +1488,7 @@ describe('ESLintInspector', () => {
                         },
                       },
                       {
-                        ruleId: 'indent',
+                        ruleId: '@stylistic/indent',
                         severity: 2,
                         message: 'Expected indentation of 2 spaces but found 4.',
                         line: 11,
@@ -1541,7 +1541,7 @@ describe('ESLintInspector', () => {
             params: {
               analyzers: [
                 LintAnalyzer.create({
-                  ruleId: 'indent',
+                  ruleId: '@stylistic/indent',
                   lint: {
                     filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                     messages: [
@@ -1577,7 +1577,7 @@ describe('ESLintInspector', () => {
                     filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                     messages: [
                       {
-                        ruleId: 'indent',
+                        ruleId: '@stylistic/indent',
                         severity: 2,
                         message: 'Expected indentation of 4 spaces but found 6.',
                         line: 9,
@@ -1592,7 +1592,7 @@ describe('ESLintInspector', () => {
                         },
                       },
                       {
-                        ruleId: 'indent',
+                        ruleId: '@stylistic/indent',
                         severity: 2,
                         message: 'Expected indentation of 2 spaces but found 4.',
                         line: 11,
@@ -1638,12 +1638,12 @@ describe('ESLintInspector', () => {
             params: {
               analyzers: [
                 LintAnalyzer.create({
-                  ruleId: 'indent',
+                  ruleId: '@stylistic/indent',
                   lint: {
                     filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                     messages: [
                       {
-                        ruleId: 'indent',
+                        ruleId: '@stylistic/indent',
                         severity: 2,
                         message: 'Expected indentation of 4 spaces but found 6.',
                         line: 9,
@@ -1658,7 +1658,7 @@ describe('ESLintInspector', () => {
                         },
                       },
                       {
-                        ruleId: 'indent',
+                        ruleId: '@stylistic/indent',
                         severity: 2,
                         message: 'Expected indentation of 2 spaces but found 4.',
                         line: 11,
@@ -1704,7 +1704,7 @@ describe('ESLintInspector', () => {
                         },
                       },
                       {
-                        ruleId: 'indent',
+                        ruleId: '@stylistic/indent',
                         severity: 2,
                         message: 'Expected indentation of 2 spaces but found 4.',
                         line: 11,
@@ -1736,12 +1736,12 @@ describe('ESLintInspector', () => {
             params: {
               analyzers: [
                 LintAnalyzer.create({
-                  ruleId: 'indent',
+                  ruleId: '@stylistic/indent',
                   lint: {
                     filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                     messages: [
                       {
-                        ruleId: 'indent',
+                        ruleId: '@stylistic/indent',
                         severity: 2,
                         message: 'Expected indentation of 4 spaces but found 6.',
                         line: 9,
@@ -1756,7 +1756,7 @@ describe('ESLintInspector', () => {
                         },
                       },
                       {
-                        ruleId: 'indent',
+                        ruleId: '@stylistic/indent',
                         severity: 2,
                         message: 'Expected indentation of 2 spaces but found 4.',
                         line: 11,
@@ -1834,12 +1834,12 @@ describe('ESLintInspector', () => {
             params: {
               analyzers: [
                 LintAnalyzer.create({
-                  ruleId: 'indent',
+                  ruleId: '@stylistic/indent',
                   lint: {
                     filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                     messages: [
                       {
-                        ruleId: 'indent',
+                        ruleId: '@stylistic/indent',
                         severity: 2,
                         message: 'Expected indentation of 4 spaces but found 6.',
                         line: 9,
@@ -1854,7 +1854,7 @@ describe('ESLintInspector', () => {
                         },
                       },
                       {
-                        ruleId: 'indent',
+                        ruleId: '@stylistic/indent',
                         severity: 2,
                         message: 'Expected indentation of 2 spaces but found 4.',
                         line: 11,
@@ -1915,7 +1915,7 @@ describe('ESLintInspector', () => {
                         },
                       },
                       {
-                        ruleId: 'indent',
+                        ruleId: '@stylistic/indent',
                         severity: 2,
                         message: 'Expected indentation of 2 spaces but found 4.',
                         line: 11,
@@ -1978,12 +1978,12 @@ describe('ESLintInspector', () => {
           params: {
             analyzers: [
               LintAnalyzer.create({
-                ruleId: 'indent',
+                ruleId: '@stylistic/indent',
                 lint: {
                   filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                   messages: [
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 4 spaces but found 6.',
                       line: 9,
@@ -1998,7 +1998,7 @@ describe('ESLintInspector', () => {
                       },
                     },
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 2 spaces but found 4.',
                       line: 11,
@@ -2044,7 +2044,7 @@ describe('ESLintInspector', () => {
                   filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                   messages: [
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 4 spaces but found 6.',
                       line: 9,
@@ -2059,7 +2059,7 @@ describe('ESLintInspector', () => {
                       },
                     },
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 2 spaces but found 4.',
                       line: 11,
@@ -2138,12 +2138,12 @@ describe('ESLintInspector', () => {
           params: {
             analyzers: [
               LintAnalyzer.create({
-                ruleId: 'indent',
+                ruleId: '@stylistic/indent',
                 lint: {
                   filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                   messages: [
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 4 spaces but found 6.',
                       line: 9,
@@ -2158,7 +2158,7 @@ describe('ESLintInspector', () => {
                       },
                     },
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 2 spaces but found 4.',
                       line: 11,
@@ -2184,12 +2184,12 @@ describe('ESLintInspector', () => {
                 },
               }),
               LintAnalyzer.create({
-                ruleId: 'semi',
+                ruleId: '@stylistic/semi',
                 lint: {
                   filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                   messages: [
                     {
-                      ruleId: 'semi',
+                      ruleId: '@stylistic/semi',
                       severity: 2,
                       message: 'Extra semicolon.',
                       line: 3,
@@ -2235,12 +2235,12 @@ describe('ESLintInspector', () => {
           params: {
             analyzers: [
               LintAnalyzer.create({
-                ruleId: 'indent',
+                ruleId: '@stylistic/indent',
                 lint: {
                   filePath: '/Users/username/repository-name/tests/targets/standard$/indent.js',
                   messages: [
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 4 spaces but found 6.',
                       line: 9,
@@ -2255,7 +2255,7 @@ describe('ESLintInspector', () => {
                       },
                     },
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 2 spaces but found 4.',
                       line: 11,
@@ -2301,7 +2301,7 @@ describe('ESLintInspector', () => {
                   filePath: '/Users/username/repository-name/tests/targets/standard$/semi.js',
                   messages: [
                     {
-                      ruleId: 'indent',
+                      ruleId: '@stylistic/indent',
                       severity: 2,
                       message: 'Expected indentation of 2 spaces but found 4.',
                       line: 11,
