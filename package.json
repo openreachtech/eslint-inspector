@@ -1,6 +1,6 @@
 {
   "name": "@openreachtech/eslint-inspector",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "This is the useful tools for for JavaScript test concerning ESLint configuration.",
   "files": [
     "index.mjs",
@@ -29,7 +29,7 @@
     "ESLint",
     "inspector"
   ],
-  "author": "Open Reach Tech inc.",
+  "author": "Open Reach Tech Inc.",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/openreachtech/eslint-inspector/issues"
