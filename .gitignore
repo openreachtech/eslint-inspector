@@ -17,4 +17,4 @@ ehthumbs_vista.db
 #### environment to develop
 .vscode/*
 !.vscode/cspell.json
-
+!.vscode/settings.json
