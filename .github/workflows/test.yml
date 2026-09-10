@@ -42,6 +42,16 @@ jobs:
           # sweep to bump a pinned major across all of them. Pin a concrete version
           # here only in a repository that genuinely needs one.
           node-version: lts/*
+          # ⚠️ This pair is the one place this file departs from npm-boilerplate,
+          # which assumes every dependency resolves from npmjs. Five @openreachtech
+          # packages here still resolve from GitHub Packages, and npm ci answers 401
+          # without a token. Drop the pair once they all move to npmjs.
+          #
+          # ⚠️ Keep the scope. Without it the default registry moves to GitHub
+          # Packages as well, and the npm audit step below loses the npmjs advisory
+          # endpoint it reads.
+          registry-url: https://npm.pkg.github.com
+          scope: '@openreachtech'
 
       - name: 🖨️ Print environment
         env:
@@ -68,6 +78,8 @@ jobs:
 
       - name: 📦 Install packages
         run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.TO_REPO_OF_ORT_PRIVATE }}
 
       - name: 🧵 ESLint
         run: npm run lint
