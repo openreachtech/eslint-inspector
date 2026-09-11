@@ -235,15 +235,15 @@
   npx eslint . --ignore-pattern "/tests/linted$/*"
   ```
 
+## Contribution
+
+* We welcome bug reports, feature requests, and code contributions. Please feel free to contact us through GitHub Issues or Pull Requests. We strive to meet user expectations and your contributions are highly appreciated!
+
 ## License
 
 This project is released under the MIT License.
 
 For more details, please see [in the LICENSE file](./LICENSE).
-
-## Contribution
-
-* We welcome bug reports, feature requests, and code contributions. Please feel free to contact us through GitHub Issues or Pull Requests. We strive to meet user expectations and your contributions are highly appreciated!
 
 ## Developer
 
