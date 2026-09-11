@@ -237,7 +237,17 @@
 
 ## Contribution
 
-* We welcome bug reports, feature requests, and code contributions. Please feel free to contact us through GitHub Issues or Pull Requests. We strive to meet user expectations and your contributions are highly appreciated!
+Bug reports, feature requests, and code contributions are welcome.
+
+Feel free to contact us through GitHub Issues.
+
+```sh
+git clone https://github.com/openreachtech/eslint-inspector.git
+cd eslint-inspector
+npm install
+npm run lint
+npm test
+```
 
 ## License
 
