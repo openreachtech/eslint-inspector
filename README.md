@@ -248,3 +248,7 @@ For more details, please see [in the LICENSE file](./LICENSE).
 ## Developer
 
 [Open Reach Tech Inc.](https://openreach.tech)
+
+## Copyright
+
+© 2023 Open Reach Tech Inc.
