@@ -245,6 +245,6 @@ For more details, please see [in the LICENSE file](./LICENSE).
 
 * We welcome bug reports, feature requests, and code contributions. Please feel free to contact us through GitHub Issues or Pull Requests. We strive to meet user expectations and your contributions are highly appreciated!
 
-## Authors
+## Developer
 
-* [Open Reach Tech Inc.](https://openreach.tech)
+[Open Reach Tech Inc.](https://openreach.tech)
