@@ -237,8 +237,9 @@
 
 ## License
 
-* This project is released under the MIT License.<br>
-See [here](./LICENSE)
+This project is released under the MIT License.
+
+For more details, please see [in the LICENSE file](./LICENSE).
 
 ## Contribution
 
