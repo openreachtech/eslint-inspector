@@ -555,6 +555,19 @@ describe('ESLintInspector', () => {
                       messageId: 'unusedVar',
                       endLine: 1,
                       endColumn: 12,
+                      suggestions: [
+                        {
+                          messageId: 'removeVar',
+                          data: {
+                            varName: 'alpha',
+                          },
+                          fix: {
+                            range: [0, 16],
+                            text: '',
+                          },
+                          desc: 'Remove unused variable \'alpha\'.',
+                        },
+                      ],
                     },
                     {
                       ruleId: '@stylistic/semi',

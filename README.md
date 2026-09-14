@@ -235,15 +235,30 @@
   npx eslint . --ignore-pattern "/tests/linted$/*"
   ```
 
-## License
-
-* This project is released under the MIT License.<br>
-See [here](./LICENSE)
-
 ## Contribution
 
-* We welcome bug reports, feature requests, and code contributions. Please feel free to contact us through GitHub Issues or Pull Requests. We strive to meet user expectations and your contributions are highly appreciated!
+Bug reports, feature requests, and code contributions are welcome.
 
-## Authors
+Feel free to contact us through GitHub Issues.
 
-* [Open Reach Tech Inc.](https://openreach.tech)
+```sh
+git clone https://github.com/openreachtech/eslint-inspector.git
+cd eslint-inspector
+npm install
+npm run lint
+npm test
+```
+
+## License
+
+This project is released under the MIT License.
+
+For more details, please see [in the LICENSE file](./LICENSE).
+
+## Developer
+
+[Open Reach Tech Inc.](https://openreach.tech)
+
+## Copyright
+
+© 2023 Open Reach Tech Inc.

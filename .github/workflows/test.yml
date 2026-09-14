@@ -13,32 +13,78 @@ permissions:
   contents: read
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  ci:
+    # ⚠️ Keep this name fixed. Required status checks are configured per-organization
+    # by check name, so renaming the job here silently exempts this repository
+    # from the merge gate.
+    name: CI Test
 
-    strategy:
-      matrix:
-        node-version: [20.x]
+    # private repository: self-hosted
+    # public repository: github-hosted
+    runs-on: ${{ fromJSON(github.event.repository.private && '["self-hosted", "light"]' || '["ubuntu-latest"]') }}
+
+    timeout-minutes: 60
 
     steps:
-      - name: 🛎 Checkout repository code
-        uses: actions/checkout@v4
+      - name: 🛎️ Checkout repository code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: 🏗️ Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+      - name: 🏗️ Use Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
-          node-version: ${{ matrix.node-version }}
+          # ⚠️ The npm cache only pays off where ~/.npm is discarded between jobs.
+          # On a persistent [self-hosted] runner it re-ships what is already on disk,
+          # adding a measured 2.7 GB and ~2m30s to this step so that the next one,
+          # npm ci, can finish in 5s instead of 7s.
+          cache: ${{ runner.environment == 'github-hosted' && 'npm' || '' }}
+          package-manager-cache: false
+          # A floating LTS alias keeps every repository current without a scheduled
+          # sweep to bump a pinned major across all of them. Pin a concrete version
+          # here only in a repository that genuinely needs one.
+          node-version: lts/*
+          # ⚠️ This pair is the one place this file departs from npm-boilerplate,
+          # which assumes every dependency resolves from npmjs. Five @openreachtech
+          # packages here still resolve from GitHub Packages, and npm ci answers 401
+          # without a token. Drop the pair once they all move to npmjs.
+          #
+          # ⚠️ Keep the scope. Without it the default registry moves to GitHub
+          # Packages as well, and the npm audit step below loses the npmjs advisory
+          # endpoint it reads.
           registry-url: https://npm.pkg.github.com
+          scope: '@openreachtech'
 
-      - name: 🔧 setup npm
+      - name: 🖨️ Print environment
+        env:
+          RUNNER_ENVIRONMENT: ${{ runner.environment }}
+        run: |
+          echo
+          echo "runner: $RUNNER_ENVIRONMENT"
+          echo "node  : $(node -v)"
+          echo "npm   : $(npm -v)"
+
+      # ⚠️ This gate runs before npm ci, and the order is the point: npm ci puts the
+      # vulnerable files on the runner, and the test run then executes them through the
+      # real code path. The advisory has to answer before anything is fetched. Auditing
+      # first is possible because npm audit resolves the tree from package-lock.json
+      # alone and needs no node_modules; skipping a doomed install is a side benefit.
+      #
+      # ⚠️ When this step fails, check whether npm is answering before reading it as a
+      # finding. A 503 from the advisory service exits 1 exactly as an advisory does, and
+      # npm does not retry the bulk POST — `--fetch-retries=4` still sends one request.
+      # Telling the two apart takes a script that reads `npm audit --json`, and that is
+      # worth carrying only while the service is degraded, which is a passing condition.
+      - name: 🛡️ npm audit
+        run: npm audit
+
+      - name: 📦 Install packages
         run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.TO_REPO_OF_ORT_PRIVATE }}
 
-      - name: 🧵 run lint
+      - name: 🧵 ESLint
         run: npm run lint
 
-      - name: 🧪 run test
+      - name: 🧪 Jest
+        env:
+          NODE_ENV: development
         run: npm test
